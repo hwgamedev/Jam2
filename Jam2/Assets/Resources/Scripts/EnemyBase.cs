@@ -21,6 +21,7 @@ public class EnemyBase : MonoBehaviour {
 	public Vector3 initialPos;
 
 	//stats
+	public int maxHealth;
 	public int health;
 	public int dmg;
 
@@ -42,7 +43,8 @@ public class EnemyBase : MonoBehaviour {
 		stepsTaken = 0;
 
 		//stats
-		health = 100;
+		maxHealth = 100;
+		health = maxHealth;
 		dmg = 5;
 
 		//set tag for enemies
