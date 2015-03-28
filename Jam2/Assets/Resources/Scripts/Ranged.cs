@@ -24,6 +24,6 @@ public class Ranged : EnemyBase {
 	}
 
 	void shoot(){
-			Debug.Log("Shoot");
+			//Debug.Log("Shoot");
 	}
 }

@@ -44,6 +44,9 @@ public class EnemyBase : MonoBehaviour {
 		//stats
 		health = 100;
 		dmg = 5;
+
+		//set tag for enemies
+		gameObject.tag = "Enemy";
 	}
 	
 	// Update is called once per frame
@@ -158,9 +161,9 @@ public class EnemyBase : MonoBehaviour {
 		return false;
 	}
 
-	void attack()
+	public virtual void attack()
 	{
-		Debug.Log("DIE");
+		//Debug.Log("DIE");
 	}
 
 	public void takeDamage(int damage)
@@ -170,7 +173,7 @@ public class EnemyBase : MonoBehaviour {
 
 	void die()
 	{
-		Destroy(this);
+		Destroy(gameObject);
 	}
 
 }

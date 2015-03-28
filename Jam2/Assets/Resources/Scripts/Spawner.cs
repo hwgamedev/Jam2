@@ -17,7 +17,7 @@ public class Spawner : EnemyBase{
 	// Update is called once per frame
 	override public void Update () {
 		base.Update();
-		if(((stepsTaken) % spawnStepCD ==0) && (stepsTaken != lastSpawnStep))
+		if(((stepsTaken % spawnStepCD) == 0) && (stepsTaken != lastSpawnStep))
 			spawn ();
 	}
 
