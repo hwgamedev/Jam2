@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyMoveToPlayer : MonoBehaviour {
+public class EnemyBase : MonoBehaviour {
 
 	public GameObject player;
 	public GameVariables vars;

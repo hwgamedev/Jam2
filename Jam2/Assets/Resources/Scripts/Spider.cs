@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spider : EnemyMoveToPlayer{
+public class Spider : EnemyBase{
 
 	public int abilityStepCD;
 	public int lastWebStep;
