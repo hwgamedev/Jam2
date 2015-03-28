@@ -5,39 +5,59 @@ public class EnemyBase : MonoBehaviour {
 
 	public GameObject player;
 	public GameVariables vars;
-	Vector2 targetPos;
+
+	//general
+	public bool awake;
+
+	//moving
 	public float speed = 1.0f;
 	private float startTime;
 	private float journeyLength;
 	public Vector3 endPosition;
-	public int health;
-	public bool awake;
 	public bool moving;
 	float xDistance;
 	float yDistance;
-	public int doSteps;
 	Vector2 moveDirection;
 	public Vector3 initialPos;
+
+	//stats
+	public int health;
+	public int dmg;
+
+	//step counters
+	public int doSteps;
 	public int stepsTaken;
+
 	// Use this for initialization
 	public virtual void Start () {
 		player = GameObject.FindWithTag("Player");
 		vars = (GameVariables) GameObject.FindWithTag("GameVariables").GetComponent("GameVariables");
+
 		awake = true;
 		moving = false;
+		//TO DO - remove
 		vars.TileSize = 1;
 		doSteps = 8;
+		//------------
 		stepsTaken = 0;
+
+		//stats
+		health = 100;
+		dmg = 5;
 	}
 	
 	// Update is called once per frame
 	public virtual void Update () {
+		if(health <= 0){
+			die ();
+			return;
+		}
 		if(doSteps > 0 )
 		{
 			bool canHit = checkCanHit();
 			if (awake && !moving && !canHit)
 			{
-				targetPos = player.transform.position;
+				Vector2 targetPos = player.transform.position;
 				xDistance = targetPos.x - transform.position.x;
 				yDistance = targetPos.y - transform.position.y;
 				startTime = Time.time;
@@ -68,7 +88,7 @@ public class EnemyBase : MonoBehaviour {
 			}else{
 				if(canHit && !moving){
 					faceMoveDirection();
-					Attack();
+					attack();
 					doSteps--;
 					stepsTaken++;
 				}
@@ -138,7 +158,7 @@ public class EnemyBase : MonoBehaviour {
 		return false;
 	}
 
-	void Attack()
+	void attack()
 	{
 		Debug.Log("DIE");
 	}
