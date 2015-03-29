@@ -10,7 +10,7 @@ public class StepManager : MonoBehaviour
 		if (Instance == null) Instance = this;
 	}
 
-	private ArrayList EnemiesArray = new ArrayList<EnemyBase> ();
+	private ArrayList EnemiesArray = new ArrayList ();
 
 	// Use this for initialization
 	void Start ()
