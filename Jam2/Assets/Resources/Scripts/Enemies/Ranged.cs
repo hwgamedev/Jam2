@@ -18,7 +18,7 @@ public class Ranged : EnemyBase {
 			render.material.SetColor("_Color", Color.white);
 		float distanceToPlayer = Mathf.Sqrt(Mathf.Pow(transform.position.x - player.transform.position.x, 2) +
 		                                    Mathf.Pow(transform.position.y - player.transform.position.y, 2));
-		if(awake && !wait && doSteps > 0 && range > (distanceToPlayer))
+		if(/*awake && */!wait && doSteps > 0 && range > (distanceToPlayer))
 		{
 			waitInit = Time.time;
 			wait = true;

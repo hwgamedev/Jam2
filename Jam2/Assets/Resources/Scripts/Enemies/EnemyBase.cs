@@ -9,7 +9,7 @@ public class EnemyBase : MonoBehaviour {
 	public GameVariables vars;
 
 	//general
-	public bool awake;
+	//public bool awake;
 
 	//moving
 	public float speed = 1.0f;
@@ -41,7 +41,7 @@ public class EnemyBase : MonoBehaviour {
 		//Player.Instance.incrementTotalEnemies();
 		player = GameObject.FindWithTag("Player");
 
-		awake = false;
+		//awake = false;
 		moving = false;
 		stepsTaken = 0;
 		wait = false;
@@ -68,12 +68,12 @@ public class EnemyBase : MonoBehaviour {
 			checkWait();
 			return;
 		}
-		if(!awake)
-			return;
+		//if(!awake)
+		//	return;
 		if(doSteps > 0 )
 		{
 			bool canHit = checkCanHit();
-			if (awake && !moving && !canHit)
+			if (/*awake && */!moving && !canHit)
 			{	
 				/*
 				startTime = Time.time;
@@ -273,7 +273,7 @@ public class EnemyBase : MonoBehaviour {
 		return wait;
 	}
 
-	public void setAwake(bool a)
+	/*public void setAwake(bool a)
 	{
 		awake = a;
 	}
@@ -281,7 +281,7 @@ public class EnemyBase : MonoBehaviour {
 	public bool isAwake()
 	{
 		return awake;
-	}
+	}*/
 	
 	
 }
