@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6169006}
   - 114: {fileID: 11476500}
   - 50: {fileID: 5041288}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BomberEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

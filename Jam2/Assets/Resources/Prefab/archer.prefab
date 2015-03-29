@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 419072}
   - 212: {fileID: 21288900}
   - 114: {fileID: 11496188}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
