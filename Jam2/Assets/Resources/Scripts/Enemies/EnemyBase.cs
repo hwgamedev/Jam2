@@ -29,7 +29,7 @@ public class EnemyBase : MonoBehaviour {
 	public int doSteps;
 	public int stepsTaken;
 	public bool wait;
-	float waitInit;
+	public float waitInit;
 	// Use this for initialization
 	public virtual void Start () {
 		player = GameObject.FindWithTag("Player");
@@ -54,7 +54,8 @@ public class EnemyBase : MonoBehaviour {
 			die ();
 			return;
 		}
-		if(wait && checkWait()){
+		if(wait){
+			checkWait();
 			return;
 		}
 		if(!awake)
@@ -157,12 +158,12 @@ public class EnemyBase : MonoBehaviour {
 			moveDirection= new Vector2(0,-1);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), Vector2.up, 1, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0,1/2, 0), Vector2.up, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(0,1);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), Vector2.right, 1, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0,1/2, 0), Vector2.right, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(1,0);
 			return true;
@@ -177,6 +178,8 @@ public class EnemyBase : MonoBehaviour {
 
 	public virtual void attack()
 	{
+		startWait();
+		Debug.Log ("ATTACK");
 		Player.Instance.setHealth(-dmg);
 	}
 
@@ -190,16 +193,22 @@ public class EnemyBase : MonoBehaviour {
 		doSteps++;
 	}
 
-	void die()
+	public void die()
 	{
+		//dropItem();
 		Destroy(gameObject);
 	}
 
-	void startWait(){
+	public void dropItem(GameObject o){
+		GameObject newdrop = Instantiate(o);
+		newdrop.transform.position = transform.position;
+	}
+
+	public void startWait(){
 		waitInit = Time.time;
 		wait = true;
 	}
-	bool checkWait()
+	public bool checkWait()
 	{
 		if(Time.time - waitInit >= 1)
 			wait = false;
