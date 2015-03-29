@@ -30,9 +30,10 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        initPlayerPref();
+        //initPlayerPref();
         playerName = PlayerPrefs.GetString("playerName");
-        maxHealth = PlayerPrefs.GetInt("maxHealth");
+        maxHealth = PlayerPrefs.GetInt("maxHealth") + PlayerPrefs.GetInt("tempExtraHealth");
+        PlayerPrefs.SetInt("tempExtraHealth", 0);
         health = maxHealth;
         coins = PlayerPrefs.GetInt("totalCoins");
         healthPotionsStart = PlayerPrefs.GetInt("healthPotionsStart");
@@ -46,16 +47,16 @@ public class Player : MonoBehaviour {
         UI.Instance.init();
     }
 
-    void initPlayerPref()
-    {
-        PlayerPrefs.SetString("playerName", "John");
-        PlayerPrefs.SetInt("maxHealth", 10);
-        PlayerPrefs.SetInt("totalCoins", 44);
-        PlayerPrefs.SetInt("healthPotionsStart", 1);
-        PlayerPrefs.SetInt("stepIncreasersStart", 2);
-        PlayerPrefs.SetInt("stepReducersStart", 3);
-        PlayerPrefs.SetInt("teleportersStart", 4);
-    }
+    //void initPlayerPref()
+    //{
+    //    PlayerPrefs.SetString("playerName", "John");
+    //    PlayerPrefs.SetInt("maxHealth", 10);
+    //    PlayerPrefs.SetInt("totalCoins", 0);
+    //    PlayerPrefs.SetInt("healthPotionsStart", 0);
+    //    PlayerPrefs.SetInt("stepIncreasersStart", 0);
+    //    PlayerPrefs.SetInt("stepReducersStart", 0);
+    //    PlayerPrefs.SetInt("teleportersStart", );
+    //}
 
     public void increaseMaxHealthPerma()
     {
