@@ -1,17 +1,15 @@
 fileFormatVersion: 2
-guid: 4d2d1cba1d8d13b469eac9462fd66aca
-timeCreated: 1427566121
+guid: e0a0192880a459e42b76f605c1ae20a2
+timeCreated: 1427601579
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: walkE_0
-    21300002: walkE_1
-    21300004: walkE_2
-    21300006: walkE_3
-    21300008: walkE_4
-    21300010: walkE_5
-    21300012: walkE_6
-    21300014: walkE_7
+    21300000: attackW_0
+    21300002: attackW_1
+    21300004: attackW_2
+    21300006: attackW_3
+    21300008: attackW_4
+    21300010: attackW_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,85 +55,65 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: walkE_0
+    - name: attackW_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 51
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walkE_1
+    - name: attackW_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 244
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walkE_2
+    - name: attackW_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 434
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walkE_3
+    - name: attackW_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 627
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walkE_4
+    - name: attackW_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 818
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walkE_5
+    - name: attackW_5
       rect:
         serializedVersion: 2
-        x: 640
+        x: 1011
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walkE_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walkE_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

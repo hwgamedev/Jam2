@@ -29,6 +29,7 @@ GameObject:
   - 4: {fileID: 461114}
   - 114: {fileID: 11437496}
   - 212: {fileID: 21262630}
+  - 95: {fileID: 9538128}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -107,6 +108,23 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172120}
   m_Enabled: 1
+--- !u!95 &9538128
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190170}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8fcf7e5440d3cf48a4ba74a4c0e8515, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11437496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,8 +168,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300014, guid: 7462c164ebd13a4458ee6df5b6ed0a32, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 949f11262b0af9044a0e511cfcadf56e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: .992156863}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
