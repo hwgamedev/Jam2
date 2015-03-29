@@ -12,12 +12,12 @@ public class EnemyBase : MonoBehaviour {
 	//moving
 	public float speed = 1.0f;
 	private float startTime;
-	private float journeyLength;
+	public float journeyLength;
 	public Vector3 endPosition;
 	public bool moving;
 	float xDistance;
 	float yDistance;
-	Vector2 moveDirection;
+	public Vector2 moveDirection;
 	public Vector3 initialPos;
 
 	//stats
@@ -28,19 +28,22 @@ public class EnemyBase : MonoBehaviour {
 	//step counters
 	public int doSteps;
 	public int stepsTaken;
+	public bool wait;
+	float waitInit;
 
 	// Use this for initialization
 	public virtual void Start () {
 		player = GameObject.FindWithTag("Player");
 		vars = (GameVariables) GameObject.FindWithTag("GameVariables").GetComponent("GameVariables");
 
-		awake = true;
+		awake = false;
 		moving = false;
 		//TO DO - remove
 		vars.TileSize = 1;
-		doSteps = 8;
+		doSteps = 20;
 		//------------
 		stepsTaken = 0;
+		wait = false;
 
 		//stats
 		maxHealth = 100;
@@ -57,33 +60,42 @@ public class EnemyBase : MonoBehaviour {
 			die ();
 			return;
 		}
+		if(wait && checkWait()){
+			return;
+		}
 		if(doSteps > 0 )
 		{
 			bool canHit = checkCanHit();
 			if (awake && !moving && !canHit)
 			{
-				Vector2 targetPos = player.transform.position;
-				xDistance = targetPos.x - transform.position.x;
-				yDistance = targetPos.y - transform.position.y;
 				startTime = Time.time;
 				initialPos = transform.position;
 				endPosition = initialPos;
+
+				/*
+				Vector2 targetPos = player.transform.position;
+				xDistance = targetPos.x - transform.position.x;
+				yDistance = targetPos.y - transform.position.y;
+
 				if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance)){
 					if ( xDistance > 0 ){
 						moveDirection = new Vector2( 1, 0);
 						endPosition += new Vector3(1, 0, 0);
 					}else{
-						moveDirection = new Vector2( -1, 0);
+						moveDirection = new Vector2(-1, 0);
 						endPosition -= new Vector3(1, 0, 0);
 					}
 				}else {
 					if ( yDistance > 0 ){
 						moveDirection = new Vector2(0, 1);
 						endPosition += new Vector3(0, 1, 0);
-					}else
+					}else{
 						moveDirection = new Vector2( 0, -1);
 						endPosition -= new Vector3(0, 1, 0);
-				}
+					}
+				}*/
+				moveDirection = GridManager.Instance.getMoveDirection(gameObject);
+				endPosition += new Vector3(moveDirection.x, moveDirection.y, 0);
 				journeyLength = Vector3.Distance (initialPos, endPosition);
 				doSteps--;
 				stepsTaken++;
@@ -92,6 +104,7 @@ public class EnemyBase : MonoBehaviour {
 
 			}else{
 				if(canHit && !moving){
+					startWait();
 					faceMoveDirection();
 					attack();
 					doSteps--;
@@ -165,7 +178,7 @@ public class EnemyBase : MonoBehaviour {
 
 	public virtual void attack()
 	{
-		//Debug.Log("DIE");
+		Player.Instance.setHealth(-dmg);
 	}
 
 	public void takeDamage(int damage)
@@ -177,6 +190,18 @@ public class EnemyBase : MonoBehaviour {
 	{
 		Destroy(gameObject);
 	}
+
+	void startWait(){
+		waitInit = Time.time;
+		wait = true;
+	}
+	bool checkWait()
+	{
+		if(Time.time - waitInit >= 1)
+			wait = false;
+		return wait;
+	}
+		
 
 }
 	

@@ -4,6 +4,7 @@ using System.Collections;
 public class GameVariables : MonoBehaviour {
 
 	public int TileSize;
+	public float stepTime = 1;
 
 	// Use this for initialization
 	void Start () {

@@ -34,6 +34,7 @@ public class Bomber : EnemyBase
 	void Explode(){
 		foreach(EnemyBase enemy in dmgEnemies)
 			enemy.takeDamage(dmg);
+		Player.Instance.setHealth(-dmg);
 	}
 
 	void OnTriggerStay2D(Collider2D other) {
