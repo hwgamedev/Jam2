@@ -199,8 +199,8 @@ public class EnemyBase : MonoBehaviour {
 		possDirections.TryGetValue("left", out left);
 		if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance) && xDistance < 0  && left)
 		{
-			moveDirection = new Vector2( 1, 0);
-			endPosition += new Vector3(1, 0, 0);
+			moveDirection = new Vector2( -1, 0);
+			endPosition += new Vector3(-1, 0, 0);
 			return;
 		}
 		possDirections.TryGetValue("up", out up);
@@ -225,8 +225,8 @@ public class EnemyBase : MonoBehaviour {
 		}
 		if(left)
 		{
-			moveDirection = new Vector2( 1, 0);
-			endPosition += new Vector3(1, 0, 0);
+			moveDirection = new Vector2( -1, 0);
+			endPosition += new Vector3(-1, 0, 0);
 			return;
 		}
 		startWait();
@@ -273,6 +273,15 @@ public class EnemyBase : MonoBehaviour {
 		return wait;
 	}
 
+	public void setAwake(bool a)
+	{
+		awake = a;
+	}
+
+	public bool isAwake()
+	{
+		return awake;
+	}
 	
 	
 }
