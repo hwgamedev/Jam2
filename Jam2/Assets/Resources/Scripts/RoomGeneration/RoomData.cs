@@ -32,9 +32,9 @@ public class RoomData : MonoBehaviour {
     public float coins = Random.Range(0.02f, 0.10f);
 
     //enemy spawn formation chances
-    public float singleEnemy = Random.Range(0.05f, 0.1f);
-    public float enemyLine = Random.Range(0.0001f, 0.001f);
-    public float cornerFormation = Random.Range(0.001f, 0.005f);
+    public float singleEnemy = Random.Range(0.1f, 0.15f);
+    public float enemyLine = Random.Range(0.05f, 0.1f);
+    public float cornerFormation = Random.Range(0.05f, 0.1f);
 
 	// Use this for initialization
 	void Start () {
@@ -308,6 +308,11 @@ public class RoomData : MonoBehaviour {
         {
             fogOfWars[i].GetComponent<FogOfWar>().initialise();
 
+        }
+
+        for (int i = 0; i < enemyArray.Count; i++)
+        {
+            enemyArray[i].active = true;
         }
     }
 }

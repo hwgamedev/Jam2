@@ -48,10 +48,13 @@ public class Dagger : MonoBehaviour {
 		if (hit && !hit.collider.isTrigger)
 		{
 			print("Colliding with: "+hit.collider.gameObject.name);
+			if(hit.collider.gameObject.CompareTag("Player")){
+				return false;
+			}
 			if(hit.collider.gameObject.CompareTag("Enemy")){
 				hit.collider.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage());
+				return true;
 			}
-			return true;
 		}
 		
 		return false;

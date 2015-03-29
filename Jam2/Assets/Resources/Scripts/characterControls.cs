@@ -30,7 +30,7 @@ public class characterControls : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator>();
 		//synchronise with player data
-		Player.Instance.incrementSteps (100);
+		Player.Instance.incrementSteps (50);
 	}
 	
 	// Update is called once per frame
@@ -54,6 +54,7 @@ public class characterControls : MonoBehaviour {
 					endPosition = startPosition;
 					endPosition += new Vector3 (0, 1, 0);
 					journeyLength = Vector3.Distance (startPosition, endPosition);
+					doStep();
 					moving = true;
 				}
 	            if (Input.GetKey(KeyCode.A))
@@ -66,6 +67,7 @@ public class characterControls : MonoBehaviour {
 					endPosition = startPosition;
 					endPosition -= new Vector3 (1, 0, 0);
 					journeyLength = Vector3.Distance (startPosition, endPosition);
+					doStep();
 					moving = true;
 				}
 	            if (Input.GetKey(KeyCode.S))
@@ -78,6 +80,7 @@ public class characterControls : MonoBehaviour {
 					endPosition = startPosition;
 					endPosition -= new Vector3 (0, 1, 0);
 					journeyLength = Vector3.Distance (startPosition, endPosition);
+					doStep();
 					moving = true;
 				}
 	            if (Input.GetKey(KeyCode.D))
@@ -90,6 +93,7 @@ public class characterControls : MonoBehaviour {
 					endPosition = startPosition;
 					endPosition += new Vector3 (1, 0, 0);
 					journeyLength = Vector3.Distance (startPosition, endPosition);
+					doStep();
 					moving = true;
 				}
 				if (Input.GetMouseButtonDown (0)) {
@@ -135,6 +139,7 @@ public class characterControls : MonoBehaviour {
 						print (longRange/(6-Player.Instance.getReach()));
 						print (length);
 						if(length <= longRange/(6-Player.Instance.getReach()) && length > shortRange) {
+							print ("yo");
 							throwDagger(transform.position, mousePoint);
 							doStep ();
 						}
@@ -160,6 +165,7 @@ public class characterControls : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);
         if (hit && !hit.collider.isTrigger)
         {
+			if (hit.collider.GetComponent<Dagger>() != null) { return false; }
             if (hit.collider.GetComponent<GoldPickup>() != null) { hit.collider.GetComponent<GoldPickup>().collect(-1); }
 			if (hit.collider.GetComponent<HealthPickup>() != null) { hit.collider.GetComponent<HealthPickup>().collect(); }
 			if (hit.collider.GetComponent<IncreaserPickup>() != null) { hit.collider.GetComponent<IncreaserPickup>().collect(); }
