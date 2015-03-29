@@ -262,10 +262,10 @@ public class RoomGenerator : MonoBehaviour {
             if (offsetCorrect) break;
 
             failureCount++;
-            print("Failed " + failureCount + " times");
+            //print("Failed " + failureCount + " times");
         }
 
-        print("New subroom position. offsets: " + offsetX + ", " + offsetY + ". size: " + roomX + ", " + roomY);
+        //print("New subroom position. offsets: " + offsetX + ", " + offsetY + ". size: " + roomX + ", " + roomY);
 
         int[] result = { offsetX, offsetY, roomX, roomY , roomNumber};
 

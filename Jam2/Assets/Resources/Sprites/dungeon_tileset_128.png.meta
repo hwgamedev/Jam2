@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: afd3b26d76eff164ab1b3ee304e64e8b
-timeCreated: 1427615385
+timeCreated: 1427624432
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -304,8 +304,8 @@ TextureImporter:
         y: 1024
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: dungeon_tileset_128_17
       rect:
@@ -314,8 +314,8 @@ TextureImporter:
         y: 1024
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: dungeon_tileset_128_18
       rect:
@@ -324,8 +324,8 @@ TextureImporter:
         y: 1024
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: dungeon_tileset_128_19
       rect:
@@ -344,8 +344,8 @@ TextureImporter:
         y: 1024
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: dungeon_tileset_128_21
       rect:
@@ -354,8 +354,8 @@ TextureImporter:
         y: 1024
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: dungeon_tileset_128_22
       rect:
@@ -364,8 +364,8 @@ TextureImporter:
         y: 1024
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: dungeon_tileset_128_23
       rect:
@@ -374,8 +374,8 @@ TextureImporter:
         y: 1024
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: dungeon_tileset_128_24
       rect:
