@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.15999985, y: -.0399999991, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,9 +85,12 @@ MonoBehaviour:
   doSteps: 0
   stepsTaken: 0
   wait: 0
+  waitInit: 0
   stepsToExplode: 0
   preparingExplosion: 0
   dmgEnemies: []
+  damagePlayer: 0
+  exploding: 0
 --- !u!212 &21255380
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,8 +115,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: a3e0002e18aceb2468080d759a020121, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 830bf8953ff31594792efa8a3cd7c640, type: 3}
+  m_Color: {r: .492647052, g: .376730084, b: .376730084, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

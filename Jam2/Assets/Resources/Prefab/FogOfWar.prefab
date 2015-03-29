@@ -9,7 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 488826}
   - 212: {fileID: 21224352}
-  m_Layer: 2
+  - 61: {fileID: 6128356}
+  - 114: {fileID: 11445742}
+  - 50: {fileID: 5053102}
+  m_Layer: 0
   m_Name: FogOfWar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,6 +31,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5053102
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175260}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+--- !u!61 &6128356
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175260}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: .5, y: -.5}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+--- !u!114 &11445742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9871bd02136fd48b0e7ebfca0c7389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21224352
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -50,7 +92,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 615236271
+  m_SortingLayerID: -1704465007
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300038, guid: afd3b26d76eff164ab1b3ee304e64e8b, type: 3}
   m_Color: {r: .20588237, g: .20588237, b: .20588237, a: 1}

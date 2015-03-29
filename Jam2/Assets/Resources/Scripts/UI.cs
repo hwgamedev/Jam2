@@ -21,7 +21,10 @@ public class UI : MonoBehaviour {
     public Button increaser;
     public Button decreaser;
     public Button teleporter;
+    public Slider healthBarSlider;
+    private int maxHealth;
     public static UI Instance;
+
 
     void Awake()
     {
@@ -30,6 +33,7 @@ public class UI : MonoBehaviour {
 
     public void init()
     {
+        maxHealth = PlayerPrefs.GetInt("maxHealth");
         nameUpdate();
         healthUpdate();
         coinUpdate();
@@ -39,9 +43,6 @@ public class UI : MonoBehaviour {
         stepDecreaserUpdate();
         teleporterUpdate();
         stepUpdate();
-        speedBuffUpdate();
-        poisonDebuffUpdate();
-        slowedDebuffUpdate();
     }
 
     public void nameUpdate()
@@ -50,17 +51,23 @@ public class UI : MonoBehaviour {
     }
     public void healthUpdate()
     {
-        healthText.text = Player.Instance.getHealth().ToString();
+        int health = Player.Instance.getHealth();
+        float percent = health / maxHealth;
+        healthBarSlider.normalizedValue = percent;
     }
 
     public void coinUpdate()
     {
-        goldText.text = Player.Instance.getCoins().ToString();
+        int coins = Player.Instance.getCoins();
+        if (coins > 1000) goldText.text = coins.ToString();
+        else goldText.text = "0" + coins.ToString();
     }
 
     public void enemyKillUpdate()
     {
-        killText.text = Player.Instance.getEnemyPercentKilled() + "%"; 
+        float percent = Player.Instance.getEnemyPercentKilled();
+        if (percent > 9) killText.text = percent + "%"; 
+        killText.text = "0" + percent + "%"; 
     }
 
     public void healthPotionUpdate()
@@ -98,20 +105,5 @@ public class UI : MonoBehaviour {
     public void stepUpdate()
     {
         stepsText.text = Player.Instance.getSteps().ToString();
-    }
-
-    public void speedBuffUpdate()
-    {
-        buff.enabled = Player.Instance.getBuff();
-    }
-
-    public void poisonDebuffUpdate()
-    {
-        debuff1.enabled = Player.Instance.getDebuff1();
-    }
-
-    public void slowedDebuffUpdate()
-    {
-        debuff2.enabled = Player.Instance.getDebuff2();
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 419072}
   - 212: {fileID: 21288900}
   - 114: {fileID: 11496188}
+  - 61: {fileID: 6182170}
   m_Layer: 9
   m_Name: archer
   m_TagString: Untagged
@@ -24,11 +25,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .219999999, y: 1.63, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6182170
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155884}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!114 &11496188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,7 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   vars: {fileID: 0}
-  awake: 0
+  awake: 1
   speed: 1
   journeyLength: 0
   endPosition: {x: 0, y: 0, z: 0}
@@ -55,6 +69,7 @@ MonoBehaviour:
   doSteps: 0
   stepsTaken: 0
   wait: 0
+  waitInit: 0
   range: 0
 --- !u!212 &21288900
 SpriteRenderer:

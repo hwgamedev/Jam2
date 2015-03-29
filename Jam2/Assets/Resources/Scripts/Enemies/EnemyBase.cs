@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyBase : MonoBehaviour {
 
@@ -25,13 +27,18 @@ public class EnemyBase : MonoBehaviour {
 	public int health;
 	public int dmg;
 
+	//health bar
+	//public Slider healthBarSlider;
+
 	//step counters
 	public int doSteps;
 	public int stepsTaken;
 	public bool wait;
-	float waitInit;
+	public float waitInit;
+	Dictionary <string,bool> possDirections;
 	// Use this for initialization
 	public virtual void Start () {
+		//Player.Instance.incrementTotalEnemies();
 		player = GameObject.FindWithTag("Player");
 
 		awake = false;
@@ -57,7 +64,8 @@ public class EnemyBase : MonoBehaviour {
 			die ();
 			return;
 		}
-		if(wait && checkWait()){
+		if(wait){
+			checkWait();
 			return;
 		}
 		if(!awake)
@@ -75,34 +83,16 @@ public class EnemyBase : MonoBehaviour {
 				initialPos = transform.position;
 				endPosition = initialPos;
 
-				Vector2 targetPos = player.transform.position;
-				xDistance = targetPos.x - transform.position.x;
-				yDistance = targetPos.y - transform.position.y;
-
-				if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance)){
-					if ( xDistance > 0 ){
-						moveDirection = new Vector2( 1, 0);
-						endPosition += new Vector3(1, 0, 0);
-					}else{
-						moveDirection = new Vector2(-1, 0);
-						endPosition -= new Vector3(1, 0, 0);
-					}
-				}else {
-					if ( yDistance > 0 ){
-						moveDirection = new Vector2(0, 1);
-						endPosition += new Vector3(0, 1, 0);
-					}else{
-						moveDirection = new Vector2( 0, -1);
-						endPosition -= new Vector3(0, 1, 0);
-					}
-				}/*
-				moveDirection = GridManager.Instance.getMoveDirection(gameObject);
-				endPosition += new Vector3(moveDirection.x, moveDirection.y, 0);*/
-				journeyLength = Vector3.Distance (initialPos, endPosition);
-				doSteps--;
+				calculateMovement();
+				if(!wait){
+					journeyLength = Vector3.Distance (initialPos, endPosition);
+					stepsTaken++;
+					moving = true;
+					faceMoveDirection();
+				}
 				stepsTaken++;
-				moving = true;
-				faceMoveDirection();
+				doSteps--;
+				
 
 			}else{
 				if(canHit && !moving){
@@ -141,7 +131,7 @@ public class EnemyBase : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 0, 0);
 	}
 
-	void faceMoveDirection()
+	virtual public void faceMoveDirection()
 	{
 		switch((int)moveDirection.x){
 		case 1: faceRight(); break;
@@ -155,22 +145,22 @@ public class EnemyBase : MonoBehaviour {
 
 	bool checkCanHit()
 	{
-		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), -Vector2.up, 1, LayerMask.GetMask("Player"));
+		RaycastHit2D hit = Physics2D.Raycast(transform.position , -Vector2.up, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(0,-1);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), Vector2.up, 1, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position , Vector2.up, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(0,1);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), Vector2.right, 1, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position, Vector2.right, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(1,0);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), -Vector2.right, 1, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position, -Vector2.right, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(-1,0);
 			return true;
@@ -178,8 +168,75 @@ public class EnemyBase : MonoBehaviour {
 		return false;
 	}
 
+	private void getPossDirections()
+	{
+		int layer = LayerMask.NameToLayer("RaycastLayer");
+		possDirections = new Dictionary<string, bool>();
+		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.up, 1,layer);
+		possDirections.Add("up", (hit.collider == null));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), -Vector2.up, 1,layer);
+		possDirections.Add("down", (hit.collider == null));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), -Vector2.right, 1,layer);
+		possDirections.Add("left", (hit.collider == null));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.right, 1,layer);
+		possDirections.Add("right", (hit.collider == null));
+	}
+
+	private void calculateMovement()
+	{
+		getPossDirections();
+		Vector2 targetPos = player.transform.position;
+		xDistance = targetPos.x - transform.position.x;
+		yDistance = targetPos.y - transform.position.y;
+		bool right, left, up, down;
+		possDirections.TryGetValue("right", out right);
+		if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance) && xDistance > 0  && right)
+		{
+			moveDirection = new Vector2( 1, 0);
+			endPosition += new Vector3(1, 0, 0);
+			return;
+		}
+		possDirections.TryGetValue("left", out left);
+		if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance) && xDistance < 0  && left)
+		{
+			moveDirection = new Vector2( 1, 0);
+			endPosition += new Vector3(1, 0, 0);
+			return;
+		}
+		possDirections.TryGetValue("up", out up);
+		possDirections.TryGetValue("down", out down);
+		if((up && !down)|| (up && yDistance > 0 && down))
+		{
+			moveDirection = new Vector2( 0, 1);
+			endPosition += new Vector3(0, 1, 0);
+			return;
+		}
+		if(down)
+		{
+			moveDirection = new Vector2( 0, -1);
+			endPosition += new Vector3(0, -1, 0);
+			return;
+		}
+		if((right && !left)|| (right && xDistance > 0 && left))
+		{
+			moveDirection = new Vector2( 1, 0);
+			endPosition += new Vector3(1, 0, 0);
+			return;
+		}
+		if(left)
+		{
+			moveDirection = new Vector2( 1, 0);
+			endPosition += new Vector3(1, 0, 0);
+			return;
+		}
+		startWait();
+	}
+	
+	
 	public virtual void attack()
 	{
+		startWait();
+		Debug.Log ("ATTACK");
 		Player.Instance.setHealth(-dmg);
 	}
 
@@ -193,22 +250,30 @@ public class EnemyBase : MonoBehaviour {
 		doSteps++;
 	}
 
-	void die()
+	public void die()
 	{
+		Player.Instance.incrementEnemiesKilled();
+		//dropItem();
 		Destroy(gameObject);
 	}
 
-	void startWait(){
+	public void dropItem(GameObject o){
+		GameObject newdrop = Instantiate(o);
+		newdrop.transform.position = transform.position;
+	}
+
+	public void startWait(){
 		waitInit = Time.time;
 		wait = true;
 	}
-	bool checkWait()
+	public bool checkWait()
 	{
 		if(Time.time - waitInit >= 1)
 			wait = false;
 		return wait;
 	}
-		
 
+	
+	
 }
 	

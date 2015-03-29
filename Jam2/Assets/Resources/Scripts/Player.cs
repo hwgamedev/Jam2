@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     private int damage;
     private int reach;
     private int stepsToTeleport;
-    private int enemiesKilled = 0;
+    private int enemiesKilled;
     private int healthPotions;
     private int stepIncreasers;
     private int stepReducers;
@@ -20,9 +20,11 @@ public class Player : MonoBehaviour {
     private int stepIncreasersStart;
     private int stepReducersStart;
     private int teleportersStart;
-    private bool buff = false;
-    private bool debuff1 = false;
-    private bool debuff2 = false;
+
+    //persistent stats
+    private int jumps;
+    private int items;
+    private int rooms;
 
     public static Player Instance;
     void Awake()
@@ -53,9 +55,6 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("reachTemp", 0);
         damage = PlayerPrefs.GetInt("attackDamage") + PlayerPrefs.GetInt("damageTemp");
         PlayerPrefs.SetInt("damageTemp", 0);
-        buff = true;
-        debuff1 = true;
-        debuff2 = true;
         UI.Instance.init();
     }
 
@@ -139,21 +138,6 @@ public class Player : MonoBehaviour {
         return stepsToTeleport;
     }
 
-    public bool getBuff()
-    {
-        return buff;
-    }
-
-    public bool getDebuff1()
-    {
-        return debuff1;
-    }
-
-    public bool getDebuff2()
-    {
-        return debuff2;
-    }
-
     public void setName(string _name)
     {
         playerName = _name;
@@ -170,6 +154,7 @@ public class Player : MonoBehaviour {
     {
         health += _health;
         if (health > maxHealth) health = maxHealth;
+        else if (health <= 0) {death();}
         UI.Instance.healthUpdate();
     }
 
@@ -178,9 +163,9 @@ public class Player : MonoBehaviour {
         maxHealth = _maxHealth;
     }
 
-    public void setTotalEnemies(int _totalEnemies)
+    public void incrementTotalEnemies()
     {
-        totalEnemies = _totalEnemies;
+        totalEnemies++;
     }
 
     public void setSteps(int _stepsToTeleport)
@@ -214,35 +199,43 @@ public class Player : MonoBehaviour {
     }
 
     public void drinkHealthPotion()
-    {   
-        if(healthPotions > 0)
-        healthPotions--;
-        setHealth(2);
-        UI.Instance.healthPotionUpdate();
+    {
+        if (healthPotions > 0)
+        {
+            healthPotions--;
+            setHealth(2);
+            UI.Instance.healthPotionUpdate();
+        }
     }
 
     public void drinkIncreaser()
     {
         if (stepIncreasers > 0)
-        stepIncreasers--;
-        incrementSteps(5);
-        UI.Instance.stepIncreaserUpdate();
+        {
+            stepIncreasers--;
+            incrementSteps(5);
+            UI.Instance.stepIncreaserUpdate();
+        }
     }
 
     public void drinkReducer()
     {
         if (stepReducers > 0)
-        stepReducers--;
-        incrementSteps(-5);
-        UI.Instance.stepDecreaserUpdate();
+        {
+            stepReducers--;
+            incrementSteps(-5);
+            UI.Instance.stepDecreaserUpdate();
+        }
     }
 
     public void drinkTeleporter()
     {
         if (teleporters > 0)
+        {
+            teleporters--;
         //call teleport
-        teleporters--;
         UI.Instance.teleporterUpdate();
+        }
     }
 
     public void incrementEnemiesKilled()
@@ -251,30 +244,14 @@ public class Player : MonoBehaviour {
         UI.Instance.enemyKillUpdate();
     }
 
-    public void setBuff(bool _buff)
-    {
-        buff = _buff;
-        UI.Instance.speedBuffUpdate();
-    }
-
-    public void setDebuff1(bool _buff)
-    {
-        debuff1 = _buff;
-        UI.Instance.poisonDebuffUpdate();
-    }
-
-    public void setDebuff2(bool _buff)
-    {
-        debuff2 = _buff;
-        UI.Instance.slowedDebuffUpdate();
-    }
-
     public void decrementSteps()
     {
         stepsToTeleport --;
-        //if steps >= 0
-        //call teleport
-        if (stepsToTeleport <= 0) stepsToTeleport = 0;
+        if (stepsToTeleport <= 0)
+        {
+            stepsToTeleport = 0;
+            //call teleport function
+        }
         UI.Instance.stepUpdate();
 
     }
@@ -282,23 +259,24 @@ public class Player : MonoBehaviour {
     public void incrementSteps(int i)
     {
         stepsToTeleport += i;
-        //if steps >= 0
-        //call teleport
-        if (stepsToTeleport <= 0) stepsToTeleport = 0;
+        if (stepsToTeleport <= 0)
+        {
+            stepsToTeleport = 0;
+            //call teleport function
+        }
         UI.Instance.stepUpdate();
     }
 
     public void death()
     {
-        //Set kills, rooms cleared, coins, jumps, items and player's death to the apropriate keys in PlayerPrefs
-        //PlayerPrefs.SetInt("totalKills", (PlayerPrefs.GetInt("totalKills") + kills);
-        //PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.SetInt("totaljumps") + jumps);
-        //PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.SetInt("totalDeaths") + 1);
-        //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.SetInt("totalItems") + items);
-        //PlayerPrefs.SetInt("totalRoomsCleared", (PlayerPrefs.SetInt("totalRoomsCleared") + rooms);
-        //PlayerPrefs.setInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins);
+        PlayerPrefs.SetInt("totalKills", (PlayerPrefs.GetInt("totalKills") + enemiesKilled));
+        PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.GetInt("totaljumps") + jumps));
+        PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.GetInt("totalDeaths") + 1));
+        PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items));
+        PlayerPrefs.SetInt("totalRooms", (PlayerPrefs.GetInt("totalRooms") + rooms));
         PlayerPrefs.SetInt("thisCoins", coins);
         PlayerPrefs.SetInt("totalCoins", (PlayerPrefs.GetInt("totalCoins") + coins));
+        PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins));
         PlayerPrefs.Save();
         Application.LoadLevel("GameOver");
     }

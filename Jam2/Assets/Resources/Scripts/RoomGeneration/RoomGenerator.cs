@@ -77,7 +77,7 @@ public class RoomGenerator : MonoBehaviour {
                 GameObject[, ,] curGrid = generateRoom();
                 data.setGrid(curGrid);
                 rooms.Add(room);
-                data.initObjects();
+                data.initObjects(roomSize);
                 roomCounter++;
             }
         }
