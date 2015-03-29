@@ -30,18 +30,12 @@ public class EnemyBase : MonoBehaviour {
 	public int stepsTaken;
 	public bool wait;
 	float waitInit;
-
 	// Use this for initialization
 	public virtual void Start () {
 		player = GameObject.FindWithTag("Player");
-		vars = (GameVariables) GameObject.FindWithTag("GameVariables").GetComponent("GameVariables");
 
 		awake = false;
 		moving = false;
-		//TO DO - remove
-		vars.TileSize = 1;
-		doSteps = 100;
-		//------------
 		stepsTaken = 0;
 		wait = false;
 
@@ -158,22 +152,22 @@ public class EnemyBase : MonoBehaviour {
 
 	bool checkCanHit()
 	{
-		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, vars.TileSize/2, 0), -Vector2.up, vars.TileSize, LayerMask.GetMask("Player"));
+		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), -Vector2.up, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(0,-1);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, vars.TileSize/2, 0), Vector2.up, vars.TileSize, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), Vector2.up, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(0,1);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, vars.TileSize/2, 0), Vector2.right, vars.TileSize, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), Vector2.right, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(1,0);
 			return true;
 		}
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, vars.TileSize/2, 0), -Vector2.right, vars.TileSize, LayerMask.GetMask("Player"));
+		hit = Physics2D.Raycast(transform.position + new Vector3(0, 1/2, 0), -Vector2.right, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
 			moveDirection= new Vector2(-1,0);
 			return true;
@@ -183,12 +177,17 @@ public class EnemyBase : MonoBehaviour {
 
 	public virtual void attack()
 	{
-		//Player.Instance.setHealth(-dmg);
+		Player.Instance.setHealth(-dmg);
 	}
 
 	public void takeDamage(int damage)
 	{
 		health -= damage;
+	}
+
+	public void incrementSteps()
+	{
+		doSteps++;
 	}
 
 	void die()
