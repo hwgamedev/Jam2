@@ -3,10 +3,17 @@ using System.Collections;
 
 public class RoomGenerator : MonoBehaviour {
 
+    public int noRoomsToGenerateHorizontal = 4;
+    public int noRoomsToGenerateVertical = 5;
+
     //room spec
-    public int noOfSubrooms = 1;
-    public int minSubRoomSize = 5;
-    public int maxSubRoomSize = 10;
+    public int noOfSubrooms = 2;
+    public int subRoomsVariation = 2;
+    public int minSubRoomSize = 10;
+    public int maxSubRoomSize = 15;
+    public int maxSizeVariation = 3;
+    public int minSizeVariation = 3;
+
     
     //tiles
     public GameObject tileTemplate;
@@ -21,35 +28,65 @@ public class RoomGenerator : MonoBehaviour {
     private GameObject[,,] grid;
 
     //this is the offset of the room on the map
-    private int roomOffsetX;
-    private int roomOffsetY;
+    private Transform roomObject;
 
     //this marks the full bounding box of a single room
     private int xStart, xEnd, yStart, yEnd;
+
+    public System.Collections.Generic.LinkedList<GameObject[,,]> rooms;
 
 
 	// Use this for initialization
     void Start()
     {
-        roomSize = noOfSubrooms * maxSubRoomSize;
-        roomOffsetX = roomOffsetY = 0;
-        generateRoom();
+        roomSize = (noOfSubrooms+subRoomsVariation) * maxSubRoomSize;
+        rooms = new System.Collections.Generic.LinkedList<GameObject[,,]>();
+        int roomCounter = 0;
+        int roomOffsetX = 0;
+        int roomOffsetY = 0;
+        for (int i = 0; i < noRoomsToGenerateHorizontal; i++)
+        {
+            roomOffsetX = (roomSize + maxSubRoomSize) * i;
+            for (int j = 0; j < noRoomsToGenerateVertical; j++)
+            {
+                roomOffsetY = (roomSize + maxSubRoomSize) * j;
+                GameObject room = new GameObject("Room"+roomCounter);
+                room.transform.parent = transform;
+                Vector3 roomPos = room.transform.localPosition;
+                roomPos.x = roomOffsetX;
+                roomPos.y = roomOffsetY;
+                room.transform.localPosition = roomPos;
+                roomObject = room.transform;
+
+                GameObject[, ,] curGrid = generateRoom();
+                rooms.AddLast(curGrid);
+                roomCounter++;
+            }
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	}
 
-    public void generateRoom()
+    public GameObject[,,] generateRoom()
     {
         //initialise a grid for the room
         grid = new GameObject[roomSize, roomSize, 10];
         int roomsGenerated = 0;
 
+        //spice things up
+        int subRoomsToGenerate = noOfSubrooms + Random.Range(0, subRoomsVariation);
+
         //generate the subrooms
-        while (roomsGenerated != noOfSubrooms)
+        while (roomsGenerated != subRoomsToGenerate)
         {
             //conjure up a subroom size
+            int roomSizeRangeMinX = minSubRoomSize - Random.Range(0, minSizeVariation);
+            int roomSizeRangeMinY = minSubRoomSize - Random.Range(0, minSizeVariation);
+            int roomSizeRangeMaxX = maxSubRoomSize - Random.Range(0, maxSizeVariation);
+            int roomSizeRangeMaxY = maxSubRoomSize - Random.Range(0, maxSizeVariation);
+
             int roomX = Random.Range(minSubRoomSize, maxSubRoomSize);
             int roomY = Random.Range(minSubRoomSize, maxSubRoomSize);
 
@@ -61,6 +98,8 @@ public class RoomGenerator : MonoBehaviour {
             //increment counter
             roomsGenerated++;
         }
+
+        return grid;
     }
 
     private int[] calculateOffset(int roomX, int roomY)
@@ -211,10 +250,22 @@ public class RoomGenerator : MonoBehaviour {
 
     private void createDoor(int xPos, int yPos, int xAdjacent, int yAdjacent)
     {
+        //delete the wall previously here
         Destroy(grid[xPos,yPos,0]);
-        GameObject temp = Instantiate(tileTemplate, new Vector3(xPos + roomOffsetX, (yPos + roomOffsetY) * -1, 0), Quaternion.identity) as GameObject;
+        //and create a passage instead
+        GameObject temp = Instantiate(tileTemplate, new Vector3(0,0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos) * -1, 0);
+        //add to grid
         grid[xPos, yPos, 0] = temp;
-        temp = Instantiate(tileTemplate, new Vector3(xPos + xAdjacent + roomOffsetX, (yPos + yAdjacent + roomOffsetY) * -1, 0), Quaternion.identity) as GameObject;
+
+        //create the passage for the other subroom as well
+        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent it to the room object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos + xAdjacent, (yPos + yAdjacent) * -1, 0);
+        //add to grid
         grid[xPos+xAdjacent, yPos+yAdjacent, 0] = temp;
     }
 
@@ -308,7 +359,9 @@ public class RoomGenerator : MonoBehaviour {
     {
         if (grid[xPos, yPos, 0] != null)
             return null;
-        GameObject temp = Instantiate(template, new Vector3(xPos + roomOffsetX, (yPos + roomOffsetY) * -1, 0), Quaternion.identity) as GameObject;
+        GameObject temp = Instantiate(template, new Vector3(0,0, 0), Quaternion.identity) as GameObject;
+        temp.transform.parent = roomObject.transform;
+        temp.transform.localPosition = new Vector3(xPos, (yPos) * -1, 0);
         grid[xPos, yPos, 0] = temp;
         return temp;
     }
