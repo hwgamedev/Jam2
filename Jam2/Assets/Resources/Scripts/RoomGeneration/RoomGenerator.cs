@@ -17,9 +17,14 @@ public class RoomGenerator : MonoBehaviour {
     
     //tiles
     public GameObject tileTemplate;
-    public GameObject cornerTile;
+    public GameObject cornerTileTop;
+    public GameObject cornerTileBottom;
     public GameObject topTile;
+    public GameObject bottomTile;
     public GameObject sideTile;
+    public GameObject wallTile;
+    public GameObject doorCornerTop;
+    public GameObject doorCornerBottom;
 
     //derive grid size
     private int roomSize;
@@ -190,8 +195,8 @@ public class RoomGenerator : MonoBehaviour {
             for (int x = offsetX+1; x < offsetX + roomX -1; x++)
             {
                 int y = offsetY - 1;
-                if (y < 0) break;
-                if (grid[x, y, 0] != null && grid[x, y, 0].tag == "Wall")
+                if (y < 0 || y -1 < 0) break;
+                if (grid[x, y, 0] != null && grid[x, y, 0].tag == "Wall" && grid[x, y-1, 0] != null && grid[x, y-1, 0].tag != "Corner")
                 {
                     counter++;
                     if (countStarted == false)
@@ -201,10 +206,10 @@ public class RoomGenerator : MonoBehaviour {
                 if (grid[x, y, 0] == null && countStarted)
                     break;
             }
-            if (counter >= 1)
+            if (counter >= 5)
             {
-                int doorPosition = firstCounterInstance + Random.Range(0, counter);
-                createDoor(doorPosition, offsetY-1, 0, 1);
+                int doorPosition = firstCounterInstance + Random.Range(3, counter-2);
+                createDoorHorizontal(doorPosition, offsetY-1);
                 offsetCorrect = true;
             }
 
@@ -212,13 +217,13 @@ public class RoomGenerator : MonoBehaviour {
             counter = 0;
             countStarted = false;
             firstCounterInstance = 0;
-            for (int y = offsetY+1; y < offsetY + roomY-1; y++)
+            for (int y = offsetY+2; y < offsetY + roomY-1; y++)
             {
                 int x = offsetX - 1;
 
-                if (x < 0) break;
+                if (x < 0 || x - 1 < 0) break;
 
-                if (grid[x, y, 0] != null && grid[x,y,0].tag == "Wall")
+                if (grid[x, y, 0] != null && grid[x,y,0].tag == "Wall" && grid[x-1,y,0] != null && grid[x-1,y,0].tag != "Corner")
                 {
                     counter++;
                     if(countStarted == false)
@@ -228,10 +233,10 @@ public class RoomGenerator : MonoBehaviour {
                 if (grid[x, y, 0] == null && countStarted)
                     break;
             }
-            if (counter >= 1)
+            if (counter >= 5)
             {
-                int doorPosition = firstCounterInstance + Random.Range(0, counter);
-                createDoor(offsetX - 1, doorPosition, 1, 0);
+                int doorPosition = firstCounterInstance + Random.Range(3, counter-2);
+                createDoorVertical(offsetX - 1, doorPosition);
                 offsetCorrect = true;
             }
 
@@ -248,105 +253,165 @@ public class RoomGenerator : MonoBehaviour {
         return result;
     }
 
-    private void createDoor(int xPos, int yPos, int xAdjacent, int yAdjacent)
+    private void createDoorVertical(int xPos, int yPos)
     {
         //delete the wall previously here
-        Destroy(grid[xPos,yPos,0]);
+        Destroy(grid[xPos, yPos, 0]);
+        Destroy(grid[xPos, yPos - 1, 0]);
+        Destroy(grid[xPos, yPos - 2, 0]);
+        Destroy(grid[xPos, yPos + 1, 0]);
         //and create a passage instead
-        GameObject temp = Instantiate(tileTemplate, new Vector3(0,0, 0), Quaternion.identity) as GameObject;
+        GameObject temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos, (yPos) * -1, 0);
         //add to grid
         grid[xPos, yPos, 0] = temp;
+        //wall tile
+        temp = Instantiate(wallTile, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos-1) * -1, 0);
+        //add to grid
+        grid[xPos, yPos-1, 0] = temp;
+        temp = Instantiate(doorCornerTop, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos - 2) * -1, 0);
+        //add to grid
+        grid[xPos, yPos - 2, 0] = temp;
+        temp = Instantiate(doorCornerBottom, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos + 1) * -1, 0);
+        //add to grid
+        grid[xPos, yPos + 1, 0] = temp;
 
         //create the passage for the other subroom as well
         temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent it to the room object
         temp.transform.parent = roomObject;
-        temp.transform.localPosition = new Vector3(xPos + xAdjacent, (yPos + yAdjacent) * -1, 0);
+        temp.transform.localPosition = new Vector3(xPos+1, (yPos) * -1, 0);
         //add to grid
-        grid[xPos+xAdjacent, yPos+yAdjacent, 0] = temp;
+        grid[xPos + 1, yPos, 0] = temp;
+        temp = Instantiate(wallTile, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent it to the room object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos + 1, (yPos-1) * -1, 0);
+        //add to grid
+        grid[xPos + 1, yPos-1, 0] = temp;
+        temp = Instantiate(doorCornerTop, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp.transform.localScale = new Vector3(-1, 1, 0);
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos + 1, (yPos - 2) * -1, 0);
+        //add to grid
+        grid[xPos, yPos - 2, 0] = temp;
+        temp = Instantiate(doorCornerBottom, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp.transform.localScale = new Vector3(-1, 1, 0);
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos + 1, (yPos + 1) * -1, 0);
+        //add to grid
+        grid[xPos, yPos + 1, 0] = temp;
     }
 
-    private int[] fitRoom(int xSubOffset, int ySubOffset, int xSpaceNeeded, int ySpaceNeeded)
+    private void createDoorHorizontal(int xPos, int yPos)
     {
-        //we'll be checking if we can fit the subroom of specified size where we want
-        int xSpaceGiven = xSpaceNeeded;
-        int ySpaceGiven = ySpaceNeeded;
+        //delete the wall previously here
+        Destroy(grid[xPos, yPos, 0]);
+        Destroy(grid[xPos - 1, yPos, 0]);
+        Destroy(grid[xPos -2, yPos, 0]);
+        Destroy(grid[xPos+1, yPos, 0]);
+        //and create a passage instead
+        GameObject temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos) * -1, 0);
+        //add to grid
+        grid[xPos, yPos, 0] = temp;
+        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos-1, (yPos) * -1, 0);
+        //add to grid
+        grid[xPos-1, yPos, 0] = temp;
+        //wall tile
+        temp = Instantiate(doorCornerBottom, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp.transform.localScale = new Vector3(-1, 1, 0);
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos-2, (yPos) * -1, 0);
+        //add to grid
+        grid[xPos-2, yPos, 0] = temp;
+        temp = Instantiate(doorCornerBottom, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos+1, (yPos) * -1, 0);
+        //add to grid
+        grid[xPos+1, yPos, 0] = temp;
 
-        //check if there's enough space there to generate the subroom of the given size
-        for (int xSpace = 0; xSpace < xSpaceNeeded; xSpace++)
-        {
-            //if there's not enough space on the x axis, reduce subroom width
-            if (xSubOffset + xSpace == roomSize - 1)
-            {
-                xSpaceGiven = xSpace - 1;
-                break;
-            }
-            else if (grid[(xSubOffset + xSpace), ySubOffset, 0] != null)
-            {
-                xSpaceGiven = xSpace - 1;
-                break;
-            }
-        }
-        //check if there's enough space there to generate the subroom of the given size
-        for (int ySpace = 0; ySpace < ySpaceNeeded; ySpace++)
-        {
-            //if there's not enough space on the y axis, reduce the subroom height
-            if (xSubOffset + ySpace == roomSize - 1)
-            {
-                xSpaceGiven = ySpace - 1;
-                break;
-            }
-            else if (grid[xSubOffset, (ySubOffset + ySpace), 0] != null)
-            {
-                ySpaceGiven = ySpace - 1;
-                break;
-            }
-        }
+        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos+1) * -1, 0);
+        //add to grid
+        grid[xPos, yPos+1, 0] = temp;
+        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos-1, (yPos + 1) * -1, 0);
+        //add to grid
+        grid[xPos-1, yPos + 1, 0] = temp;
+        //wall tile
+        temp = Instantiate(doorCornerTop, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp.transform.localScale = new Vector3(-1, 1, 0);
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos - 2, (yPos+1) * -1, 0);
+        //add to grid
+        grid[xPos-2, yPos + 1, 0] = temp;
+        temp = Instantiate(doorCornerTop, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos + 1, (yPos+1) * -1, 0);
+        //add to grid
+        grid[xPos+1, yPos +1, 0] = temp;
 
-        //check if the subroom is realistically big enough to navigate (1 cell for walls after all)
-        if (xSpaceGiven < 3 || ySpaceGiven < 3)
-        {
-            return null;
-        }
-
-        //expand the whole room bounding box
-        if (xStart > xSubOffset)
-            xStart = xSubOffset;
-        if (xEnd < xSubOffset + xSpaceGiven)
-            xEnd = xSubOffset + xSpaceGiven;
-        if (yStart > ySubOffset)
-            yStart = ySubOffset;
-        if (yEnd < ySubOffset + xSpaceGiven)
-            yEnd = ySubOffset + ySpaceGiven;
-
-        print("Room bounding box: x: " + xStart + ", " + xEnd + ". y: " + yStart + ", " + yEnd);
-
-        //return the spec of the new room to be generated
-        int[] result = { xSubOffset, ySubOffset, xSpaceGiven, ySpaceGiven };
-        return result;
+        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos + 2) * -1, 0);
+        //add to grid
+        grid[xPos, yPos+2, 0] = temp;
+        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos-1, (yPos + 2) * -1, 0);
+        //add to grid
+        grid[xPos-1, yPos + 2, 0] = temp;
+        
     }
 
     private void generateSubRoom(int roomX, int roomY, int offsetX, int offsetY)
     {
         //generate the corner tiles
-        genCornerTile(offsetX, offsetY, 1, 1);
-        genCornerTile(roomX-1 + offsetX, offsetY, -1, 1);
-        genCornerTile(roomX-1 + offsetX, roomY-1 + offsetY, -1, -1);
-        genCornerTile(offsetX, roomY-1 + offsetY, 1, -1);
+        genCornerTile(cornerTileTop, offsetX, offsetY, 1, 1);
+        genCornerTile(cornerTileTop, roomX-1 + offsetX, offsetY, -1, 1);
+        genCornerTile(cornerTileBottom, roomX-1 + offsetX, roomY-1 + offsetY, -1, 1);
+        genCornerTile(cornerTileBottom, offsetX, roomY-1 + offsetY, 1, 1);
 
         //generate walls
-        genWall(roomX-1, offsetX, offsetY, true, false);
-        genWall(roomX-1, offsetX, roomY-1 + offsetY, true, true);
-        genWall(roomY-1, offsetX, offsetY, false, false);
-        genWall(roomY-1, offsetX + roomX-1, offsetY, false, true);
+        genWall(topTile, roomX-1, offsetX, offsetY, true, false);
+        genWall(wallTile, roomX - 1, offsetX, offsetY + 1, true, false);
+        genWall(bottomTile, roomX-1, offsetX, roomY-1 + offsetY, true, true);
+        genWall(sideTile, roomY-1, offsetX, offsetY, false, false);
+        genWall(sideTile, roomY-1, offsetX + roomX-1, offsetY, false, true);
 
         //fill the middle bit
         for (int x = 1; x < roomX-1; x++)
         {
-            for (int y = 1; y < roomY-1; y++)
+            for (int y = 2; y < roomY-1; y++)
             {
                 int xPos = x + offsetX;
                 int yPos = y + offsetY;
@@ -366,7 +431,7 @@ public class RoomGenerator : MonoBehaviour {
         return temp;
     }
 
-    private void genCornerTile(int xPos, int yPos, int xScale, int yScale)
+    private void genCornerTile(GameObject cornerTile, int xPos, int yPos, int xScale, int yScale)
     {
         GameObject temp = createTile(cornerTile, xPos, yPos);
         if (temp == null)
@@ -379,25 +444,25 @@ public class RoomGenerator : MonoBehaviour {
         temp.transform.localScale = theScale;
     }
 
-    private void genWall(int noOfTiles, int xPos, int yPos, bool xAxis, bool flip)
+    private void genWall(GameObject tile, int noOfTiles, int xPos, int yPos, bool xAxis, bool flip)
     {
         for (int i = 1; i < noOfTiles; i++)
         {
             GameObject temp;
             if (xAxis)
             {
-                temp = createTile(topTile, xPos + i, yPos);
+                temp = createTile(tile, xPos + i, yPos);
             }
             else
             {
-                temp = createTile(sideTile, xPos, yPos + i);
+                temp = createTile(tile, xPos, yPos + i);
             }
-            if (flip && temp != null)
+            if (flip && temp != null && !xAxis)
             {
                 Vector3 theScale = temp.transform.localScale;
-                if (xAxis)
-                    theScale.y *= -1;
-                else
+               // if (xAxis)
+               //     theScale.y *= -1;
+               // else
                     theScale.x *= -1;
                 temp.transform.localScale = theScale;
             }

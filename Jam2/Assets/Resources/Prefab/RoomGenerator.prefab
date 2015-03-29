@@ -39,13 +39,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9651b1aea81c43946b8b722b1cce5b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noRoomsToGenerateHorizontal: 4
+  noRoomsToGenerateVertical: 5
   noOfSubrooms: 3
+  subRoomsVariation: 2
   minSubRoomSize: 10
   maxSubRoomSize: 15
+  maxSizeVariation: 3
+  minSizeVariation: 3
   tileTemplate: {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
-  cornerTile: {fileID: 150884, guid: 4ae2ed232f845b94880cf058bf6805ce, type: 2}
+  cornerTileTop: {fileID: 174428, guid: f31cad70126b9814e84d9ef070931aaf, type: 2}
+  cornerTileBottom: {fileID: 174390, guid: d34dd9a8ab6158d408d88cfe3df3c63d, type: 2}
   topTile: {fileID: 197168, guid: 359fe4dc132441a4d983d307889887cc, type: 2}
+  bottomTile: {fileID: 139606, guid: 3b5a63204c69fc849bc6c861246a1c43, type: 2}
   sideTile: {fileID: 143612, guid: d3cb78cb24cad31409a43ce378fd717f, type: 2}
+  wallTile: {fileID: 110348, guid: aef119f7a47a27e44806c6c31e6e89b8, type: 2}
+  doorCornerTop: {fileID: 143424, guid: bdf1b514f2f75ba46bfc1d4266a832f9, type: 2}
+  doorCornerBottom: {fileID: 154182, guid: c1887f833cfcce84b9bf8959cc3289d7, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
