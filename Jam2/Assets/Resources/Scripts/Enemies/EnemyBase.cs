@@ -46,6 +46,9 @@ public class EnemyBase : MonoBehaviour {
 
 		//set tag for enemies
 		gameObject.tag = "Enemy";
+
+		//register to the step manager
+		StepManager.Instance.register (this);
 	}
 	
 	// Update is called once per frame

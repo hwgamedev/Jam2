@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     private int maxHealth;
     private int health;
     private int coins;
+    private int damage;
+    private int reach;
     private int stepsToTeleport;
     private int enemiesKilled = 0;
     private int healthPotions;
@@ -30,36 +32,42 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        //initPlayerPref();
         playerName = PlayerPrefs.GetString("playerName");
         maxHealth = PlayerPrefs.GetInt("maxHealth") + PlayerPrefs.GetInt("tempExtraHealth");
         PlayerPrefs.SetInt("tempExtraHealth", 0);
         health = maxHealth;
         coins = PlayerPrefs.GetInt("totalCoins");
-        healthPotionsStart = PlayerPrefs.GetInt("healthPotionsStart");
+        healthPotionsStart = PlayerPrefs.GetInt("healthPotionsStart") + PlayerPrefs.GetInt("healthPotionsStartTemp");
+        PlayerPrefs.SetInt("healthPotionsStartTemp", 0);
         healthPotions = healthPotionsStart;
-        stepIncreasersStart = PlayerPrefs.GetInt("stepIncreasersStart");
+        stepIncreasersStart = PlayerPrefs.GetInt("stepIncreasersStart") + PlayerPrefs.GetInt("stepIncreasersStartTemp");
+        PlayerPrefs.SetInt("stepIncreasersStart", 0);
         stepIncreasers = stepIncreasersStart;
-        stepReducersStart = PlayerPrefs.GetInt("stepReducersStart");
+        stepReducersStart = PlayerPrefs.GetInt("stepReducersStart") + PlayerPrefs.GetInt("stepReducersStartTemp");
+        PlayerPrefs.SetInt("stepReducersStart", 0);
         stepReducers = stepReducersStart;
-        teleportersStart = PlayerPrefs.GetInt("teleportersStart");
+        teleportersStart = PlayerPrefs.GetInt("teleportersStart") + PlayerPrefs.GetInt("teleportersStartTemp");
+        PlayerPrefs.SetInt("teleportersStart", 0);
         teleporters = teleportersStart;
+        reach = PlayerPrefs.GetInt("attackReach") + PlayerPrefs.GetInt("reachTemp");
+        PlayerPrefs.SetInt("reachTemp", 0);
+        damage = PlayerPrefs.GetInt("attackDamage") + PlayerPrefs.GetInt("damageTemp");
+        PlayerPrefs.SetInt("damageTemp", 0);
         buff = true;
         debuff1 = true;
         debuff2 = true;
         UI.Instance.init();
     }
 
-    //void initPlayerPref()
-    //{
-    //    PlayerPrefs.SetString("playerName", "John");
-    //    PlayerPrefs.SetInt("maxHealth", 10);
-    //    PlayerPrefs.SetInt("totalCoins", 0);
-    //    PlayerPrefs.SetInt("healthPotionsStart", 0);
-    //    PlayerPrefs.SetInt("stepIncreasersStart", 0);
-    //    PlayerPrefs.SetInt("stepReducersStart", 0);
-    //    PlayerPrefs.SetInt("teleportersStart", );
-    //}
+    public int getReach()
+    {
+        return reach;
+    }
+
+    public int getDamage()
+    {
+        return damage;
+    }
 
     public void increaseMaxHealthPerma()
     {
@@ -283,8 +291,16 @@ public class Player : MonoBehaviour {
     public void death()
     {
         //Set kills, rooms cleared, coins, jumps, items and player's death to the apropriate keys in PlayerPrefs
-        PlayerPrefs.SetInt("totalCoins", coins);
+        //PlayerPrefs.SetInt("totalKills", (PlayerPrefs.GetInt("totalKills") + kills);
+        //PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.SetInt("totaljumps") + jumps);
+        //PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.SetInt("totalDeaths") + 1);
+        //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.SetInt("totalItems") + items);
+        //PlayerPrefs.SetInt("totalRoomsCleared", (PlayerPrefs.SetInt("totalRoomsCleared") + rooms);
+        //PlayerPrefs.setInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins);
+        PlayerPrefs.SetInt("thisCoins", coins);
+        PlayerPrefs.SetInt("totalCoins", (PlayerPrefs.GetInt("totalCoins") + coins));
         PlayerPrefs.Save();
+        Application.LoadLevel("GameOver");
     }
 
 }

@@ -7,7 +7,8 @@ public class Shop : MonoBehaviour {
     public InputField createChar;
     public GameObject shop;
     public GameObject creator;
-
+    public AudioClip till;
+    public AudioClip error;
     private string playerName;
     private int totalCoins;
     private int maxHealth;
@@ -158,6 +159,10 @@ public class Shop : MonoBehaviour {
                     maxHealth++;
                     PlayerPrefs.SetInt("maxHealth", maxHealth);
                 }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
+                }
                 break;
             case 2:
                 if (totalCoins > healthCostTemp)
@@ -166,6 +171,10 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     tempExtraHealth++;
                     PlayerPrefs.SetInt("tempExtraHealth", tempExtraHealth);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             default:
@@ -197,6 +206,10 @@ public class Shop : MonoBehaviour {
                     damage++;
                     PlayerPrefs.SetInt("attackDamage", damage);
                 }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
+                }
                 break;
             case 2:
                 if (totalCoins > damageCostTemp)
@@ -205,6 +218,10 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     damageTemp++;
                     PlayerPrefs.SetInt("damageTemp", damageTemp);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             default:
@@ -236,6 +253,10 @@ public class Shop : MonoBehaviour {
                     reach++;
                     PlayerPrefs.SetInt("attackReach", reach);
                 }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
+                }
                 break;
             case 2:
                 if (totalCoins > reachCostTemp)
@@ -244,6 +265,10 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     reachTemp++;
                     PlayerPrefs.SetInt("reachTemp", reachTemp);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             default:
@@ -274,6 +299,11 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     healthPotionsStart++;
                     PlayerPrefs.SetInt("healthPotionsStart", healthPotionsStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             case 2:
@@ -283,12 +313,17 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     healthPotionsTempStart++;
                     PlayerPrefs.SetInt("healthPotionsStartTemp", healthPotionsTempStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             default:
                 break;
         }
-        healthpotCost = 1000 + ((healthPotionsStart - 1) * 1000);
+        healthpotCost = 1000 + ((healthPotionsStart) * 1000);
         healthpotCostTemp = 100 + (healthPotionsTempStart * 100);
         perm[3].GetComponentInChildren<Text>().text = healthpotCost.ToString() + "g";
         temp[3].GetComponentInChildren<Text>().text = healthpotCostTemp.ToString() + "g";
@@ -313,6 +348,11 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     stepIncreasersStart++;
                     PlayerPrefs.SetInt("stepIncreasersStart", stepIncreasersStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             case 2:
@@ -322,12 +362,17 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     stepIncreasersTempStart++;
                     PlayerPrefs.SetInt("stepIncreasersStartTemp", stepIncreasersTempStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             default:
                 break;
         }
-        incrCost = 1000 + ((stepIncreasersStart - 1) * 1000);
+        incrCost = 1000 + ((stepIncreasersStart) * 1000);
         incrCostTemp = 100 + (stepIncreasersTempStart * 100);
         perm[4].GetComponentInChildren<Text>().text = incrCost.ToString() + "g";
         temp[4].GetComponentInChildren<Text>().text = incrCostTemp.ToString() + "g";
@@ -352,6 +397,11 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     stepReducersStart++;
                     PlayerPrefs.SetInt("stepReducersStart", stepReducersStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             case 2:
@@ -361,12 +411,17 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     stepReducersTempStart++;
                     PlayerPrefs.SetInt("stepReducersStartTemp", stepReducersTempStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             default:
                 break;
         }
-        reduceCost = 1000 + ((stepReducersStart - 1) * 1000);
+        reduceCost = 1000 + ((stepReducersStart) * 1000);
         reduceCostTemp = 100 + (stepReducersTempStart * 100);
         perm[5].GetComponentInChildren<Text>().text = reduceCost.ToString() + "g";
         temp[5].GetComponentInChildren<Text>().text = reduceCostTemp.ToString() + "g";
@@ -391,6 +446,11 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     teleportersStart++;
                     PlayerPrefs.SetInt("teleporttersStart", teleportersStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             case 2:
@@ -400,13 +460,18 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     teleportersTempStart++;
                     PlayerPrefs.SetInt("teleportersStartTemp", teleportersTempStart);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(error, transform.position);
                 }
                 break;
             default:
                 break;
         }
-        teleCost = 1000 + ((teleportersStart - 1) * 1000);
-        teleCostTemp = 100 + (teleportersTempStart * 100);
+        teleCost = 3000 + ((teleportersStart) * 2500);
+        teleCostTemp = 1000 + (teleportersTempStart * 1000);
         perm[6].GetComponentInChildren<Text>().text = teleCost.ToString() + "g";
         temp[6].GetComponentInChildren<Text>().text = teleCostTemp.ToString() + "g";
         if (teleportersTempStart > 0)
@@ -422,7 +487,7 @@ public class Shop : MonoBehaviour {
     public void startGame()
     {
         PlayerPrefs.Save();
-        Application.LoadLevel("UITestScene");
+        Application.LoadLevel("UIOnRoom");
     }
 
     public void updateCoinCount()
