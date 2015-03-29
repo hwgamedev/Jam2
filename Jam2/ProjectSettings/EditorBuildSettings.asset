@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/shop.unity
   - enabled: 1
     path: Assets/Resources/Scenes/UITestScene.unity
+  - enabled: 1
+    path: Assets/Resources/Scenes/GameOver.unity
