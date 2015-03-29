@@ -7,7 +7,7 @@ public class GameVariables : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		TileSize = 10;
+		TileSize = 1;
 	}
 	
 	// Update is called once per frame
