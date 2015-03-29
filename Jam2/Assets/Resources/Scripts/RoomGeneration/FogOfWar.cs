@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FogOfWar : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class FogOfWar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (changedAlpha)
         {
             SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
@@ -25,10 +27,16 @@ public class FogOfWar : MonoBehaviour {
         }
 	}
 
-    void OnTriggerEnter2D(Collider2D col)
+    public void changeAlpha(float nAlpha)
+    {
+        newAlpha = newAlpha - nAlpha;
+        changedAlpha = true;
+    }
+
+    public void initialise()
     {
         //print("triggered!");
-        if (initialCleansing == false && col.tag == "Player")
+        if (initialCleansing == false)
         {
             //print("Cleansing!");
             initialCleansing = true;

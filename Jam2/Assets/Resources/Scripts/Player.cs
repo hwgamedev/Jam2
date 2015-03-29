@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     private int coins;
     private int damage;
     private int reach;
-    private int stepsToTeleport;
+    private int stepsToTeleport = 500000;
     private int enemiesKilled = 0;
     private int healthPotions;
     private int stepIncreasers;
