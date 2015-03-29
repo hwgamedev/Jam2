@@ -54,6 +54,14 @@ MonoBehaviour:
   - {fileID: 150748, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
   - {fileID: 181890, guid: 88c954f97207e2745910c18968fca681, type: 2}
   fogOfWars: []
+  accents:
+  - {fileID: 160562, guid: c1dc5f996b2a8734aad1e96fc6f42059, type: 2}
+  - {fileID: 178272, guid: 0bedf56ab40e42240a3df0172f5089d2, type: 2}
+  - {fileID: 159720, guid: 4a828015bd70fcd499031d403319da42, type: 2}
+  - {fileID: 151514, guid: 466e30b04c7350b4f99f536092407e31, type: 2}
+  - {fileID: 165378, guid: e9302528caee6cd429d812eab7fbd197, type: 2}
+  - {fileID: 142160, guid: 6fff72b7b8dac554cae159c7626074b1, type: 2}
+  - {fileID: 146364, guid: 343258a71dad0954bbc0c1afbbacbcab, type: 2}
   sparseObjects: .080215469
   clumps: .0722759515
   treasure: 9.99999997e-07

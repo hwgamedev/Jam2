@@ -19,6 +19,7 @@ public class RoomData : MonoBehaviour {
     public GameObject treasureTemplate;
     public GameObject[] enemies;
     public GameObject[] fogOfWars;
+    public GameObject[] accents;
 
     private int enemyCount = 0;
     private List<GameObject> enemyArray;
@@ -74,8 +75,38 @@ public class RoomData : MonoBehaviour {
         initFogOfWar();
         initObstacles();
         initEnemies();
+        putOnAccents();
 
         setupComplete = true;
+    }
+
+    public void putOnAccents()
+    {
+        for (int z = 0; z < roomBoxes.Count; z++)
+        {
+            int[] roomBox = roomBoxes[z];
+            int minX = roomBox[0] + 1;
+            int maxX = roomBox[0] + roomBox[2] - 1;
+            int y = roomBox[1] +1;
+            int wallLength = maxX - minX;
+            //pick an accent from a list
+            int accentIndex = Random.Range(0,accents.Length);
+            if (grid[minX+2, y, 0].tag != "Floor")
+            {
+                //TODO: put on the selected accent
+                GameObject temp = Instantiate(accents[accentIndex], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                temp.transform.parent = transform;
+                temp.transform.localPosition = new Vector3(minX+2, y * -1);
+            }
+
+            if (grid[maxX-3, y, 0].tag != "Floor")
+            {
+                //TODO: put on the selected accent
+                GameObject temp = Instantiate(accents[accentIndex], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                temp.transform.parent = transform;
+                temp.transform.localPosition = new Vector3(maxX-3, y * -1);
+            }
+        }
     }
 
     public void initObstacles()
@@ -115,7 +146,7 @@ public class RoomData : MonoBehaviour {
                             {
                                 for (int j = y; j < y + Random.Range(0,3); j++)
                                 {
-                                    if (i > maxX || j > maxY)
+                                    if (i >= maxX || j >= maxY)
                                         continue;
                                     if (grid[i, j, 1] == null)
                                     {
@@ -189,7 +220,7 @@ public class RoomData : MonoBehaviour {
                         {
                             for (int i = x; i < x + Random.Range(0, 3); i++)
                             {
-                                    if (i > maxX)
+                                    if (i >= maxX)
                                         break;
                                     if (grid[i, y, 1] == null)
                                     {
