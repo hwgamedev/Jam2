@@ -5,30 +5,43 @@ public class characterControls : MonoBehaviour {
 
 	//public GameObject character;
 
-	private Animator anim;
+	// stats to be synchronised with player data
 	public float speed = 1.0f;
 	private int health = 20;
 	private int steps = 10;
+	public float shortRange = 1.5f;
+	public int attackPower = 10;
+
+	private Animator anim;
+
+	// movement helpers
 	private float startTime;
 	private float journeyLength;
 	private Vector3 startPosition;
 	private Vector3 endPosition;
+
+	//states
 	private bool moving = false;
 	private bool attacking = false;
-	public ParticleSystem trace;
+
+	//if need be to add a particle system when attacking
+	//public ParticleSystem trace;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
+		//synchronise with player data
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (health <= 0) {
 			doKill();
+			return;
 		}
 		if (steps == 0) {
 			doJump();
+			return;
 		} else {
 			if (!moving && !attacking) {
         		if (Input.GetKey(KeyCode.W))
@@ -47,7 +60,7 @@ public class characterControls : MonoBehaviour {
 	            {
 	                if (checkForCollisions(new Vector3(transform.position.x-0.5f, transform.position.y, transform.position.z),transform.position - new Vector3(1, 0, 0)))
 	                    return;
-	                anim.SetTrigger("iddleE");
+	                anim.SetTrigger("iddleW");
 					startTime = Time.time;
 					startPosition = transform.position;
 					endPosition = startPosition;
@@ -71,7 +84,7 @@ public class characterControls : MonoBehaviour {
 	            {
 	                if (checkForCollisions(new Vector3(transform.position.x+0.5f, transform.position.y, transform.position.z),transform.position + new Vector3(1, 0, 0)))
 	                    return;
-					anim.SetTrigger("iddleW");
+					anim.SetTrigger("iddleE");
 					startTime = Time.time;
 					startPosition = transform.position;
 					endPosition = startPosition;
@@ -90,26 +103,30 @@ public class characterControls : MonoBehaviour {
 							//trace.transform.rotation = Quaternion.Euler(0,0,89f);
 							//trace.Play();
 							attacking = true;
+							doAttack ("N");
 						} else if (diffY < 0 && diffY > -1) {
 							anim.SetTrigger ("attackS");
 							doStep();
 							//trace.transform.rotation = Quaternion.Euler(0,0,-91f);
 							//trace.Play();
 							attacking = true;
+							doAttack ("S");
 						}
 					} else if (diffY < 1 && diffY > 0) {
 						if (diffX < -0.7 && diffX > -1.7) {
-							anim.SetTrigger ("attackE");
+							anim.SetTrigger ("attackW");
 							doStep();
 							//trace.transform.rotation = Quaternion.Euler(0,0,-179f);
 							//trace.Play();
 							attacking = true;
+							doAttack ("W");
 						} else if (diffX > 0.7 && diffX < 1.7) {
-							anim.SetTrigger ("attackW");
+							anim.SetTrigger ("attackE");
 							doStep();
 							//trace.transform.rotation = Quaternion.Euler(0,0,-1f);
 							//trace.Play();
 							attacking = true;
+							doAttack ("E");
 						}
 					}
 				}
@@ -117,9 +134,6 @@ public class characterControls : MonoBehaviour {
 		}
 		if (moving) {
 			doLerp ();
-		}
-		if (attacking) {
-			doAttack();
 		}
 	}
 
@@ -152,12 +166,24 @@ public class characterControls : MonoBehaviour {
 		}
 	}
 
-	private void doAttack(){
-		// TODO proper collision detection with enemies
-		//RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.right, 5, <enemy layer>);
-		//if (hit.collider != null) {
-		//	
-		//}
+	private void doAttack(string direction){
+		RaycastHit2D hit = Physics2D.Linecast(transform.position, transform.position + new Vector3(0f,shortRange,0f));
+		switch (direction) {
+		case "N":
+			break;
+		case "S":
+			hit = Physics2D.Linecast(transform.position, transform.position - new Vector3(0f,shortRange,0f));
+			break;
+		case "W":
+			hit = Physics2D.Linecast(transform.position, transform.position - new Vector3(shortRange,0f,0f));
+			break;
+		case "E":
+			hit = Physics2D.Linecast(transform.position, transform.position + new Vector3(shortRange,0f,0f));
+			break;
+		}
+		if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Enemy")) {
+			hit.collider.gameObject.GetComponent<EnemyBase>().takeDamage(attackPower);
+		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleN") ||
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleS") ||
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleE") ||
@@ -167,16 +193,18 @@ public class characterControls : MonoBehaviour {
 	}
 
 	private void doJump(){
-
+		print ("teleport !!");
+		steps = 20;
 	}
 
 	private void doKill(){
 		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("die")){
 			anim.SetTrigger ("kill");
 		}
+		// UI Game Over ?
 	}
 
-	public void doDammages(int dammages) {
+	public void takeDammages(int dammages) {
 		health -= dammages;
 	}
 }
