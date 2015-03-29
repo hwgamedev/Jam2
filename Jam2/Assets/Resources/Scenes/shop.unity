@@ -134,6 +134,18 @@ Prefab:
       propertyPath: m_Text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: error
+      value: 
+      objectReference: {fileID: 8300000, guid: f6e91dd3f799b3b41a4a284bb3807989, type: 3}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: till
+      value: 
+      objectReference: {fileID: 8300000, guid: 9e29dec87e28a58499d0794f6bfc9231, type: 3}
+    - target: {fileID: 11487024, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
   m_IsPrefabParent: 0

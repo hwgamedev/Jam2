@@ -55,7 +55,9 @@ public class UI : MonoBehaviour {
 
     public void coinUpdate()
     {
-        goldText.text = Player.Instance.getCoins().ToString();
+        int coins = Player.Instance.getCoins();
+        if (coins > 9) goldText.text = coins.ToString();
+        else goldText.text = "0" + coins.ToString();
     }
 
     public void enemyKillUpdate()
