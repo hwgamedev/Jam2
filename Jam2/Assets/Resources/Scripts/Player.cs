@@ -282,6 +282,7 @@ public class Player : MonoBehaviour {
 
     public void death()
     {
+        //Set kills, rooms cleared, coins, jumps, items and player's death to the apropriate keys in PlayerPrefs
         PlayerPrefs.SetInt("totalCoins", coins);
         PlayerPrefs.Save();
     }
