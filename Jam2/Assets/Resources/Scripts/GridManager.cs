@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class GridManager : MonoBehaviour {
 
-	public RoomGenerator rg;
-	public int currentRoom;
+	public RoomData rg;
 	public GameObject[,,] grid;
 	public int [,] distanceSteps;
 	public Queue <KeyValuePair<int,int>> nodes;
@@ -17,15 +16,14 @@ public class GridManager : MonoBehaviour {
 		if (Instance == null) Instance = this;
 	}
 	void Start () {
-		rg = (RoomGenerator)FindObjectOfType(typeof(RoomGenerator));
-		currentRoom = 0;
+		rg = ((RoomGenerator)FindObjectOfType(typeof(RoomGenerator))).GetComponent<RoomData>();
 		nodes = new Queue<KeyValuePair<int, int>>();
 	}
 	
 	public void pathMove()
 	{
 		Debug.Log("PATHMOVE");
-		grid = rg.rooms.First.Value;
+		grid = rg.getGrid();
 		//Debug.Log(grid.GetLength(1));
 		distanceSteps = new int[grid.GetLength(0), grid.GetLength(1)] ;
 		for(int i = 0; i < (distanceSteps.GetLength(0));i++)
@@ -69,6 +67,8 @@ public class GridManager : MonoBehaviour {
 		grid[playerTile.Key, playerTile.Value, 3] = null;
 		playerTile= new KeyValuePair<int, int>((int)(playerTile.Key + a.x), (int)(playerTile.Value - a.y));
 		grid[playerTile.Key, playerTile.Value, 3] = o;
+		rg.setGrid(grid);
+
 	}
 	
 
@@ -127,6 +127,7 @@ public class GridManager : MonoBehaviour {
 		tile = getClosestAdjecent(tile.Key, tile.Value);
 		grid[previous.Key + tile.Key, previous.Value - tile.Value, 3] = o;
 		grid[previous.Key, previous.Value, 3] = null;
+		rg.setGrid(grid);
 		return new Vector2( tile.Key, tile.Value);
 
 	}
