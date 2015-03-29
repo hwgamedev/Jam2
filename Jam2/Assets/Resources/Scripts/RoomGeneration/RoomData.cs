@@ -44,15 +44,12 @@ public class RoomData : MonoBehaviour {
     {
         for (int i = 0; i < playerVisibleRooms.Length; i++)
         {
-            if (!playerVisibleRooms[i])
-            {
-                int spawnX = roomBoxes[i][0];
-                int spawnY = roomBoxes[i][1];
-                GameObject go = Instantiate(fogOfWar,new Vector3(0,0,0), Quaternion.identity) as GameObject;
-                go.transform.parent = transform;
-                go.transform.localPosition = new Vector3(spawnX+.5f, spawnY*-1-.5f);
-                go.transform.localScale = new Vector3(roomBoxes[i][2]-2, roomBoxes[i][3]-2, 0);
-            }
+            int spawnX = roomBoxes[i][0];
+            int spawnY = roomBoxes[i][1];
+            GameObject go = Instantiate(fogOfWar,new Vector3(0,0,0), Quaternion.identity) as GameObject;
+            go.transform.parent = transform;
+            go.transform.localPosition = new Vector3(spawnX+.5f+.25f, spawnY*-1-.5f-.25f);
+            go.transform.localScale = new Vector3(roomBoxes[i][2]-2.5f, roomBoxes[i][3]-2.5f, 0);
         }
     }
 
