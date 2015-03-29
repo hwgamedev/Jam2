@@ -31,7 +31,7 @@ GameObject:
   - 212: {fileID: 21262630}
   - 95: {fileID: 9538128}
   - 61: {fileID: 6101082}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
