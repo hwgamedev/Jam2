@@ -142,7 +142,7 @@ public class EnemyBase : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 0, 0);
 	}
 
-	void faceMoveDirection()
+	virtual public void faceMoveDirection()
 	{
 		switch((int)moveDirection.x){
 		case 1: faceRight(); break;

@@ -21,6 +21,7 @@ public class Bomber : EnemyBase
 		dmgEnemies = new List<EnemyBase>();
 		preparingExplosion = false;
 		exploding = false;
+		render = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
 	}
 	
 	// Update is called once per frame
@@ -49,6 +50,9 @@ public class Bomber : EnemyBase
 		}
 	}
 
+	override public void faceMoveDirection()
+	{
+	}
 	override public void attack(){
 		startWait ();
 		render.material.SetColor("_Color", Color.red);
