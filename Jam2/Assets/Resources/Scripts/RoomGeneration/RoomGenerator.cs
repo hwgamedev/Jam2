@@ -215,14 +215,14 @@ public class RoomGenerator : MonoBehaviour {
             {
                 int y = offsetY - 1;
                 if (y < 0 || y -1 < 0) break;
-                if (grid[x, y, 0] != null && grid[x, y, 0].tag == "Wall" && grid[x, y-1, 0] != null && grid[x, y-1, 0].tag != "Corner")
+                if (grid[x, y, 0] != null && grid[x, y, 0].tag == "Wall" && grid[x, y-1, 0] != null && grid[x, y-1, 0].tag != "Corner" && grid[x,y-1,0].tag != "Wall")
                 {
                     counter++;
                     if (countStarted == false)
                         firstCounterInstance = x;
                     countStarted = true;
                 }
-                if (grid[x, y, 0] == null && countStarted)
+                else if (countStarted)
                     break;
             }
             if (counter >= 5)
@@ -242,14 +242,14 @@ public class RoomGenerator : MonoBehaviour {
 
                 if (x < 0 || x - 1 < 0) break;
 
-                if (grid[x, y, 0] != null && grid[x,y,0].tag == "Wall" && grid[x-1,y,0] != null && grid[x-1,y,0].tag != "Corner")
+                if (grid[x, y, 0] != null && grid[x, y, 0].tag == "Wall" && grid[x - 1, y, 0] != null && grid[x - 1, y, 0].tag != "Corner" && grid[x-1, y, 0].tag != "Wall")
                 {
                     counter++;
                     if(countStarted == false)
                         firstCounterInstance = y;
                     countStarted = true;
                 }
-                if (grid[x, y, 0] == null && countStarted)
+                else if (countStarted)
                     break;
             }
             if (counter >= 5)

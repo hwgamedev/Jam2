@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 422554}
   - 114: {fileID: 11431164}
   - 61: {fileID: 6138122}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: DoorVertical
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -242,9 +242,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -1.5}
+  m_Offset: {x: 0, y: -1.75}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.5}
 --- !u!114 &11431164
 MonoBehaviour:
   m_ObjectHideFlags: 1
