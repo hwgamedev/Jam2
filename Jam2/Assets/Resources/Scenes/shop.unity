@@ -87,10 +87,52 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &294769734
-GameObject:
-  m_PrefabParentObject: {fileID: 133474, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-  m_PrefabInternal: {fileID: 2130569307}
+--- !u!1001 &531787708
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 122942, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_Name
+      value: ShopUI
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &907037392
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,62 +217,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!1 &985638225
-GameObject:
-  m_PrefabParentObject: {fileID: 178772, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-  m_PrefabInternal: {fileID: 2130569307}
---- !u!1001 &2130569307
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 490178, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11466982, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: shop
-      value: 
-      objectReference: {fileID: 985638225}
-    - target: {fileID: 11466982, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: creator
-      value: 
-      objectReference: {fileID: 294769734}
-    - target: {fileID: 122942, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-      propertyPath: m_Name
-      value: ShopUI
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11466982, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
-  m_IsPrefabParent: 0

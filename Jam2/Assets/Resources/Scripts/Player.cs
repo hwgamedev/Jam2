@@ -44,6 +44,9 @@ public class Player : MonoBehaviour {
         stepReducers = stepReducersStart;
         teleportersStart = PlayerPrefs.GetInt("teleportersStart");
         teleporters = teleportersStart;
+        buff = true;
+        debuff1 = true;
+        debuff2 = true;
         UI.Instance.init();
     }
 
@@ -203,7 +206,8 @@ public class Player : MonoBehaviour {
     }
 
     public void drinkHealthPotion()
-    {
+    {   
+        if(healthPotions > 0)
         healthPotions--;
         setHealth(2);
         UI.Instance.healthPotionUpdate();
@@ -211,6 +215,7 @@ public class Player : MonoBehaviour {
 
     public void drinkIncreaser()
     {
+        if (stepIncreasers > 0)
         stepIncreasers--;
         incrementSteps(5);
         UI.Instance.stepIncreaserUpdate();
@@ -218,6 +223,7 @@ public class Player : MonoBehaviour {
 
     public void drinkReducer()
     {
+        if (stepReducers > 0)
         stepReducers--;
         incrementSteps(-5);
         UI.Instance.stepDecreaserUpdate();
@@ -225,6 +231,7 @@ public class Player : MonoBehaviour {
 
     public void drinkTeleporter()
     {
+        if (teleporters > 0)
         //call teleport
         teleporters--;
         UI.Instance.teleporterUpdate();
