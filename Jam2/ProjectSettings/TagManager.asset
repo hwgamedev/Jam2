@@ -8,6 +8,7 @@ TagManager:
   - Player
   - Enemy
   - Corner
+  - GameVariables
   - Interactable
   - PlayerSpawn
   layers:
@@ -20,7 +21,11 @@ TagManager:
   - 
   - 
   - Player
+<<<<<<< HEAD
   - RaycastLayer
+=======
+  - Enemy
+>>>>>>> origin/master
   - 
   - 
   - 
