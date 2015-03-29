@@ -42,12 +42,16 @@ MonoBehaviour:
   fogOfWar: {fileID: 175260, guid: 2f0924cff4753164bae3028170297beb, type: 2}
   spawnPoint: 0000000000000000
   obstacles:
-  - {fileID: 159862, guid: ca1cd5a00a2340842b43df6d020f3fce, type: 2}
-  - {fileID: 167906, guid: dc09fc8b446c0364f96dd554653810d5, type: 2}
-  - {fileID: 113188, guid: b365169f89e0ce84dbae3c7119f8c648, type: 2}
   - {fileID: 123152, guid: 6448dab87bd3ab14eb8da517eba3c26e, type: 2}
+  - {fileID: 159862, guid: ca1cd5a00a2340842b43df6d020f3fce, type: 2}
+  - {fileID: 113188, guid: b365169f89e0ce84dbae3c7119f8c648, type: 2}
+  - {fileID: 167906, guid: dc09fc8b446c0364f96dd554653810d5, type: 2}
   goldTemplate: {fileID: 129870, guid: ec8ba40c58478604c94741b0c6d3a154, type: 2}
   treasureTemplate: {fileID: 143112, guid: 3dfc73ec5a20a7640a819793ca436ce2, type: 2}
+  sparseObjects: .0510379374
+  clumps: .0681516752
+  treasure: 9.99999997e-07
+  coins: .0933439434
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
