@@ -24,7 +24,7 @@ public class characterControls : MonoBehaviour {
 		if (!moving && !attacking) {
             if (Input.GetKey(KeyCode.W))
             {
-                if (checkForCollisions(transform.position + new Vector3(0, 1, 0)))
+                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), transform.position + new Vector3(0, 1, 0)))
                     return;
                 anim.SetTrigger("iddleN");
 				startTime = Time.time;
@@ -36,7 +36,7 @@ public class characterControls : MonoBehaviour {
 			}
             if (Input.GetKey(KeyCode.A))
             {
-                if (checkForCollisions(transform.position - new Vector3(1, 0, 0)))
+                if (checkForCollisions(new Vector3(transform.position.x-0.5f, transform.position.y, transform.position.z),transform.position - new Vector3(1, 0, 0)))
                     return;
                 anim.SetTrigger("iddleE");
 				startTime = Time.time;
@@ -48,7 +48,7 @@ public class characterControls : MonoBehaviour {
 			}
             if (Input.GetKey(KeyCode.S))
             {
-                if (checkForCollisions(transform.position - new Vector3(0, 1, 0)))
+                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.5f, transform.position.z),transform.position - new Vector3(0, 1, 0)))
                     return;
                 anim.SetTrigger("iddleS");
 				startTime = Time.time;
@@ -60,7 +60,7 @@ public class characterControls : MonoBehaviour {
 			}
             if (Input.GetKey(KeyCode.D))
             {
-                if (checkForCollisions(transform.position + new Vector3(1, 0, 0)))
+                if (checkForCollisions(new Vector3(transform.position.x+0.5f, transform.position.y, transform.position.z),transform.position + new Vector3(1, 0, 0)))
                     return;
 				anim.SetTrigger("iddleW");
 				startTime = Time.time;
@@ -104,12 +104,12 @@ public class characterControls : MonoBehaviour {
 		}
 	}
 
-    private bool checkForCollisions(Vector3 endPoint)
+    private bool checkForCollisions(Vector3 startPoint, Vector3 endPoint)
     {
-        //Debug.DrawLine(transform.position, endPoint);
+        Debug.DrawLine(transform.position, endPoint);
         int layer = LayerMask.NameToLayer("RaycastLayer");
         //print("Layer : "+layer);
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, endPoint);
+        RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);
         if (hit && !hit.collider.isTrigger)
         {
             print("Colliding with: "+hit.collider.gameObject.name);

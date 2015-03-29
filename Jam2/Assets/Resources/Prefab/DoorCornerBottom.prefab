@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 451554}
   - 212: {fileID: 21242606}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DoorCornerBottom
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1381001665
+  m_SortingLayerID: -1938372847
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300164, guid: afd3b26d76eff164ab1b3ee304e64e8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

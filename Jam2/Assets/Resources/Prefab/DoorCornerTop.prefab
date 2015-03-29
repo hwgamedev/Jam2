@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 440378}
   - 212: {fileID: 21270682}
   - 61: {fileID: 6145680}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: DoorCornerTop
   m_TagString: Wall
   m_Icon: {fileID: 0}
