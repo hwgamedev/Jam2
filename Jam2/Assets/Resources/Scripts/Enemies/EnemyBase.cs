@@ -27,27 +27,29 @@ public class EnemyBase : MonoBehaviour {
 	public int health;
 	public int dmg;
 
-	//health bar
-	//public Slider healthBarSlider;
-
 	//step counters
 	public int doSteps;
 	public int stepsTaken;
 	public bool wait;
 	public float waitInit;
 	Dictionary <string,bool> possDirections;
+	GameObject[] drops;
+	public GameObject goldPickup;
+	public GameObject healthPickup;
+	public GameObject increaserPickup;
+	public GameObject decreaserPickup;
 	// Use this for initialization
 	public virtual void Start () {
 		//Player.Instance.incrementTotalEnemies();
 		player = GameObject.FindWithTag("Player");
-
+		//initDrops ();
 		//awake = false;
 		moving = false;
 		stepsTaken = 0;
 		wait = false;
 
 		//stats
-		maxHealth = 100;
+		maxHealth = 1;
 		health = maxHealth;
 		dmg = 5;
 
@@ -75,10 +77,6 @@ public class EnemyBase : MonoBehaviour {
 			bool canHit = checkCanHit();
 			if (/*awake && */!moving && !canHit)
 			{	
-				/*
-				startTime = Time.time;
-				initialPos = transform.position;
-				endPosition = initialPos;*/
 				startTime = Time.time;
 				initialPos = transform.position;
 				endPosition = initialPos;
@@ -169,16 +167,22 @@ public class EnemyBase : MonoBehaviour {
 	}
 
 	private void getPossDirections()
-	{
-		int layer = LayerMask.NameToLayer("RaycastLayer");
+	{	
+		int layer = LayerMask.GetMask("RaycastLayer"); 
 		possDirections = new Dictionary<string, bool>();
-		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.up, 1,layer);
+		Debug.DrawRay(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, Color.cyan ); 
+		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, 1,layer);
+		Debug.Log (hit.collider);
+		Debug.Log (hit);
 		possDirections.Add("up", (hit.collider == null));
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), -Vector2.up, 1,layer);
+		hit = Physics2D.Raycast(transform.position + new Vector3(0, -0.75f, 0), -Vector2.up, 1,layer);
+		Debug.Log (hit.collider);
 		possDirections.Add("down", (hit.collider == null));
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), -Vector2.right, 1,layer);
+		hit = Physics2D.Raycast(transform.position + new Vector3(-0.75f, 0, 0), -Vector2.right, 1,layer);
+		Debug.Log (hit.collider);
 		possDirections.Add("left", (hit.collider == null));
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, 0, 0), Vector2.right, 1,layer);
+		hit = Physics2D.Raycast(transform.position + new Vector3(0.75f, 0, 0), Vector2.right, 1,layer);
+		Debug.Log (hit.collider);
 		possDirections.Add("right", (hit.collider == null));
 	}
 
@@ -252,14 +256,35 @@ public class EnemyBase : MonoBehaviour {
 
 	public void die()
 	{
+		Debug.Log ("YUDIE");
 		Player.Instance.incrementEnemiesKilled();
 		//dropItem();
 		Destroy(gameObject);
 	}
 
-	public void dropItem(GameObject o){
-		GameObject newdrop = Instantiate(o);
-		newdrop.transform.position = transform.position;
+	public void dropItem(){
+		int index = -1;
+		float tmp = Random.Range(0, 7);
+		GameObject newdrop;
+		if(tmp <= 1){
+			newdrop = Instantiate(goldPickup);
+			newdrop.transform.position = transform.position;
+		}else{ 
+			if (tmp <= 2){
+				newdrop = Instantiate(healthPickup);
+				newdrop.transform.position = transform.position;
+			}else{
+				if (tmp <= 3){
+					newdrop = Instantiate(decreaserPickup);
+					newdrop.transform.position = transform.position;
+				}
+				else {
+					if (tmp <= 4){
+						newdrop = Instantiate(increaserPickup);
+						newdrop.transform.position = transform.position;}
+				}
+			}
+		}
 	}
 
 	public void startWait(){
