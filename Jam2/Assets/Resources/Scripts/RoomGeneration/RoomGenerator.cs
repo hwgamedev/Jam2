@@ -147,6 +147,7 @@ public class RoomGenerator : MonoBehaviour {
             //otherwise, count if there's enough contact between our new subroom and any of the existing subrooms for a door to be placed
             int counter = 0;
             bool countStarted = false;
+            int firstCounterInstance = 0;
             for (int x = offsetX+1; x < offsetX + roomX -1; x++)
             {
                 int y = offsetY - 1;
@@ -154,6 +155,8 @@ public class RoomGenerator : MonoBehaviour {
                 if (grid[x, y, 0] != null && grid[x, y, 0].tag == "Wall")
                 {
                     counter++;
+                    if (countStarted == false)
+                        firstCounterInstance = x;
                     countStarted = true;
                 }
                 if (grid[x, y, 0] == null && countStarted)
@@ -161,12 +164,15 @@ public class RoomGenerator : MonoBehaviour {
             }
             if (counter >= 1)
             {
+                int doorPosition = firstCounterInstance + Random.Range(0, counter);
+                createDoor(doorPosition, offsetY-1, 0, 1);
                 offsetCorrect = true;
             }
 
             //do the same on the other axis, since we're not sure where the contact might come from
-            counter = 0; 
+            counter = 0;
             countStarted = false;
+            firstCounterInstance = 0;
             for (int y = offsetY+1; y < offsetY + roomY-1; y++)
             {
                 int x = offsetX - 1;
@@ -176,6 +182,8 @@ public class RoomGenerator : MonoBehaviour {
                 if (grid[x, y, 0] != null && grid[x,y,0].tag == "Wall")
                 {
                     counter++;
+                    if(countStarted == false)
+                        firstCounterInstance = y;
                     countStarted = true;
                 }
                 if (grid[x, y, 0] == null && countStarted)
@@ -183,6 +191,8 @@ public class RoomGenerator : MonoBehaviour {
             }
             if (counter >= 1)
             {
+                int doorPosition = firstCounterInstance + Random.Range(0, counter);
+                createDoor(offsetX - 1, doorPosition, 1, 0);
                 offsetCorrect = true;
             }
 
