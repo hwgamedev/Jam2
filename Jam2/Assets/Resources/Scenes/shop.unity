@@ -87,6 +87,17 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &164914030
+GameObject:
+  m_PrefabParentObject: {fileID: 199062, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+  m_PrefabInternal: {fileID: 531787708}
+--- !u!81 &164914033
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 164914030}
+  m_Enabled: 1
 --- !u!1001 &531787708
 Prefab:
   m_ObjectHideFlags: 0
@@ -145,6 +156,122 @@ Prefab:
     - target: {fileID: 11487024, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
       propertyPath: m_Colors.m_ColorMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22444476, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 22444476, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -156
+      objectReference: {fileID: 0}
+    - target: {fileID: 22478184, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22492740, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22462394, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22415906, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22489600, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22427832, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22431434, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460736, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22493500, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22455224, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22469798, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22409428, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22434596, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22494756, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445658, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_FontData.m_FontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445658, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: startHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: healthUpgrade
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: healthLimit
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: startDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: damageUpgrade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: damageLimit
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: startReach
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: reachUpgrade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: reachLimit
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: potionCap
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484604, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
+      propertyPath: teleporterCap
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}

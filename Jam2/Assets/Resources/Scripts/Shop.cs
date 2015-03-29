@@ -33,6 +33,21 @@ public class Shop : MonoBehaviour {
     private int reachTemp;
     private int tempExtraHealth;
 
+    public int startHealth;
+    public int healthUpgrade;
+    public int healthLimit;
+
+    public int startDamage;
+    public int damageUpgrade;
+    public int damageLimit;
+
+    public int startReach;
+    public int reachUpgrade;
+    public int reachLimit;
+
+    public int potionCap;
+    public int teleporterCap;
+
     int healthCost;
     int healthCostTemp;
     int damageCost;
@@ -55,7 +70,7 @@ public class Shop : MonoBehaviour {
 
     void Start()
     {
-        //PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
+        PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
         if (PlayerPrefs.HasKey("playerName"))
         {
             initStats();
@@ -69,10 +84,10 @@ public class Shop : MonoBehaviour {
     public void createCharacter()
     {
         PlayerPrefs.SetString("playerName", createChar.text);
-        PlayerPrefs.SetInt("maxHealth", 10);
-        PlayerPrefs.SetInt("totalCoins", 0);
-        PlayerPrefs.SetInt("attackReach", 1);
-        PlayerPrefs.SetInt("attackDamage", 1);
+        PlayerPrefs.SetInt("maxHealth", startHealth);
+        PlayerPrefs.SetInt("totalCoins", 200000);
+        PlayerPrefs.SetInt("attackReach", startReach);
+        PlayerPrefs.SetInt("attackDamage", startDamage);
         PlayerPrefs.SetInt("healthPotionsStart", 0);
         PlayerPrefs.SetInt("stepIncreasersStart", 0);
         PlayerPrefs.SetInt("stepReducersStart", 0);
@@ -156,7 +171,7 @@ public class Shop : MonoBehaviour {
                 {
                     totalCoins -= healthCost;
                     updateCoinCount();
-                    maxHealth++;
+                    maxHealth += healthUpgrade;
                     PlayerPrefs.SetInt("maxHealth", maxHealth);
                 }
                 else
@@ -169,7 +184,7 @@ public class Shop : MonoBehaviour {
                 {
                     totalCoins -= healthCostTemp;
                     updateCoinCount();
-                    tempExtraHealth++;
+                    tempExtraHealth += healthUpgrade;
                     PlayerPrefs.SetInt("tempExtraHealth", tempExtraHealth);
                 }
                 else
@@ -180,10 +195,22 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        healthCost = 1000 + ((maxHealth - 10) * 1000);
-        healthCostTemp = 100 + (tempExtraHealth * 100);
-        perm[0].GetComponentInChildren<Text>().text = healthCost.ToString() + "g";
-        temp[0].GetComponentInChildren<Text>().text = healthCostTemp.ToString() + "g";
+        if (tempExtraHealth + maxHealth >= healthLimit)
+        {
+            perm[0].GetComponentInChildren<Text>().text = "FULL";
+            perm[0].interactable = false;
+            temp[0].GetComponentInChildren<Text>().text = "FULL";
+            temp[0].interactable = false;
+        }
+        else
+        {
+
+
+            healthCost = (maxHealth + tempExtraHealth) * 100;
+            healthCostTemp = (maxHealth + tempExtraHealth) * 30;
+            perm[0].GetComponentInChildren<Text>().text = healthCost.ToString() + "g";
+            temp[0].GetComponentInChildren<Text>().text = healthCostTemp.ToString() + "g";
+        }
         if (tempExtraHealth > 0)
         {
             current[0].text = maxHealth.ToString() + " (+" + tempExtraHealth.ToString() + ")";
@@ -227,10 +254,20 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        damageCost = 1000 + ((damage - 1) * 1000);
-        damageCostTemp = 100 + (damageTemp * 100);
-        perm[1].GetComponentInChildren<Text>().text = damageCost.ToString() + "g";
-        temp[1].GetComponentInChildren<Text>().text = damageCostTemp.ToString() + "g";
+        if (damageTemp + damage >= damageLimit)
+        {
+            perm[1].GetComponentInChildren<Text>().text = "FULL";
+            perm[1].interactable = false;
+            temp[1].GetComponentInChildren<Text>().text = "FULL";
+            temp[1].interactable = false;
+        }
+        else
+        {
+            damageCost = 2500 * (damage + damageTemp);
+            damageCostTemp = 750 * (damage + damageTemp);
+            perm[1].GetComponentInChildren<Text>().text = damageCost.ToString() + "g";
+            temp[1].GetComponentInChildren<Text>().text = damageCostTemp.ToString() + "g";
+        }
         if (damageTemp > 0)
         {
             current[1].text = damage.ToString() + " (+" + damageTemp.ToString() + ")";
@@ -274,10 +311,20 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        reachCost = 1000 + ((reach - 1) * 1000);
-        reachCostTemp = 100 + (reachTemp * 100);
-        perm[2].GetComponentInChildren<Text>().text = reachCost.ToString() + "g";
-        temp[2].GetComponentInChildren<Text>().text = reachCostTemp.ToString() + "g";
+        if (reachTemp + reach >= reachLimit)
+        {
+            perm[2].GetComponentInChildren<Text>().text = "FULL";
+            perm[2].interactable = false;
+            temp[2].GetComponentInChildren<Text>().text = "FULL";
+            temp[2].interactable = false;
+        }
+        else
+        {
+            reachCost = 2500 * (reach + reachTemp);
+            reachCostTemp = 750 * (reach + reachTemp);
+            perm[2].GetComponentInChildren<Text>().text = reachCost.ToString() + "g";
+            temp[2].GetComponentInChildren<Text>().text = reachCostTemp.ToString() + "g";
+        }
         if (reachTemp > 0)
         {
             current[2].text = reach.ToString() + " (+" + reachTemp.ToString() + ")";
@@ -323,10 +370,26 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        healthpotCost = 1000 + ((healthPotionsStart) * 1000);
-        healthpotCostTemp = 100 + (healthPotionsTempStart * 100);
-        perm[3].GetComponentInChildren<Text>().text = healthpotCost.ToString() + "g";
-        temp[3].GetComponentInChildren<Text>().text = healthpotCostTemp.ToString() + "g";
+        if (healthPotionsStart >= potionCap)
+        {
+            perm[3].GetComponentInChildren<Text>().text = "FULL";
+            perm[3].interactable = false;
+
+        }
+        if (healthPotionsTempStart + healthPotionsStart >= potionCap + 1)
+        {
+            temp[3].GetComponentInChildren<Text>().text = "FULL";
+            temp[3].interactable = false;
+            perm[3].GetComponentInChildren<Text>().text = "FULL";
+            perm[3].interactable = false;
+        }
+        else if (healthPotionsStart != potionCap)
+        {
+            healthpotCost = 2000 + (healthPotionsStart + healthPotionsTempStart) * 1000;
+            healthpotCostTemp = 500 + (healthPotionsTempStart + healthPotionsStart) * 250;
+            perm[3].GetComponentInChildren<Text>().text = healthpotCost.ToString() + "g";
+            temp[3].GetComponentInChildren<Text>().text = healthpotCostTemp.ToString() + "g";
+        }
         if (healthPotionsTempStart > 0)
         {
             current[3].text = healthPotionsStart.ToString() + " (+" + healthPotionsTempStart.ToString() + ")";
@@ -372,10 +435,26 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        incrCost = 1000 + ((stepIncreasersStart) * 1000);
-        incrCostTemp = 100 + (stepIncreasersTempStart * 100);
-        perm[4].GetComponentInChildren<Text>().text = incrCost.ToString() + "g";
-        temp[4].GetComponentInChildren<Text>().text = incrCostTemp.ToString() + "g";
+        if (stepIncreasersStart >= potionCap)
+        {
+            perm[4].GetComponentInChildren<Text>().text = "FULL";
+            perm[4].interactable = false;
+
+        }
+        if (stepIncreasersTempStart + stepIncreasersStart >= potionCap + 1)
+        {
+            temp[4].GetComponentInChildren<Text>().text = "FULL";
+            temp[4].interactable = false;
+            perm[4].GetComponentInChildren<Text>().text = "FULL";
+            perm[4].interactable = false;
+        }
+        else if (stepIncreasersStart != potionCap)
+        {
+            incrCost = 2000 + (stepIncreasersStart + stepIncreasersTempStart) * 1000;
+            incrCostTemp = 500 + (stepIncreasersTempStart + stepIncreasersStart) * 250;
+            perm[4].GetComponentInChildren<Text>().text = incrCost.ToString() + "g";
+            temp[4].GetComponentInChildren<Text>().text = incrCostTemp.ToString() + "g";
+        }
         if (stepIncreasersTempStart > 0)
         {
             current[4].text = stepIncreasersStart.ToString() + " (+" + stepIncreasersTempStart.ToString() + ")";
@@ -421,10 +500,25 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        reduceCost = 1000 + ((stepReducersStart) * 1000);
-        reduceCostTemp = 100 + (stepReducersTempStart * 100);
-        perm[5].GetComponentInChildren<Text>().text = reduceCost.ToString() + "g";
-        temp[5].GetComponentInChildren<Text>().text = reduceCostTemp.ToString() + "g";
+        if (stepReducersStart >= potionCap)
+        {
+            perm[5].GetComponentInChildren<Text>().text = "FULL";
+            perm[5].interactable = false;
+        }
+        if (stepReducersTempStart + stepReducersStart >= potionCap + 1)
+        {
+            temp[5].GetComponentInChildren<Text>().text = "FULL";
+            temp[5].interactable = false;
+            perm[5].GetComponentInChildren<Text>().text = "FULL";
+            perm[5].interactable = false;
+        }
+        else if (stepReducersStart != potionCap)
+        {
+            reduceCost = 2000 + (stepReducersStart + stepReducersTempStart) * 1000;
+            reduceCostTemp = 500 + (stepReducersTempStart + stepReducersStart) * 250;
+            perm[5].GetComponentInChildren<Text>().text = reduceCost.ToString() + "g";
+            temp[5].GetComponentInChildren<Text>().text = reduceCostTemp.ToString() + "g";
+        }
         if (stepReducersTempStart > 0)
         {
             current[5].text = stepReducersStart.ToString() + " (+" + stepReducersTempStart.ToString() + ")";
@@ -445,7 +539,7 @@ public class Shop : MonoBehaviour {
                     totalCoins -= teleCost;
                     updateCoinCount();
                     teleportersStart++;
-                    PlayerPrefs.SetInt("teleporttersStart", teleportersStart);
+                    PlayerPrefs.SetInt("teleportersStart", teleportersStart);
                     AudioSource.PlayClipAtPoint(till, transform.position);
                 }
                 else
@@ -470,10 +564,25 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        teleCost = 5000 + ((teleportersStart) * 5000);
-        teleCostTemp = 2500 + (teleportersTempStart * 2500);
-        perm[6].GetComponentInChildren<Text>().text = teleCost.ToString() + "g";
-        temp[6].GetComponentInChildren<Text>().text = teleCostTemp.ToString() + "g";
+        if (teleportersStart >= teleporterCap)
+        {
+            perm[6].GetComponentInChildren<Text>().text = "FULL";
+            perm[6].interactable = false;
+        }
+        if (teleportersTempStart + teleportersStart >= teleporterCap + 1)
+        {
+            temp[6].GetComponentInChildren<Text>().text = "FULL";
+            temp[6].interactable = false;
+            perm[6].GetComponentInChildren<Text>().text = "FULL";
+            perm[6].interactable = false;
+        }
+        else if (teleportersStart != potionCap)
+        {
+            teleCost = 5000 + (teleportersStart + teleportersTempStart) * 5000;
+            teleCostTemp = 2500 + (teleportersTempStart + teleportersStart) * 1250;
+            perm[6].GetComponentInChildren<Text>().text = teleCost.ToString() + "g";
+            temp[6].GetComponentInChildren<Text>().text = teleCostTemp.ToString() + "g";
+        }
         if (teleportersTempStart > 0)
         {
             current[6].text = teleportersStart.ToString() + " (+" + teleportersTempStart.ToString() + ")";
