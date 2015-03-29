@@ -40,7 +40,7 @@ public class EnemyBase : MonoBehaviour {
 		moving = false;
 		//TO DO - remove
 		vars.TileSize = 1;
-		doSteps = 20;
+		doSteps = 100;
 		//------------
 		stepsTaken = 0;
 		wait = false;
@@ -63,16 +63,21 @@ public class EnemyBase : MonoBehaviour {
 		if(wait && checkWait()){
 			return;
 		}
+		if(!awake)
+			return;
 		if(doSteps > 0 )
 		{
 			bool canHit = checkCanHit();
 			if (awake && !moving && !canHit)
-			{
+			{	
+				/*
+				startTime = Time.time;
+				initialPos = transform.position;
+				endPosition = initialPos;*/
 				startTime = Time.time;
 				initialPos = transform.position;
 				endPosition = initialPos;
 
-				/*
 				Vector2 targetPos = player.transform.position;
 				xDistance = targetPos.x - transform.position.x;
 				yDistance = targetPos.y - transform.position.y;
@@ -93,9 +98,9 @@ public class EnemyBase : MonoBehaviour {
 						moveDirection = new Vector2( 0, -1);
 						endPosition -= new Vector3(0, 1, 0);
 					}
-				}*/
+				}/*
 				moveDirection = GridManager.Instance.getMoveDirection(gameObject);
-				endPosition += new Vector3(moveDirection.x, moveDirection.y, 0);
+				endPosition += new Vector3(moveDirection.x, moveDirection.y, 0);*/
 				journeyLength = Vector3.Distance (initialPos, endPosition);
 				doSteps--;
 				stepsTaken++;
@@ -178,7 +183,7 @@ public class EnemyBase : MonoBehaviour {
 
 	public virtual void attack()
 	{
-		Player.Instance.setHealth(-dmg);
+		//Player.Instance.setHealth(-dmg);
 	}
 
 	public void takeDamage(int damage)

@@ -19,50 +19,57 @@ public class GridManager : MonoBehaviour {
 		rg = ((RoomGenerator)FindObjectOfType(typeof(RoomGenerator))).GetComponent<RoomData>();
 		nodes = new Queue<KeyValuePair<int, int>>();
 	}
-	
-	public void pathMove()
+
+
+	//update grid numbers
+	public void updateGrid(RoomData rd)
 	{
 		Debug.Log("PATHMOVE");
+		rg = rd;
 		grid = rg.getGrid();
-		//Debug.Log(grid.GetLength(1));
 		distanceSteps = new int[grid.GetLength(0), grid.GetLength(1)] ;
 		for(int i = 0; i < (distanceSteps.GetLength(0));i++)
 			for(int j = 0; j < (distanceSteps.GetLength(1));j++)  
-		{
+			{
 				distanceSteps[i,j] = -1;
-				
-		}
+			}
 		GameObject player = GameObject.FindWithTag("Player");
 		playerTile = findPlayer(player);
 		if (playerTile.Key!= -1){
-			//Debug.Log("FOUIND");
 			setDistanceArray(playerTile);
 		}
 
 	}
 
+	public void updateGrid()
+	{
+		updateGrid (rg);		
+	}
+
+	//find player in grid
 	public KeyValuePair<int, int> findPlayer(GameObject o){
 		for(int i = 0; i < (grid.GetLength(0));i++)
 			for(int j = 0; j < (grid.GetLength(1));j++)
 				if (grid[i,j,3] !=null && grid[i,j,3].CompareTag("Player"))
-			{
-				//Debug.Log(i);
-				return new KeyValuePair<int,int>(i,j);
-			}
+				{
+					return new KeyValuePair<int,int>(i,j);
+				}
 		return new KeyValuePair<int,int>(-1,-1);
 	}
 
+
+	//find a given object in grid
 	public KeyValuePair<int, int> findObject(GameObject o){
 		for(int i = 0; i < (grid.GetLength(0));i++)
 			for(int j = 0; j < (grid.GetLength(1));j++)
 				if (grid[i,j,3] !=null && grid[i,j,3]==o)
-			{
-				//Debug.Log(i);
+				{
 					return new KeyValuePair<int,int>(i,j);
-			}
+				}
 		return new KeyValuePair<int,int>(-1,-1);
 	}
 
+	//change where the payer is on the grid
 	public void changePlayerTile(Vector2 a, GameObject o){
 		grid[playerTile.Key, playerTile.Value, 3] = null;
 		playerTile= new KeyValuePair<int, int>((int)(playerTile.Key + a.x), (int)(playerTile.Value - a.y));
@@ -71,7 +78,7 @@ public class GridManager : MonoBehaviour {
 
 	}
 	
-
+	//set array that calculates where enemies go
 	public void setDistanceArray(KeyValuePair<int,int>temp)
 	{
 		KeyValuePair<int,int> origin = temp;
@@ -81,10 +88,9 @@ public class GridManager : MonoBehaviour {
 			origin = nodes.Dequeue();
 			distancesAroundNode(origin.Key,origin.Value);
 		}
-
-
 	}
 
+	//set distances around a node
 	public void distancesAroundNode(int x, int y){
 		int distance = distanceSteps[x,y] + 1;
 		setNode (x+1, y, distance);
@@ -93,6 +99,7 @@ public class GridManager : MonoBehaviour {
 		setNode (x, y-1, distance);
 	}
 
+	//set distance to player for one tile
 	public void setNode(int x, int y, int value)
 	{
 		if(x < distanceSteps.GetLength(0) && y < distanceSteps.GetLength(1) && x>=0 && y>=0 && walkable (x,y)){
@@ -106,9 +113,9 @@ public class GridManager : MonoBehaviour {
 				}
 			}
 		}
-		//Debug.Log (value);
 	}
 
+	//check if a tile can have an enemy/player on it
 	public bool walkable(int x, int y)
 	{
 		if(grid[x,y,0] == null)
@@ -121,6 +128,7 @@ public class GridManager : MonoBehaviour {
 
 	}
 
+	//tell enemy where to move next
 	public Vector2 getMoveDirection(GameObject o){
 		KeyValuePair<int, int> tile = findObject(o);
 		KeyValuePair<int, int> previous = tile;
@@ -133,7 +141,7 @@ public class GridManager : MonoBehaviour {
 	}
 
 
-
+	//get the closest tile to the player that is also adjecent to the enemy at x and y on the grid
 	public KeyValuePair<int, int> getClosestAdjecent(int x, int y){
 		int min = 900;
 		KeyValuePair<int, int> temp = new KeyValuePair<int,int >();

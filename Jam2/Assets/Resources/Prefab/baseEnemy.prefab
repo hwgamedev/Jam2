@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21294516}
   - 114: {fileID: 11488150}
   - 61: {fileID: 6141698}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: baseEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -58,14 +58,17 @@ MonoBehaviour:
   vars: {fileID: 0}
   awake: 0
   speed: 1
+  journeyLength: 0
   endPosition: {x: 0, y: 0, z: 0}
   moving: 0
+  moveDirection: {x: 0, y: 0}
   initialPos: {x: 0, y: 0, z: 0}
   maxHealth: 0
   health: 0
   dmg: 0
   doSteps: 0
   stepsTaken: 0
+  wait: 0
 --- !u!212 &21294516
 SpriteRenderer:
   m_ObjectHideFlags: 1
