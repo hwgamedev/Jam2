@@ -4,13 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - PlayerSpawn
   - Wall
-  - Player
+  - Door
   - Enemy
   - Corner
-  - GameVariables
-  - Interactable
-  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
@@ -20,12 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-<<<<<<< HEAD
   - RaycastLayer
-=======
-  - Enemy
->>>>>>> origin/master
+  - 
   - 
   - 
   - 
@@ -52,15 +46,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: GroundStuff
-    uniqueID: 4294862691
+  - name: Walls
+    uniqueID: 3083086009
     locked: 0
   - name: Obstacles
-    uniqueID: 2480666031
+    uniqueID: 3013221327
     locked: 0
-  - name: ObstructionLayer
-    uniqueID: 1381001665
+  - name: Obstructions
+    uniqueID: 2356594449
     locked: 0
-  - name: FogOfWar
-    uniqueID: 615236271
+  - name: New Layer
+    uniqueID: 2590502289
     locked: 0
