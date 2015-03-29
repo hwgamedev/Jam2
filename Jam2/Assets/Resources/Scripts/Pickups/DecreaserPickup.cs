@@ -15,10 +15,10 @@ public class DecreaserPickup : MonoBehaviour
 		
 	}
 	
-	void OnCollisionEnter2D(Collider2D col)
+	void OnCollisionEnter2D(Collision2D col)
 	{
 		print("Decreaser collected!");
-		if (col.tag == "Player" && !collected)
+		if (col.collider.tag == "Player" && !collected)
 		{
 			collect();
 		}
