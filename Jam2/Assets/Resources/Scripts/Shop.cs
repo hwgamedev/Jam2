@@ -470,8 +470,8 @@ public class Shop : MonoBehaviour {
             default:
                 break;
         }
-        teleCost = 3000 + ((teleportersStart) * 2500);
-        teleCostTemp = 1000 + (teleportersTempStart * 1000);
+        teleCost = 5000 + ((teleportersStart) * 5000);
+        teleCostTemp = 2500 + (teleportersTempStart * 2500);
         perm[6].GetComponentInChildren<Text>().text = teleCost.ToString() + "g";
         temp[6].GetComponentInChildren<Text>().text = teleCostTemp.ToString() + "g";
         if (teleportersTempStart > 0)
