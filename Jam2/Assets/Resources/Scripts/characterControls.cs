@@ -8,8 +8,7 @@ public class characterControls : MonoBehaviour {
 	// stats of character
 	public float speed = 1.0f;
 	public float shortRange = 1.5f;
-	// public float longRange = 5f;
-	public int attackPower = 10;
+	public float longRange = 11f;
 
 	private Animator anim;
 
@@ -25,11 +24,13 @@ public class characterControls : MonoBehaviour {
 
 	//if need be to add a particle system when attacking
 	//public ParticleSystem trace;
+	public GameObject dagger;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
 		//synchronise with player data
+		Player.Instance.incrementSteps (100);
 	}
 	
 	// Update is called once per frame
@@ -127,6 +128,16 @@ public class characterControls : MonoBehaviour {
 							attacking = true;
 							doAttack ("E");
 						}
+					} 
+					if (!attacking) {
+
+						float length = Mathf.Sqrt (Mathf.Pow (diffX,2) + Mathf.Pow (diffY,2));
+						print (longRange/(6-Player.Instance.getReach()));
+						print (length);
+						if(length <= longRange/(6-Player.Instance.getReach()) && length > shortRange) {
+							throwDagger(transform.position, mousePoint);
+							doStep ();
+						}
 					}
 				}
 			}
@@ -183,7 +194,7 @@ public class characterControls : MonoBehaviour {
 			break;
 		}
 		if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Enemy")) {
-			hit.collider.gameObject.GetComponent<EnemyBase>().takeDamage(attackPower);
+			hit.collider.gameObject.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage()*2);
 		}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleN") ||
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleS") ||
@@ -191,6 +202,11 @@ public class characterControls : MonoBehaviour {
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleW")) {
 			attacking = false;
 		}
+	}
+
+	private void throwDagger(Vector3 start, Vector3 end){
+		GameObject daggerInstance = Instantiate(dagger, start, Quaternion.identity) as GameObject;
+		daggerInstance.GetComponent<Dagger> ().throwDagger (start, end);
 	}
 
 	private void doJump(){
