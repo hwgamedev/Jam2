@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Corner
   - Interactable
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - RaycastLayer
   - 
   - 
   - 
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: ObstructionLayer
     uniqueID: 1381001665
+    locked: 0
+  - name: FogOfWar
+    uniqueID: 615236271
     locked: 0

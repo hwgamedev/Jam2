@@ -22,8 +22,11 @@ public class characterControls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!moving && !attacking) {
-			if (Input.GetKey (KeyCode.W)) {
-				anim.SetTrigger("iddleN");
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (checkForCollisions(transform.position + new Vector3(0, 1, 0)))
+                    return;
+                anim.SetTrigger("iddleN");
 				startTime = Time.time;
 				startPosition = transform.position;
 				endPosition = startPosition;
@@ -31,8 +34,11 @@ public class characterControls : MonoBehaviour {
 				journeyLength = Vector3.Distance (startPosition, endPosition);
 				moving = true;
 			}
-			if (Input.GetKey (KeyCode.A)) {
-				anim.SetTrigger("iddleE");
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (checkForCollisions(transform.position - new Vector3(1, 0, 0)))
+                    return;
+                anim.SetTrigger("iddleE");
 				startTime = Time.time;
 				startPosition = transform.position;
 				endPosition = startPosition;
@@ -40,8 +46,11 @@ public class characterControls : MonoBehaviour {
 				journeyLength = Vector3.Distance (startPosition, endPosition);
 				moving = true;
 			}
-			if (Input.GetKey (KeyCode.S)) {
-				anim.SetTrigger("iddleS");
+            if (Input.GetKey(KeyCode.S))
+            {
+                if (checkForCollisions(transform.position - new Vector3(0, 1, 0)))
+                    return;
+                anim.SetTrigger("iddleS");
 				startTime = Time.time;
 				startPosition = transform.position;
 				endPosition = startPosition;
@@ -49,7 +58,10 @@ public class characterControls : MonoBehaviour {
 				journeyLength = Vector3.Distance (startPosition, endPosition);
 				moving = true;
 			}
-			if (Input.GetKey (KeyCode.D)) {
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (checkForCollisions(transform.position + new Vector3(1, 0, 0)))
+                    return;
 				anim.SetTrigger("iddleW");
 				startTime = Time.time;
 				startPosition = transform.position;
@@ -91,6 +103,21 @@ public class characterControls : MonoBehaviour {
 			doAttack();
 		}
 	}
+
+    private bool checkForCollisions(Vector3 endPoint)
+    {
+        //Debug.DrawLine(transform.position, endPoint);
+        int layer = LayerMask.NameToLayer("RaycastLayer");
+        //print("Layer : "+layer);
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, endPoint);
+        if (hit && !hit.collider.isTrigger)
+        {
+            print("Colliding with: "+hit.collider.gameObject.name);
+            return true;
+        }
+
+        return false;
+    }
 
 	private void doLerp() {
 		float distCovered = (Time.time - startTime) * speed;

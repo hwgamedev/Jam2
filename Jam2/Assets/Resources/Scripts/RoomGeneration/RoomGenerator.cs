@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RoomGenerator : MonoBehaviour {
 
@@ -30,6 +31,9 @@ public class RoomGenerator : MonoBehaviour {
     public GameObject doorHorizontal;
     public GameObject doorVertical;
 
+    //room data template
+    public GameObject roomDataTemplate;
+
     //derive grid size
     private int roomSize;
 
@@ -38,18 +42,19 @@ public class RoomGenerator : MonoBehaviour {
 
     //this is the offset of the room on the map
     private Transform roomObject;
+    private RoomData data;
 
-    //this marks the full bounding box of a single room
-    private int xStart, xEnd, yStart, yEnd;
+    //template for player
+    public GameObject player;
 
-    public System.Collections.Generic.LinkedList<GameObject[,,]> rooms;
+    public List<GameObject> rooms;
 
 
 	// Use this for initialization
     void Start()
     {
         roomSize = (noOfSubrooms+subRoomsVariation) * maxSubRoomSize;
-        rooms = new System.Collections.Generic.LinkedList<GameObject[,,]>();
+        rooms = new List<GameObject>();
         int roomCounter = 0;
         int roomOffsetX = 0;
         int roomOffsetY = 0;
@@ -59,7 +64,9 @@ public class RoomGenerator : MonoBehaviour {
             for (int j = 0; j < noRoomsToGenerateVertical; j++)
             {
                 roomOffsetY = (roomSize + maxSubRoomSize) * j;
-                GameObject room = new GameObject("Room"+roomCounter);
+                GameObject room = Instantiate(roomDataTemplate, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+                room.name = "Room" + roomCounter;
+                data = room.GetComponent<RoomData>();
                 room.transform.parent = transform;
                 Vector3 roomPos = room.transform.localPosition;
                 roomPos.x = roomOffsetX;
@@ -68,10 +75,16 @@ public class RoomGenerator : MonoBehaviour {
                 roomObject = room.transform;
 
                 GameObject[, ,] curGrid = generateRoom();
-                rooms.AddLast(curGrid);
+                data.setGrid(curGrid);
+                rooms.Add(room);
+                data.initObjects();
                 roomCounter++;
             }
         }
+
+        int startRoom = Random.Range(0, rooms.Count);
+        GameObject playerInstance = Instantiate(player, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+        rooms[startRoom].GetComponent<RoomData>().spawnPlayer(playerInstance);
 	}
 	
 	// Update is called once per frame
@@ -99,10 +112,12 @@ public class RoomGenerator : MonoBehaviour {
             int roomX = Random.Range(minSubRoomSize, maxSubRoomSize);
             int roomY = Random.Range(minSubRoomSize, maxSubRoomSize);
 
-            int[] offsetsAndSizes = calculateOffset(roomX, roomY);
+            int[] offsetsAndSizes = calculateOffset(roomX, roomY, roomsGenerated);
 
             //generate the subroom based off the specifications
             generateSubRoom(offsetsAndSizes[2],offsetsAndSizes[3],offsetsAndSizes[0],offsetsAndSizes[1]);
+
+            data.addRoomBox(offsetsAndSizes);
 
             //increment counter
             roomsGenerated++;
@@ -111,7 +126,7 @@ public class RoomGenerator : MonoBehaviour {
         return grid;
     }
 
-    private int[] calculateOffset(int roomX, int roomY)
+    private int[] calculateOffset(int roomX, int roomY, int roomNumber)
     {
         //initialise the offset from 0,0 for where the new subroom would be put
         int offsetX = 0;
@@ -252,7 +267,7 @@ public class RoomGenerator : MonoBehaviour {
 
         print("New subroom position. offsets: " + offsetX + ", " + offsetY + ". size: " + roomX + ", " + roomY);
 
-        int[] result = { offsetX, offsetY, roomX, roomY };
+        int[] result = { offsetX, offsetY, roomX, roomY , roomNumber};
 
         return result;
     }
