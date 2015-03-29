@@ -4,12 +4,11 @@ using System.Collections;
 public class characterControls : MonoBehaviour {
 
 	//public GameObject character;
-	public GameVariables vars;
 
 	private Animator anim;
-	public int steps = 20;
-	public int health = 20;
 	public float speed = 1.0f;
+	private int health = 20;
+	private int steps = 10;
 	private float startTime;
 	private float journeyLength;
 	private Vector3 startPosition;
@@ -21,8 +20,6 @@ public class characterControls : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
-		vars = (GameVariables) GameObject.FindWithTag("GameVariables").GetComponent("GameVariables");
-		
 	}
 	
 	// Update is called once per frame
@@ -35,6 +32,8 @@ public class characterControls : MonoBehaviour {
 		} else {
 			if (!moving && !attacking) {
 				if (Input.GetKey (KeyCode.W)) {
+					if (checkForCollisions(transform.position + new Vector3(0, 1, 0)))
+						return;
 					anim.SetTrigger ("iddleN");
 					startTime = Time.time;
 					startPosition = transform.position;
@@ -45,6 +44,8 @@ public class characterControls : MonoBehaviour {
 					moving = true;
 				}
 				if (Input.GetKey (KeyCode.A)) {
+					if (checkForCollisions(transform.position - new Vector3(1, 0, 0)))
+						return;
 					anim.SetTrigger ("iddleE");
 					startTime = Time.time;
 					startPosition = transform.position;
@@ -55,6 +56,8 @@ public class characterControls : MonoBehaviour {
 					moving = true;
 				}
 				if (Input.GetKey (KeyCode.S)) {
+					if (checkForCollisions(transform.position - new Vector3(0, 1, 0)))
+						return;
 					anim.SetTrigger ("iddleS");
 					startTime = Time.time;
 					startPosition = transform.position;
@@ -65,6 +68,8 @@ public class characterControls : MonoBehaviour {
 					moving = true;
 				}
 				if (Input.GetKey (KeyCode.D)) {
+					if (checkForCollisions(transform.position + new Vector3(1, 0, 0)))
+						return;
 					anim.SetTrigger ("iddleW");
 					startTime = Time.time;
 					startPosition = transform.position;
@@ -109,12 +114,12 @@ public class characterControls : MonoBehaviour {
 					}
 				}
 			}
-			if (moving) {
-				doLerp ();
-			}
-			if (attacking) {
-				doAttack ();
-			}
+		}
+		if (moving) {
+			doLerp ();
+		}
+		if (attacking) {
+			doAttack();
 		}
 	}
 
@@ -122,6 +127,21 @@ public class characterControls : MonoBehaviour {
 		steps --;
 		// notify game mechanic of step performed by player
 	}
+
+    private bool checkForCollisions(Vector3 endPoint)
+    {
+        //Debug.DrawLine(transform.position, endPoint);
+        int layer = LayerMask.NameToLayer("RaycastLayer");
+        //print("Layer : "+layer);
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, endPoint);
+        if (hit && !hit.collider.isTrigger)
+        {
+            print("Colliding with: "+hit.collider.gameObject.name);
+            return true;
+        }
+
+        return false;
+    }
 
 	private void doLerp() {
 		float distCovered = (Time.time - startTime) * speed;
