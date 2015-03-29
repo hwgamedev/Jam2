@@ -26,6 +26,10 @@ public class RoomGenerator : MonoBehaviour {
     public GameObject doorCornerTop;
     public GameObject doorCornerBottom;
 
+    //doors
+    public GameObject doorHorizontal;
+    public GameObject doorVertical;
+
     //derive grid size
     private int roomSize;
 
@@ -287,6 +291,14 @@ public class RoomGenerator : MonoBehaviour {
         //add to grid
         grid[xPos, yPos + 1, 0] = temp;
 
+        //add door
+        temp = Instantiate(doorVertical, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent passage to parent object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos, (yPos-1.4f) * -1, 0);
+        //add to grid
+        grid[xPos, yPos-1, 1] = temp;
+
         //create the passage for the other subroom as well
         temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent it to the room object
@@ -390,6 +402,14 @@ public class RoomGenerator : MonoBehaviour {
         temp.transform.localPosition = new Vector3(xPos-1, (yPos + 2) * -1, 0);
         //add to grid
         grid[xPos-1, yPos + 2, 0] = temp;
+
+        //add door
+        temp = Instantiate(doorHorizontal, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //parent it to the room object
+        temp.transform.parent = roomObject;
+        temp.transform.localPosition = new Vector3(xPos-1.5f, (yPos) * -1, 0);
+        //add to grid
+        grid[xPos-1, yPos, 1] = temp;
         
     }
 

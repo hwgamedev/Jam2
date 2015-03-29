@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Corner
   - GameVariables
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GroundStuff
+    uniqueID: 4294862691
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2480666031
+    locked: 0
+  - name: ObstructionLayer
+    uniqueID: 1381001665
     locked: 0
