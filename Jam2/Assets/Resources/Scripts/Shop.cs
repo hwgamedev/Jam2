@@ -70,7 +70,7 @@ public class Shop : MonoBehaviour {
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
+        //PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
         if (PlayerPrefs.HasKey("playerName"))
         {
             initStats();
@@ -85,7 +85,7 @@ public class Shop : MonoBehaviour {
     {
         PlayerPrefs.SetString("playerName", createChar.text);
         PlayerPrefs.SetInt("maxHealth", startHealth);
-        PlayerPrefs.SetInt("totalCoins", 200000);
+        PlayerPrefs.SetInt("totalCoins", 0);
         PlayerPrefs.SetInt("attackReach", startReach);
         PlayerPrefs.SetInt("attackDamage", startDamage);
         PlayerPrefs.SetInt("healthPotionsStart", 0);
