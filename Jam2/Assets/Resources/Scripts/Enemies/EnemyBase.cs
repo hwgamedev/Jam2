@@ -236,7 +236,7 @@ public class EnemyBase : MonoBehaviour {
 	public virtual void attack()
 	{
 		startWait();
-		Debug.Log ("ATTACK");
+		Debug.Log (dmg);
 		Player.Instance.setHealth(-dmg);
 	}
 

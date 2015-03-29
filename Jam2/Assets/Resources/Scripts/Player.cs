@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     private int stepIncreasersStart;
     private int stepReducersStart;
     private int teleportersStart;
+    private int jump;
 
     public static Player Instance;
     void Awake()
@@ -250,15 +251,25 @@ public class Player : MonoBehaviour {
         UI.Instance.stepUpdate();
     }
 
+    public void incrementJump()
+    {
+        jump++;
+    }
+
+    public void incrementTotalEnemies()
+    {
+        totalEnemies++;
+    }
+
     public void death()
     {
         //Set kills, rooms cleared, coins, jumps, items and player's death to the apropriate keys in PlayerPrefs
-        //PlayerPrefs.SetInt("totalKills", (PlayerPrefs.GetInt("totalKills") + kills);
-        //PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.SetInt("totaljumps") + jumps);
-        //PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.SetInt("totalDeaths") + 1);
-        //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.SetInt("totalItems") + items);
-        //PlayerPrefs.SetInt("totalRoomsCleared", (PlayerPrefs.SetInt("totalRoomsCleared") + rooms);
-        //PlayerPrefs.setInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins);
+        PlayerPrefs.SetInt("totalKills", (PlayerPrefs.GetInt("totalKills") + enemiesKilled));
+        PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.GetInt("totaljumps") + jump));
+        PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.GetInt("totalDeaths") + 1));
+        //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items);
+        //PlayerPrefs.SetInt("totalRooms", (PlayerPrefs.GetInt("totalRooms") + rooms);
+        PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins);
         PlayerPrefs.SetInt("thisCoins", coins);
         PlayerPrefs.SetInt("totalCoins", (PlayerPrefs.GetInt("totalCoins") + coins));
         PlayerPrefs.Save();
