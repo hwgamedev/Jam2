@@ -48,8 +48,7 @@ public class RoomGenerator : MonoBehaviour {
     public GameObject player;
 
     public List<GameObject> rooms;
-
-
+	
 	// Use this for initialization
     void Start()
     {
