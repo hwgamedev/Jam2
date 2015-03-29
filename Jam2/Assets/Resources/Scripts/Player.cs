@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     private int coins;
     private int damage;
     private int reach;
-    private int stepsToTeleport = 500000;
+    private int stepsToTeleport;
     private int enemiesKilled = 0;
     private int healthPotions;
     private int stepIncreasers;
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour {
 
     public void setCoins(int _coins)
     {
-        coins = _coins;
+        coins += _coins;
         UI.Instance.coinUpdate();
     }
 
@@ -246,7 +246,7 @@ public class Player : MonoBehaviour {
         stepsToTeleport += i;
         //if steps >= 0
         //call teleport
-        if (stepsToTeleport <= 0) stepsToTeleport = 0;
+        if (stepsToTeleport <= 0) { stepsToTeleport = 0; }
         UI.Instance.stepUpdate();
     }
 
