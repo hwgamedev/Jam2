@@ -31,7 +31,6 @@ public class UI : MonoBehaviour {
         if (Instance == null) Instance = this;
     }
 
-
     public void init()
     {
         maxHealth = PlayerPrefs.GetInt("maxHealth");

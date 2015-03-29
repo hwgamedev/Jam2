@@ -149,6 +149,8 @@ public class characterControls : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);
         if (hit && !hit.collider.isTrigger)
         {
+            if (hit.collider.GetComponent<GoldPickup>() != null) { hit.collider.GetComponent<GoldPickup>().collect(-1); }
+            if (hit.collider.GetComponent<OpenTreasure>() != null) { hit.collider.GetComponent<OpenTreasure>().spawnPrize(); }
             print("Colliding with: "+hit.collider.gameObject.name);
             return true;
         }

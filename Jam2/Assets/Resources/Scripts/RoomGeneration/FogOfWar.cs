@@ -27,10 +27,10 @@ public class FogOfWar : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        print("triggered!");
+        //print("triggered!");
         if (initialCleansing == false && col.tag == "Player")
         {
-            print("Cleansing!");
+            //print("Cleansing!");
             initialCleansing = true;
             changedAlpha = true;
             SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
