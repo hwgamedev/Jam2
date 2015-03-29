@@ -8,14 +8,14 @@ public class characterControls : MonoBehaviour {
 	private Animator anim;
 	public float speed = 1.0f;
 	private int health = 20;
-	private int steps = 50;
+	private int steps = 10;
 	private float startTime;
 	private float journeyLength;
 	private Vector3 startPosition;
 	private Vector3 endPosition;
 	private bool moving = false;
 	private bool attacking = false;
-	//public ParticleSystem trace;
+	public ParticleSystem trace;
 
 	// Use this for initialization
 	void Start () {
@@ -154,10 +154,10 @@ public class characterControls : MonoBehaviour {
 
 	private void doAttack(){
 		// TODO proper collision detection with enemies
-		RaycastHit2D hit = Physics2D.Raycast (transform.position+new Vector3(0.5f,0,0), Vector2.right, 5, LayerMask.NameToLayer("RayycastLayer"));
-		if (hit) {
-			print (hit.collider.gameObject.tag);
-		}
+		//RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.right, 5, <enemy layer>);
+		//if (hit.collider != null) {
+		//	
+		//}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleN") ||
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleS") ||
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleE") ||
