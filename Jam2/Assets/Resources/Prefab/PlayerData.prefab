@@ -39,13 +39,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e851ebebaa8a6840bdc4bce3a4dd2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  startCoins: 450
-  healthPotionsStart: 1
-  stepIncreasersStart: 2
-  stepReducersStart: 3
-  teleportersStart: 4
-  playerName: John
   totalEnemies: 100
 --- !u!1001 &100100000
 Prefab:
