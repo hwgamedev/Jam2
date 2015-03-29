@@ -9,6 +9,8 @@ TagManager:
   - Door
   - Enemy
   - Corner
+  - Floor
+  - Treasure
   layers:
   - Default
   - TransparentFX
@@ -55,6 +57,6 @@ TagManager:
   - name: Obstructions
     uniqueID: 2356594449
     locked: 0
-  - name: New Layer
+  - name: FOW
     uniqueID: 2590502289
     locked: 0
