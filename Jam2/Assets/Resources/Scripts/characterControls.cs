@@ -5,11 +5,10 @@ public class characterControls : MonoBehaviour {
 
 	//public GameObject character;
 
-	// stats to be synchronised with player data
+	// stats of character
 	public float speed = 1.0f;
-	private int health = 20;
-	private int steps = 10;
 	public float shortRange = 1.5f;
+	// public float longRange = 5f;
 	public int attackPower = 10;
 
 	private Animator anim;
@@ -35,11 +34,11 @@ public class characterControls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0) {
+		if (Player.Instance.getHealth() <= 0) {
 			doKill();
 			return;
 		}
-		if (steps == 0) {
+		if (Player.Instance.getSteps() == 0) {
 			doJump();
 			return;
 		} else {
@@ -138,7 +137,7 @@ public class characterControls : MonoBehaviour {
 	}
 
 	private void doStep(){
-		steps --;
+		StepManager.Instance.newStep ();
 		// notify game mechanic of step performed by player
 	}
 
@@ -194,17 +193,18 @@ public class characterControls : MonoBehaviour {
 
 	private void doJump(){
 		print ("teleport !!");
-		steps = 20;
 	}
 
 	private void doKill(){
 		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("die")){
 			anim.SetTrigger ("kill");
 		}
-		// UI Game Over ?
+		Player.Instance.death ();
 	}
 
 	public void takeDammages(int dammages) {
+		int health = Player.Instance.getHealth ();
 		health -= dammages;
+		Player.Instance.setHealth (health);
 	}
 }
