@@ -161,6 +161,9 @@ public class characterControls : MonoBehaviour {
         if (hit && !hit.collider.isTrigger)
         {
             if (hit.collider.GetComponent<GoldPickup>() != null) { hit.collider.GetComponent<GoldPickup>().collect(-1); }
+			if (hit.collider.GetComponent<HealthPickup>() != null) { hit.collider.GetComponent<HealthPickup>().collect(); }
+			if (hit.collider.GetComponent<IncreaserPickup>() != null) { hit.collider.GetComponent<IncreaserPickup>().collect(); }
+			if (hit.collider.GetComponent<DecreaserPickup>() != null) { hit.collider.GetComponent<DecreaserPickup>().collect(); }
             if (hit.collider.GetComponent<OpenTreasure>() != null) { hit.collider.GetComponent<OpenTreasure>().spawnPrize(); }
             print("Colliding with: "+hit.collider.gameObject.name);
             return true;

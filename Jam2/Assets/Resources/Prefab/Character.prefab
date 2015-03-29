@@ -12,7 +12,7 @@ GameObject:
   - 92: {fileID: 9240908}
   - 124: {fileID: 12473716}
   - 81: {fileID: 8198254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ GameObject:
   - 212: {fileID: 21262630}
   - 95: {fileID: 9538128}
   - 61: {fileID: 6101082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -153,7 +153,6 @@ MonoBehaviour:
   speed: 3
   shortRange: 1.5
   longRange: 11
-  attackPower: 10
   dagger: {fileID: 108126, guid: 08ff538b42ecec541b89dd7f14dca7fe, type: 2}
 --- !u!124 &12473716
 Behaviour:
