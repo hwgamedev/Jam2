@@ -20,9 +20,6 @@ public class Player : MonoBehaviour {
     private int stepIncreasersStart;
     private int stepReducersStart;
     private int teleportersStart;
-    private bool buff = false;
-    private bool debuff1 = false;
-    private bool debuff2 = false;
 
     public static Player Instance;
     void Awake()
@@ -53,9 +50,6 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("reachTemp", 0);
         damage = PlayerPrefs.GetInt("attackDamage") + PlayerPrefs.GetInt("damageTemp");
         PlayerPrefs.SetInt("damageTemp", 0);
-        buff = true;
-        debuff1 = true;
-        debuff2 = true;
         UI.Instance.init();
     }
 
@@ -139,21 +133,6 @@ public class Player : MonoBehaviour {
         return stepsToTeleport;
     }
 
-    public bool getBuff()
-    {
-        return buff;
-    }
-
-    public bool getDebuff1()
-    {
-        return debuff1;
-    }
-
-    public bool getDebuff2()
-    {
-        return debuff2;
-    }
-
     public void setName(string _name)
     {
         playerName = _name;
@@ -170,6 +149,7 @@ public class Player : MonoBehaviour {
     {
         health += _health;
         if (health > maxHealth) health = maxHealth;
+        else if (health <= 0) {death();}
         UI.Instance.healthUpdate();
     }
 
@@ -249,24 +229,6 @@ public class Player : MonoBehaviour {
     {
         enemiesKilled++;
         UI.Instance.enemyKillUpdate();
-    }
-
-    public void setBuff(bool _buff)
-    {
-        buff = _buff;
-        UI.Instance.speedBuffUpdate();
-    }
-
-    public void setDebuff1(bool _buff)
-    {
-        debuff1 = _buff;
-        UI.Instance.poisonDebuffUpdate();
-    }
-
-    public void setDebuff2(bool _buff)
-    {
-        debuff2 = _buff;
-        UI.Instance.slowedDebuffUpdate();
     }
 
     public void decrementSteps()
