@@ -72,7 +72,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156896, g: .404408455, b: .474509835, a: 0}
+  m_BackGroundColor: {r: .0947231799, g: .162939966, b: .176470578, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -151,6 +151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  shortRange: 1.5
+  longRange: 11
+  attackPower: 10
+  dagger: {fileID: 108126, guid: 08ff538b42ecec541b89dd7f14dca7fe, type: 2}
 --- !u!124 &12473716
 Behaviour:
   m_ObjectHideFlags: 1
