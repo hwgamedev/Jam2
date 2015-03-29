@@ -230,6 +230,7 @@ Prefab:
       propertyPath: m_Name
       value: ShopUI
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11466982, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ad4dbf0694a8b594d9d226d020f98bef, type: 2}
   m_IsPrefabParent: 0
