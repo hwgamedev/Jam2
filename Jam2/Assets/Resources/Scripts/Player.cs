@@ -2,16 +2,10 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-    //replace public variables with a player file
-    public int maxHealth;
-    public int startCoins;
-    public int healthPotionsStart;
-    public int stepIncreasersStart;
-    public int stepReducersStart;
-    public int teleportersStart;
-    public string playerName;
-    public int totalEnemies;
+    public int totalEnemies; //replace with a count of enemies spawned
 
+    private string playerName;
+    private int maxHealth;
     private int health;
     private int coins;
     private int stepsToTeleport;
@@ -20,6 +14,10 @@ public class Player : MonoBehaviour {
     private int stepIncreasers;
     private int stepReducers;
     private int teleporters;
+    private int healthPotionsStart;
+    private int stepIncreasersStart;
+    private int stepReducersStart;
+    private int teleportersStart;
     private bool buff = false;
     private bool debuff1 = false;
     private bool debuff2 = false;
@@ -32,15 +30,56 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        //set player name
-        //set totalEnemies
+        initPlayerPref();
+        playerName = PlayerPrefs.GetString("playerName");
+        maxHealth = PlayerPrefs.GetInt("maxHealth");
         health = maxHealth;
-        coins = startCoins;
+        coins = PlayerPrefs.GetInt("totalCoins");
+        healthPotionsStart = PlayerPrefs.GetInt("healthPotionsStart");
         healthPotions = healthPotionsStart;
+        stepIncreasersStart = PlayerPrefs.GetInt("stepIncreasersStart");
         stepIncreasers = stepIncreasersStart;
+        stepReducersStart = PlayerPrefs.GetInt("stepReducersStart");
         stepReducers = stepReducersStart;
+        teleportersStart = PlayerPrefs.GetInt("teleportersStart");
         teleporters = teleportersStart;
         UI.Instance.init();
+    }
+
+    void initPlayerPref()
+    {
+        PlayerPrefs.SetString("playerName", "John");
+        PlayerPrefs.SetInt("maxHealth", 10);
+        PlayerPrefs.SetInt("totalCoins", 44);
+        PlayerPrefs.SetInt("healthPotionsStart", 1);
+        PlayerPrefs.SetInt("stepIncreasersStart", 2);
+        PlayerPrefs.SetInt("stepReducersStart", 3);
+        PlayerPrefs.SetInt("teleportersStart", 4);
+    }
+
+    public void increaseMaxHealthPerma()
+    {
+        PlayerPrefs.SetInt("maxHealth", maxHealth++);
+    }
+
+    public void increaseMaxIncreasers()
+    {
+        PlayerPrefs.SetInt("stepIncreasersStart", stepIncreasersStart++);
+    }
+
+    public void increaseMaxReducers()
+    {
+        PlayerPrefs.SetInt("stepReducersStart", stepReducersStart++);
+    }
+
+    public void increaseMaxHealthPotions()
+    {
+        PlayerPrefs.SetInt("healthPotionsStart", healthPotionsStart++);
+    }
+
+    public void increaseMaxTeleporters()
+    {
+        PlayerPrefs.SetInt("teleportersStart", teleportersStart++);
     }
 
     public string getName()
@@ -186,7 +225,6 @@ public class Player : MonoBehaviour {
     public void drinkTeleporter()
     {
         //call teleport
-        Debug.Log("Teleport");
         teleporters--;
         UI.Instance.teleporterUpdate();
     }
@@ -218,6 +256,9 @@ public class Player : MonoBehaviour {
     public void decrementSteps()
     {
         stepsToTeleport --;
+        //if steps >= 0
+        //call teleport
+        if (stepsToTeleport <= 0) stepsToTeleport = 0;
         UI.Instance.stepUpdate();
 
     }
@@ -227,8 +268,14 @@ public class Player : MonoBehaviour {
         stepsToTeleport += i;
         //if steps >= 0
         //call teleport
-        if (stepsToTeleport <= 0) Debug.Log("Teleport");
+        if (stepsToTeleport <= 0) stepsToTeleport = 0;
         UI.Instance.stepUpdate();
+    }
+
+    public void death()
+    {
+        PlayerPrefs.SetInt("totalCoins", coins);
+        PlayerPrefs.Save();
     }
 
 }
