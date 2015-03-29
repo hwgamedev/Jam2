@@ -16,6 +16,7 @@ public class StepManager : MonoBehaviour
 		
 	}
 	public void newStep(){
+		Player.Instance.decrementSteps();
 		GridManager.Instance.pathMove ();
 	}
 }
