@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21201916}
   - 61: {fileID: 6153140}
   - 114: {fileID: 11481974}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpawnerEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

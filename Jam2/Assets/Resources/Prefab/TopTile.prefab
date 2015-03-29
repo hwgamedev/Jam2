@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 447926}
   - 212: {fileID: 21234060}
   - 61: {fileID: 6196942}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: TopTile
   m_TagString: Wall
   m_Icon: {fileID: 0}

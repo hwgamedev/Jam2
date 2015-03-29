@@ -24,6 +24,70 @@ public class characterControls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
+		if (!moving && !attacking) {
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), transform.position + new Vector3(0, 1, 0)))
+                    return;
+                anim.SetTrigger("iddleN");
+				startTime = Time.time;
+				startPosition = transform.position;
+				endPosition = startPosition;
+				endPosition += new Vector3 (0, 1, 0);
+				journeyLength = Vector3.Distance (startPosition, endPosition);
+				moving = true;
+			}
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (checkForCollisions(new Vector3(transform.position.x-0.5f, transform.position.y, transform.position.z),transform.position - new Vector3(1, 0, 0)))
+                    return;
+                anim.SetTrigger("iddleE");
+				startTime = Time.time;
+				startPosition = transform.position;
+				endPosition = startPosition;
+				endPosition -= new Vector3 (1, 0, 0);
+				journeyLength = Vector3.Distance (startPosition, endPosition);
+				moving = true;
+			}
+            if (Input.GetKey(KeyCode.S))
+            {
+                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.5f, transform.position.z),transform.position - new Vector3(0, 1, 0)))
+                    return;
+                anim.SetTrigger("iddleS");
+				startTime = Time.time;
+				startPosition = transform.position;
+				endPosition = startPosition;
+				endPosition -= new Vector3 (0, 1, 0);
+				journeyLength = Vector3.Distance (startPosition, endPosition);
+				moving = true;
+			}
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (checkForCollisions(new Vector3(transform.position.x+0.5f, transform.position.y, transform.position.z),transform.position + new Vector3(1, 0, 0)))
+                    return;
+				anim.SetTrigger("iddleW");
+				startTime = Time.time;
+				startPosition = transform.position;
+				endPosition = startPosition;
+				endPosition += new Vector3 (1, 0, 0);
+				journeyLength = Vector3.Distance (startPosition, endPosition);
+				moving = true;
+			}
+			if(Input.GetMouseButtonDown(0)){
+				Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
+				float diffX = mousePoint.x - transform.position.x;
+				float diffY = mousePoint.y - transform.position.y;
+				if(diffX > -0.7 && diffX < 0.7){
+					if(diffY > 1 && diffY < 2){
+						anim.SetTrigger("attackN");
+						attacking = true;
+					}
+					else if(diffY < 0 && diffY > -1){
+						anim.SetTrigger("attackS");
+						attacking = true;
+					}
+=======
 		if (health <= 0) {
 			doKill();
 		}
@@ -42,6 +106,7 @@ public class characterControls : MonoBehaviour {
 					journeyLength = Vector3.Distance (startPosition, endPosition);
 					doStep();
 					moving = true;
+>>>>>>> deaa9b7fee48fe0bdd579cf0b0e69d6911ce73c4
 				}
 				if (Input.GetKey (KeyCode.A)) {
 					if (checkForCollisions(transform.position - new Vector3(1, 0, 0)))
@@ -123,17 +188,21 @@ public class characterControls : MonoBehaviour {
 		}
 	}
 
+<<<<<<< HEAD
+    private bool checkForCollisions(Vector3 startPoint, Vector3 endPoint)
+=======
 	private void doStep(){
 		steps --;
 		// notify game mechanic of step performed by player
 	}
 
     private bool checkForCollisions(Vector3 endPoint)
+>>>>>>> deaa9b7fee48fe0bdd579cf0b0e69d6911ce73c4
     {
-        //Debug.DrawLine(transform.position, endPoint);
+        Debug.DrawLine(transform.position, endPoint);
         int layer = LayerMask.NameToLayer("RaycastLayer");
         //print("Layer : "+layer);
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, endPoint);
+        RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);
         if (hit && !hit.collider.isTrigger)
         {
             print("Colliding with: "+hit.collider.gameObject.name);

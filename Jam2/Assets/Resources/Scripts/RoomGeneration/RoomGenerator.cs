@@ -333,14 +333,14 @@ public class RoomGenerator : MonoBehaviour {
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos + 1, (yPos - 2) * -1, 0);
         //add to grid
-        grid[xPos, yPos - 2, 0] = temp;
+        grid[xPos+1, yPos - 2, 0] = temp;
         temp = Instantiate(doorCornerBottom, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         temp.transform.localScale = new Vector3(-1, 1, 0);
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos + 1, (yPos + 1) * -1, 0);
         //add to grid
-        grid[xPos, yPos + 1, 0] = temp;
+        grid[xPos+1, yPos + 1, 0] = temp;
     }
 
     private void createDoorHorizontal(int xPos, int yPos)
