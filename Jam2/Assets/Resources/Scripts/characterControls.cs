@@ -103,6 +103,7 @@ public class characterControls : MonoBehaviour {
 							trace.transform.rotation = Quaternion.Euler(0,0,-1f);
 							trace.Play();
 							attacking = true;
+							doDammages (5);
 						}
 					}
 				}
@@ -145,7 +146,7 @@ public class characterControls : MonoBehaviour {
 
 	private void doKill(){
 		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("die")){
-			//anim.SetTrigger ("kill");
+			anim.SetTrigger ("kill");
 		}
 	}
 
