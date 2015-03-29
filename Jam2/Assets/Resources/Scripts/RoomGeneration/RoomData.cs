@@ -332,8 +332,11 @@ public class RoomData : MonoBehaviour {
 
     public void spawnPlayer(GameObject player)
     {
+		print (player.transform.position);
         player.transform.parent = transform;
+		print (player.transform.position);
         player.transform.localPosition = new Vector3(spawnPoint[0], spawnPoint[1]*-1, 0);
+		print (player.transform.position);
 
         for (int i = 0; i < roomBoxes.Count; i++)
         {

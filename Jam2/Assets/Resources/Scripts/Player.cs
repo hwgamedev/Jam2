@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
     public int totalEnemies; //replace with a count of enemies spawned
@@ -236,9 +237,19 @@ public class Player : MonoBehaviour {
         stepsToTeleport --;
         //if steps >= 0
         //call teleport
-        if (stepsToTeleport <= 0) stepsToTeleport = 0;
+        if (stepsToTeleport <= 0) {
+			stepsToTeleport = 0;
+		}
         UI.Instance.stepUpdate();
-
+		if (stepsToTeleport == 0) {
+			RoomGenerator r = FindObjectOfType<RoomGenerator>();
+			GameObject p = FindObjectOfType<characterControls>().gameObject;
+			print (p);
+			List<GameObject> rooms = r.rooms;
+			print (rooms);
+			int room = Random.Range(0, rooms.Count);
+			rooms[room].GetComponent<RoomData>().spawnPlayer(p);
+		}
     }
 
     public void incrementSteps(int i)
@@ -246,7 +257,9 @@ public class Player : MonoBehaviour {
         stepsToTeleport += i;
         //if steps >= 0
         //call teleport
-        if (stepsToTeleport <= 0) { stepsToTeleport = 0; }
+        if (stepsToTeleport <= 0) { 
+			stepsToTeleport = 0; 
+		}
         UI.Instance.stepUpdate();
     }
 

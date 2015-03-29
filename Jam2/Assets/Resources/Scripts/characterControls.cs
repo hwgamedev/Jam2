@@ -30,17 +30,16 @@ public class characterControls : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator>();
 		//synchronise with player data
-		Player.Instance.incrementSteps (50);
+		resetSteps ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Player.Instance.getHealth() <= 0) {
-			doKill();
+		if (Player.Instance.getSteps () == 0) {
 			return;
 		}
-		if (Player.Instance.getSteps() == 0) {
-			doJump();
+		if (Player.Instance.getHealth() <= 0) {
+			doKill();
 			return;
 		} else {
 			if (!moving && !attacking) {
@@ -218,10 +217,6 @@ public class characterControls : MonoBehaviour {
 		daggerInstance.GetComponent<Dagger> ().throwDagger (start, end);
 	}
 
-	private void doJump(){
-		print ("teleport !!");
-	}
-
 	private void doKill(){
 		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("die")){
 			anim.SetTrigger ("kill");
@@ -233,5 +228,13 @@ public class characterControls : MonoBehaviour {
 		int health = Player.Instance.getHealth ();
 		health -= dammages;
 		Player.Instance.setHealth (health);
+	}
+
+	public void resetSteps(){
+		Player.Instance.incrementSteps(10);
+	}
+
+	public void destroy(){
+		Destroy (gameObject);
 	}
 }
