@@ -44,10 +44,11 @@ public class Dagger : MonoBehaviour {
 	}
 
 	private bool checkCollision(Vector3 start, Vector3 end) {
-		RaycastHit2D hit = Physics2D.Linecast(start, end);
+        int layer = LayerMask.GetMask("RaycastLayer");
+		RaycastHit2D hit = Physics2D.Linecast(start, end, layer);
 		if (hit && !hit.collider.isTrigger)
 		{
-			print("Colliding with: "+hit.collider.gameObject.name);
+			//print("Colliding with: "+hit.collider.gameObject.name);
 			if(hit.collider.gameObject.CompareTag("Player")){
 				return false;
 			}

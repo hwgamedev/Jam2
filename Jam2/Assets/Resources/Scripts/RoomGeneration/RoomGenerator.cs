@@ -66,7 +66,7 @@ public class RoomGenerator : MonoBehaviour {
             {
                 roomOffsetY = (roomSize + maxSubRoomSize) * j;
                 GameObject room = Instantiate(roomDataTemplate, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-                room.name = "Room" + roomCounter;
+                room.name = "Room " + (roomCounter+1);
                 data = room.GetComponent<RoomData>();
                 room.transform.parent = transform;
                 Vector3 roomPos = room.transform.localPosition;
@@ -151,7 +151,7 @@ public class RoomGenerator : MonoBehaviour {
             //set the chance for the search to move right and down
             float speedX = Random.Range(0.5f, 1f);
             float speedY = Random.Range(0.5f, 1f);
-            print("Speeds x: " + speedX + ", y: " + speedY);
+            //print("Speeds x: " + speedX + ", y: " + speedY);
 
             //check if the room would collide with other rooms
             bool hasCollisions = true;

@@ -204,7 +204,7 @@ public class characterControls : MonoBehaviour {
 	}
 
 	private void doAttack(string direction){
-        print("Remaining steps: " + Player.Instance.getSteps());
+        //print("Remaining steps: " + Player.Instance.getSteps());
 		RaycastHit2D hit = Physics2D.Linecast(transform.position+new Vector3(0,0.75f,0), transform.position + new Vector3(0f,shortRange,0f));
 		switch (direction) {
 		case "N":

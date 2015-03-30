@@ -33,7 +33,7 @@ public class RoomData : MonoBehaviour {
     public float coins = Random.Range(0.02f, 0.10f);
 
     //enemy spawn formation chances
-    public float singleEnemy = Random.Range(0.1f, 0.15f);
+    public float singleEnemy = Random.Range(0.2f, 0.3f);
     public float enemyLine = Random.Range(0.05f, 0.1f);
     public float cornerFormation = Random.Range(0.05f, 0.1f);
 
@@ -194,6 +194,7 @@ public class RoomData : MonoBehaviour {
     {
         enemyCount = 0;
         enemyArray = new List<GameObject>();
+        
         for (int z = 0; z < roomBoxes.Count; z++)
         {
             int[] roomBox = roomBoxes[z];
@@ -227,7 +228,7 @@ public class RoomData : MonoBehaviour {
                                         GameObject temp = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                                         temp.transform.parent = transform;
                                         temp.transform.localPosition = new Vector3(x, y * -1);
-                                        enemyArray.Add(temp); enemyCount++;
+                                        addEnemy(temp);
                                     }
                             }
                         }
@@ -236,7 +237,7 @@ public class RoomData : MonoBehaviour {
                             GameObject temp = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                             temp.transform.parent = transform;
                             temp.transform.localPosition = new Vector3(x, y * -1);
-                            enemyArray.Add(temp); enemyCount++;
+                            addEnemy(temp);
                         }
                     }
                 }
@@ -249,7 +250,7 @@ public class RoomData : MonoBehaviour {
                     GameObject temp = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                     temp.transform.parent = transform;
                     temp.transform.localPosition = new Vector3(minX, minY * -1);
-                    enemyArray.Add(temp); enemyCount++;
+                    addEnemy(temp);
                 }
 
                 if (grid[maxX, minY, 0] != null && grid[maxX, minY, 0].tag == "Floor" && grid[maxX, minY, 1] == null)
@@ -257,7 +258,7 @@ public class RoomData : MonoBehaviour {
                     GameObject temp = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                     temp.transform.parent = transform;
                     temp.transform.localPosition = new Vector3(maxX, minY * -1);
-                    enemyArray.Add(temp); enemyCount++;
+                    addEnemy(temp);
                 }
 
                 if (grid[minX, maxY, 0] != null && grid[minX, maxY, 0].tag == "Floor" && grid[minX, maxY, 1] == null)
@@ -265,7 +266,7 @@ public class RoomData : MonoBehaviour {
                     GameObject temp = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                     temp.transform.parent = transform;
                     temp.transform.localPosition = new Vector3(minX, maxY * -1);
-                    enemyArray.Add(temp); enemyCount++;
+                    addEnemy(temp);
                 }
 
                 if (grid[maxX, maxY, 0] != null && grid[maxX, maxY, 0].tag == "Floor" && grid[maxX, maxY, 1] == null)
@@ -273,21 +274,29 @@ public class RoomData : MonoBehaviour {
                     GameObject temp = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                     temp.transform.parent = transform;
                     temp.transform.localPosition = new Vector3(maxX, maxY * -1);
-                    enemyArray.Add(temp); enemyCount++;
+                    addEnemy(temp);
                 }
             }
 
 
         }
 
-        decrement = .4f / (enemyCount - 1);
+        print("EnemyCount: " + enemyCount);
+        decrement = .4f / (enemyCount);
         
         
     }
 
+    private void addEnemy(GameObject temp)
+    {
+        enemyArray.Add(temp);
+        enemyCount++;
+        temp.GetComponent<EnemyBase>().setRoom(gameObject.name);
+    }
+
     private void cleanupDoor(int xPos, int yPos)
     {
-        print("Door at x: " + xPos + ", y: " + yPos);
+        //print("Door at x: " + xPos + ", y: " + yPos);
         for (int i = xPos - 3; i < xPos + 4; i++)
         {
             for (int j = yPos - 3; j < yPos + 4; j++)
@@ -332,11 +341,11 @@ public class RoomData : MonoBehaviour {
 
     public void spawnPlayer(GameObject player)
     {
-		print (player.transform.position);
+		//print (player.transform.position);
         player.transform.parent = transform;
-		print (player.transform.position);
+		//print (player.transform.position);
         player.transform.localPosition = new Vector3(spawnPoint[0], spawnPoint[1]*-1, 0);
-		print (player.transform.position);
+		//print (player.transform.position);
 
         for (int i = 0; i < roomBoxes.Count; i++)
         {
@@ -346,7 +355,7 @@ public class RoomData : MonoBehaviour {
 
         for (int i = 0; i < enemyArray.Count; i++)
         {
-            enemyArray[i].active = true;
+            enemyArray[i].SetActive(true);
         }
     }
 
@@ -354,12 +363,20 @@ public class RoomData : MonoBehaviour {
     {
         for (int i = 0; i < enemyArray.Count; i++)
         {
-            enemyArray[i].active = false;
+            enemyArray[i].SetActive(false);
         }
     }
 
     public int getRoomSize()
     {
         return roomSize;
+    }
+
+    public void setEnemyAsDead(GameObject enemy)
+    {
+        enemyArray.Remove(enemy);
+        foreach(GameObject fow in fogOfWars) {
+            fow.GetComponent<FogOfWar>().changeAlpha(decrement);
+        }
     }
 }

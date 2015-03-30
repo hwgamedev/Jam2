@@ -43,6 +43,9 @@ public class EnemyBase : MonoBehaviour {
     private float blinkTimer = 0;
     private bool blink = false;
 
+    //need to know which room the enemy's at
+    private string room;
+
 	// Use this for initialization
 	public virtual void Start () {
         if (blinkTimer > 0)
@@ -263,6 +266,7 @@ public class EnemyBase : MonoBehaviour {
 	
 	public virtual void attack()
 	{
+        Debug.Log("Gonna fuck you up");
 		startWait();
 		Debug.Log (dmg);
 		Player.Instance.setHealth(-dmg);
@@ -270,7 +274,7 @@ public class EnemyBase : MonoBehaviour {
 
 	public void takeDamage(int damage)
 	{
-        Debug.Log("Hurting really bad!");
+        //Debug.Log("Hurting really bad!");
 		health -= damage;
 	}
 
@@ -281,6 +285,8 @@ public class EnemyBase : MonoBehaviour {
 
 	public void die()
 	{
+        FindObjectOfType<StepManager>().unsubscribe(this);
+        GameObject.Find(room).GetComponent<RoomData>().setEnemyAsDead(this.gameObject);
 		Debug.Log ("YUDIE");
 		Player.Instance.incrementEnemiesKilled();
 		//dropItem();
@@ -322,6 +328,11 @@ public class EnemyBase : MonoBehaviour {
 			wait = false;
 		return wait;
 	}
+
+    public void setRoom(string roomName)
+    {
+        room = roomName;
+    }
 
 	/*public void setAwake(bool a)
 	{

@@ -29,5 +29,10 @@ public class StepManager : MonoBehaviour
 			    enemy.incrementSteps();
 		}
 	}
+
+    public void unsubscribe(EnemyBase enemy)
+    {
+        EnemiesArray.Remove(enemy);
+    }
 }
 
