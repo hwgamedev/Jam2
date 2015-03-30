@@ -180,23 +180,23 @@ Prefab:
     m_Modifications:
     - target: {fileID: 22492602, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22492602, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22465266, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22465266, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22465266, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 408604, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_LocalPosition.x

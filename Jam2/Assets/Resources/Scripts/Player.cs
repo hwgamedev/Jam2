@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
     private int stepReducersStart;
     private int teleportersStart;
     private int jump;
-    private int currentRoom;
+    private string currentRoom;
     private int currentRoomEnemies;
 
     public static Player Instance;
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
         UI.Instance.init();
     }
 
-    public int getCurrentRoom()
+    public string getCurrentRoom()
     {
         return currentRoom;
     }
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour {
         return currentRoomEnemies;
     }
 
-    public void setCurrentRoom(int room)
+    public void setCurrentRoom(string room)
     {
         currentRoom = room;
         UI.Instance.updateRoom();

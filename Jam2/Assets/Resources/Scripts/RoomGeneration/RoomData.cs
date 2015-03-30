@@ -209,6 +209,10 @@ public class RoomData : MonoBehaviour {
                     {
                         //Debug.Log("mandatory spawn!");
                         //Debug.Log("Love me!");
+                        if (grid[x, y, 1] != null && grid[x, y, 1].tag == "PlayerSpawn")
+                        {
+                            x += 1;
+                        }
                         if (grid[x, y, 1] != null)
                             Destroy(grid[x, y, 1]);
 
@@ -360,6 +364,8 @@ public class RoomData : MonoBehaviour {
 		//print (player.transform.position);
         player.transform.localPosition = new Vector3(spawnPoint[0], spawnPoint[1]*-1, 0);
 		//print (player.transform.position);
+        Player.Instance.setCurrentRoom(gameObject.name);
+        Player.Instance.setRoomEnemies(enemyArray.Count);
 
         for (int i = 0; i < roomBoxes.Count; i++)
         {
@@ -389,6 +395,7 @@ public class RoomData : MonoBehaviour {
     public void setEnemyAsDead(GameObject enemy)
     {
         enemyArray.Remove(enemy);
+        Player.Instance.killRoomEnemy();
         foreach(GameObject fow in fogOfWars) {
             fow.GetComponent<FogOfWar>().changeAlpha(decrement);
         }
