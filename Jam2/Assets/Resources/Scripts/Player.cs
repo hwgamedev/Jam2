@@ -218,24 +218,40 @@ public class Player : MonoBehaviour {
     public void pickUpHealthPotion()
     {
         healthPotions++;
+        if (healthPotions > 10)
+        {
+            healthPotions = 10;
+        }
         UI.Instance.healthPotionUpdate();
     }
 
     public void pickUpIncreaser()
     {
         stepIncreasers++;
+        if(stepIncreasers > 10)
+        {
+            stepIncreasers = 10;
+        }
         UI.Instance.stepIncreaserUpdate();
     }
 
     public void pickUpReducer()
     {
         stepReducers++;
+        if (stepReducers > 10)
+        {
+            stepReducers = 10;
+        }
         UI.Instance.stepDecreaserUpdate();
     }
 
     public void pickUpTeleporter()
     {
         teleporters++;
+        if (teleporters > 10)
+        {
+            teleporters = 10;
+        }
         UI.Instance.teleporterUpdate();
     }
 
