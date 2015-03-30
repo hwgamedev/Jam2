@@ -44,13 +44,13 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("healthPotionsStartTemp", 0);
         healthPotions = healthPotionsStart;
         stepIncreasersStart = PlayerPrefs.GetInt("stepIncreasersStart") + PlayerPrefs.GetInt("stepIncreasersStartTemp");
-        PlayerPrefs.SetInt("stepIncreasersStart", 0);
+        PlayerPrefs.SetInt("stepIncreasersStartTemp", 0);
         stepIncreasers = stepIncreasersStart;
         stepReducersStart = PlayerPrefs.GetInt("stepReducersStart") + PlayerPrefs.GetInt("stepReducersStartTemp");
-        PlayerPrefs.SetInt("stepReducersStart", 0);
+        PlayerPrefs.SetInt("stepReducersStartTemp", 0);
         stepReducers = stepReducersStart;
         teleportersStart = PlayerPrefs.GetInt("teleportersStart") + PlayerPrefs.GetInt("teleportersStartTemp");
-        PlayerPrefs.SetInt("teleportersStart", 0);
+        PlayerPrefs.SetInt("teleportersStartTemp", 0);
         teleporters = teleportersStart;
         reach = PlayerPrefs.GetInt("attackReach") + PlayerPrefs.GetInt("reachTemp");
         PlayerPrefs.SetInt("reachTemp", 0);
@@ -285,7 +285,8 @@ public class Player : MonoBehaviour {
         //if steps >= 0
         //call teleport
         if (stepsToTeleport <= 0) { 
-			stepsToTeleport = 0; 
+			stepsToTeleport = 0;
+            teleport();
 		}
         UI.Instance.stepUpdate();
     }

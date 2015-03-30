@@ -116,13 +116,13 @@ public class Shop : MonoBehaviour {
         PlayerPrefs.SetInt("stepIncreasersStartTemp", 0);
         PlayerPrefs.SetInt("stepReducersStartTemp", 0);
         PlayerPrefs.SetInt("teleportersStartTemp", 0);
-        tempExtraHealth = PlayerPrefs.GetInt("tempExtraHealth");
-        reachTemp = PlayerPrefs.GetInt("reachTemp");
-        damageTemp = PlayerPrefs.GetInt("damageTemp");
-        healthPotionsTempStart = PlayerPrefs.GetInt("healthPotionsStartTemp");
-        stepIncreasersTempStart = PlayerPrefs.GetInt("stepIncreasersStartTemp");
-        stepReducersTempStart = PlayerPrefs.GetInt("stepReducersStartTemp");
-        teleportersTempStart =  PlayerPrefs.GetInt("teleportersStartTemp");
+        tempExtraHealth = 0;
+        reachTemp = 0;
+        damageTemp = 0;
+        healthPotionsTempStart = 0;
+        stepIncreasersTempStart = 0;
+        stepReducersTempStart = 0;
+        teleportersTempStart =  0;
         //Overview
         playerName = PlayerPrefs.GetString("playerName");
         overview[0].text = playerName;
