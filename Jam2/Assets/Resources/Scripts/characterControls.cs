@@ -163,6 +163,11 @@ public class characterControls : MonoBehaviour {
 		}
 	}
 
+    public void teleport()
+    {
+        anim.SetTrigger("tele");
+    }
+
 	private void doStep(){
 		StepManager.Instance.newStep ();
 		// notify game mechanic of step performed by player
