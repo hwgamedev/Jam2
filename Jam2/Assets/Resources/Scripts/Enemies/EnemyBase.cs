@@ -38,8 +38,32 @@ public class EnemyBase : MonoBehaviour {
 	public GameObject healthPickup;
 	public GameObject increaserPickup;
 	public GameObject decreaserPickup;
+
+    //damage timer
+    private float blinkTimer = 0;
+    private bool blink = false;
+
 	// Use this for initialization
 	public virtual void Start () {
+        if (blinkTimer > 0)
+        {
+            SpriteRenderer sr = GetComponent<SpriteRenderer>();
+            blinkTimer -= Time.deltaTime;
+            //if end of animation, make sure we're not blinking
+            if (blinkTimer <= 0 && blink == true)
+            {
+                blinkTimer = 0;
+                blink = false;
+                sr.color = Color.white;
+            }
+            else {
+                if (blink)
+                    sr.color = Color.white;
+                else
+                    sr.color = Color.red;
+                blink = !blink;
+            }    
+        }
 		//Player.Instance.incrementTotalEnemies();
 		player = GameObject.FindWithTag("Player");
 		//initDrops ();
@@ -246,6 +270,7 @@ public class EnemyBase : MonoBehaviour {
 
 	public void takeDamage(int damage)
 	{
+        Debug.Log("Hurting really bad!");
 		health -= damage;
 	}
 

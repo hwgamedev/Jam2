@@ -255,11 +255,7 @@ public class Player : MonoBehaviour {
 			RoomGenerator r = FindObjectOfType<RoomGenerator>();
 			GameObject p = GameObject.FindGameObjectWithTag("Player");
             p.GetComponent<characterControls>().setMoving(false);
-			print (p);
-			List<GameObject> rooms = r.rooms;
-			print (rooms);
-			int room = Random.Range(0, rooms.Count);
-            RoomData rd = rooms[room].GetComponent<RoomData>();
+            RoomData rd = r.getNextRoom().GetComponent<RoomData>();
             rd.spawnPlayer(p);
             this.incrementSteps(rd.getRoomSize());
 		}

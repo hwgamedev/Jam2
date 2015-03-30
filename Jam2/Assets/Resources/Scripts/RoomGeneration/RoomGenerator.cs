@@ -48,6 +48,8 @@ public class RoomGenerator : MonoBehaviour {
     public GameObject player;
 
     public List<GameObject> rooms;
+    public List<GameObject> visitedRooms;
+    public GameObject currRoom;
 	
 	// Use this for initialization
     void Start()
@@ -84,6 +86,10 @@ public class RoomGenerator : MonoBehaviour {
         int startRoom = Random.Range(0, rooms.Count);
         GameObject playerInstance = Instantiate(player, new Vector3(0,0,0), Quaternion.identity) as GameObject;
         rooms[startRoom].GetComponent<RoomData>().spawnPlayer(playerInstance);
+        currRoom = rooms[startRoom];
+        visitedRooms.Add(rooms[startRoom]);
+        rooms.RemoveAt(startRoom);
+
 	}
 	
 	// Update is called once per frame
@@ -501,5 +507,22 @@ public class RoomGenerator : MonoBehaviour {
                 temp.transform.localScale = theScale;
             }
         }
+    }
+
+    public GameObject getNextRoom()
+    {
+        if (rooms.Count == 0)
+        {
+            rooms.AddRange(visitedRooms);
+            visitedRooms = new List<GameObject>();
+        }
+        int roomIndex = Random.Range(0, rooms.Count);
+        GameObject nextRoom = rooms[roomIndex];
+        currRoom.GetComponent<RoomData>().removePlayer();
+        currRoom = nextRoom;
+        visitedRooms.Add(nextRoom);
+        rooms.RemoveAt(roomIndex);
+
+        return nextRoom;
     }
 }
