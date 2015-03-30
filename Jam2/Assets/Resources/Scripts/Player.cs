@@ -282,6 +282,10 @@ public class Player : MonoBehaviour {
     public void incrementEnemiesKilled()
     {
         enemiesKilled++;
+        if (enemiesKilled == totalEnemies)
+        {
+            win();
+        }
         UI.Instance.enemyKillUpdate();
     }
 
@@ -332,10 +336,26 @@ public class Player : MonoBehaviour {
         totalEnemies++;
     }
 
+    public void win()
+    {
+        //Set kills, rooms cleared, coins, jumps, items and player's death to the apropriate keys in PlayerPrefs
+        PlayerPrefs.SetInt("totalKills", (PlayerPrefs.GetInt("totalKills") + enemiesKilled));
+        PlayerPrefs.SetInt("enemyKills", enemiesKilled);
+        PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.GetInt("totaljumps") + jump));
+        PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.GetInt("totalDeaths") + 1));
+        //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items);
+        //PlayerPrefs.SetInt("totalRooms", (PlayerPrefs.GetInt("totalRooms") + rooms);
+        PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollectedCoins") + thisCoins));
+        PlayerPrefs.SetInt("thisCoins", thisCoins);
+        PlayerPrefs.SetInt("totalCoins", coins + thisCoins);
+        PlayerPrefs.Save();
+        Application.LoadLevel("win");
+    }
     public void death()
     {
         //Set kills, rooms cleared, coins, jumps, items and player's death to the apropriate keys in PlayerPrefs
         PlayerPrefs.SetInt("totalKills", (PlayerPrefs.GetInt("totalKills") + enemiesKilled));
+        PlayerPrefs.SetInt("enemyKills", enemiesKilled);
         PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.GetInt("totaljumps") + jump));
         PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.GetInt("totalDeaths") + 1));
         //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items);
