@@ -60,7 +60,7 @@ public class UI : MonoBehaviour {
 
     public void updateRoom()
     {
-        room.text = Player.Instance.getCurrentRoom() + ": " + Player.Instance.getCurrentRoomEnemies().ToString() + " Enemies Remaining";
+        room.text = Player.Instance.getCurrentRoom() + ": " + Player.Instance.getCurrentRoomEnemies().ToString() + " Enemies left";
     }
 
     public void coinUpdate()
