@@ -173,6 +173,7 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     maxHealth += healthUpgrade;
                     PlayerPrefs.SetInt("maxHealth", maxHealth);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
                 }
                 else
                 {
@@ -186,6 +187,7 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     tempExtraHealth += healthUpgrade;
                     PlayerPrefs.SetInt("tempExtraHealth", tempExtraHealth);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
                 }
                 else
                 {
@@ -232,6 +234,7 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     damage++;
                     PlayerPrefs.SetInt("attackDamage", damage);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
                 }
                 else
                 {
@@ -245,6 +248,7 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     damageTemp++;
                     PlayerPrefs.SetInt("damageTemp", damageTemp);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
                 }
                 else
                 {
@@ -289,6 +293,7 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     reach++;
                     PlayerPrefs.SetInt("attackReach", reach);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
                 }
                 else
                 {
@@ -302,6 +307,7 @@ public class Shop : MonoBehaviour {
                     updateCoinCount();
                     reachTemp++;
                     PlayerPrefs.SetInt("reachTemp", reachTemp);
+                    AudioSource.PlayClipAtPoint(till, transform.position);
                 }
                 else
                 {
