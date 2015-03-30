@@ -21,7 +21,7 @@ public class FogOfWar : MonoBehaviour {
             SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
             float newVal = Mathf.Lerp(sr.color.a, newAlpha, Time.deltaTime);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, newVal);
-            if (newVal == newAlpha)
+            if (newVal <= newAlpha)
                 changedAlpha = false;
 
         }
@@ -30,6 +30,7 @@ public class FogOfWar : MonoBehaviour {
     public void changeAlpha(float nAlpha)
     {
         newAlpha = newAlpha - nAlpha;
+        print("Newalpha: " + newAlpha);
         changedAlpha = true;
     }
 

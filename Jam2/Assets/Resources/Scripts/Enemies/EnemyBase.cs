@@ -89,10 +89,6 @@ public class EnemyBase : MonoBehaviour {
 	
 	// Update is called once per frame
 	public virtual void Update () {
-		if(health <= 0){
-			die ();
-			return;
-		}
 		if(wait){
 			checkWait();
 			return;
@@ -276,6 +272,8 @@ public class EnemyBase : MonoBehaviour {
 	{
         //Debug.Log("Hurting really bad!");
 		health -= damage;
+        if (health <= 0)
+            die();
 	}
 
 	public void incrementSteps()

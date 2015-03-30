@@ -43,14 +43,6 @@ public class RoomData : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (enemyArray != null && setupComplete && enemyCount != enemyArray.Count)
-        {
-            for (int i = 0; i < roomBoxes.Count; i++)
-            {
-                fogOfWars[i].GetComponent<FogOfWar>().changeAlpha(decrement);
-            }
-
-        }
 	}
 
     public void addRoomBox(int[] boxSpec)
@@ -202,17 +194,38 @@ public class RoomData : MonoBehaviour {
             int maxX = roomBox[0] + roomBox[2] - 1;
             int minY = roomBox[1] + 2;
             int maxY = roomBox[1] + roomBox[3] - 1;
+            int mandatoryX = (roomBox[0]+((maxX - minX) / 2));
+            int mandatoryY = (roomBox[1]+((maxY - minY)) / 2);
+            print("Mandatory enemy x: " + mandatoryX + " y: " + mandatoryY + " minX: " + minX + ",maxX: " + maxX + ", minY: " + minY + ", maxY: " + maxY);
+
 
             for (int x = minX; x < maxX; x++)
             {
                 for (int y = minY; y < maxY; y++)
                 {
+                    //print("x: " + x + " y: " + y);
+                    //mandatory enemy in centre of each room
+                    if (x == mandatoryX && y == mandatoryY)
+                    {
+                        //Debug.Log("mandatory spawn!");
+                        //Debug.Log("Love me!");
+                        if (grid[x, y, 1] != null)
+                            Destroy(grid[x, y, 1]);
+
+                        GameObject temp = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                        temp.transform.parent = transform;
+                        temp.transform.localPosition = new Vector3(x, y * -1);
+                        addEnemy(temp);
+                        continue;
+                    }
+
                     //avoid doorways
                     if ((x == minX && grid[x - 1, y, 0].tag == "Floor") ||
                         (x == maxX && grid[x + 1, y, 0].tag == "Floor") ||
                         (y == minY && grid[x, y - 1, 0].tag == "Floor") ||
                         (y == maxY && grid[x, y + 1, 0].tag == "Floor"))
                         continue;
+
 
                     //if it's not a doorway, try to place a line of enemies
                     if (grid[x, y, 0] != null && grid[x, y, 0].tag == "Floor" && grid[x, y, 1] == null)
@@ -281,8 +294,9 @@ public class RoomData : MonoBehaviour {
 
         }
 
-        print("EnemyCount: " + enemyCount);
+        print(gameObject.name+" EnemyCount: " + enemyCount+ " NoSubrooms: "+roomBoxes.Count);
         decrement = .4f / (enemyCount);
+        print("decrement: " + decrement);
         
         
     }
@@ -312,7 +326,7 @@ public class RoomData : MonoBehaviour {
     private void initFogOfWar()
     {
         fogOfWars = new GameObject[roomBoxes.Count];
-        for (int i = 0; i < playerVisibleRooms.Length; i++)
+        for (int i = 0; i < roomBoxes.Count; i++)
         {
             int spawnX = roomBoxes[i][0];
             int spawnY = roomBoxes[i][1];
