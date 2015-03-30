@@ -70,7 +70,7 @@ public class Shop : MonoBehaviour {
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
+        //PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
         if (PlayerPrefs.HasKey("playerName"))
         {
             initStats();
