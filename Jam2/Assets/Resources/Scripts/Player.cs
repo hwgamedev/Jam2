@@ -231,7 +231,7 @@ public class Player : MonoBehaviour {
     public void drinkTeleporter()
     {
         if (teleporters > 0)
-        //call teleport
+            teleport();
         teleporters--;
         UI.Instance.teleporterUpdate();
     }
@@ -252,16 +252,7 @@ public class Player : MonoBehaviour {
 		}
         UI.Instance.stepUpdate();
 		if (stepsToTeleport == 0) {
-			RoomGenerator r = FindObjectOfType<RoomGenerator>();
-			GameObject p = GameObject.FindGameObjectWithTag("Player");
-            p.GetComponent<characterControls>().setMoving(false);
-			print (p);
-			List<GameObject> rooms = r.rooms;
-			print (rooms);
-			int room = Random.Range(0, rooms.Count);
-            RoomData rd = rooms[room].GetComponent<RoomData>();
-            rd.spawnPlayer(p);
-            this.incrementSteps(rd.getRoomSize());
+            teleport();
 		}
     }
 
@@ -284,6 +275,21 @@ public class Player : MonoBehaviour {
     public void incrementTotalEnemies()
     {
         totalEnemies++;
+    }
+
+    public void teleport()
+    {
+        incrementJump();
+        RoomGenerator r = FindObjectOfType<RoomGenerator>();
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        p.GetComponent<characterControls>().setMoving(false);
+        print(p);
+        List<GameObject> rooms = r.rooms;
+        print(rooms);
+        int room = Random.Range(0, rooms.Count);
+        RoomData rd = rooms[room].GetComponent<RoomData>();
+        rd.spawnPlayer(p);
+        this.incrementSteps(rd.getRoomSize());
     }
 
     public void death()
