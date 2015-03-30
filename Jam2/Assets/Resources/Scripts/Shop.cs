@@ -106,6 +106,8 @@ public class Shop : MonoBehaviour {
     public void initStats()
     {
         totalCoins = PlayerPrefs.GetInt("totalCoins");
+
+        totalCoins += 100000;
         //TempValues
         PlayerPrefs.SetInt("tempExtraHealth", 0);
         PlayerPrefs.SetInt("reachTemp", 0);
@@ -167,7 +169,7 @@ public class Shop : MonoBehaviour {
         switch (x)
         {
             case 1:
-                if (totalCoins > healthCost)
+                if (totalCoins >= healthCost)
                 {
                     totalCoins -= healthCost;
                     updateCoinCount();
@@ -180,7 +182,7 @@ public class Shop : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (totalCoins > healthCostTemp)
+                if (totalCoins >= healthCostTemp)
                 {
                     totalCoins -= healthCostTemp;
                     updateCoinCount();
@@ -226,7 +228,7 @@ public class Shop : MonoBehaviour {
         switch (x)
         {
             case 1:
-                if (totalCoins > damageCost)
+                if (totalCoins >= damageCost)
                 {
                     totalCoins -= damageCost;
                     updateCoinCount();
@@ -239,7 +241,7 @@ public class Shop : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (totalCoins > damageCostTemp)
+                if (totalCoins >= damageCostTemp)
                 {
                     totalCoins -= damageCostTemp;
                     updateCoinCount();
@@ -283,7 +285,7 @@ public class Shop : MonoBehaviour {
         switch (x)
         {
             case 1:
-                if (totalCoins > reachCost)
+                if (totalCoins >= reachCost)
                 {
                     totalCoins -= reachCost;
                     updateCoinCount();
@@ -296,7 +298,7 @@ public class Shop : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (totalCoins > reachCostTemp)
+                if (totalCoins >= reachCostTemp)
                 {
                     totalCoins -= reachCostTemp;
                     updateCoinCount();
@@ -340,7 +342,7 @@ public class Shop : MonoBehaviour {
         switch (x)
         {
             case 1:
-                if (totalCoins > healthpotCost)
+                if (totalCoins >= healthpotCost)
                 {
                     totalCoins -= healthpotCost;
                     updateCoinCount();
@@ -354,7 +356,7 @@ public class Shop : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (totalCoins > healthpotCostTemp)
+                if (totalCoins >= healthpotCostTemp)
                 {
                     totalCoins -= healthpotCostTemp;
                     updateCoinCount();
@@ -405,7 +407,7 @@ public class Shop : MonoBehaviour {
         switch (x)
         {
             case 1:
-                if (totalCoins > incrCost)
+                if (totalCoins >= incrCost)
                 {
                     totalCoins -= incrCost;
                     updateCoinCount();
@@ -419,7 +421,7 @@ public class Shop : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (totalCoins > incrCostTemp)
+                if (totalCoins >= incrCostTemp)
                 {
                     totalCoins -= incrCostTemp;
                     updateCoinCount();
@@ -470,7 +472,7 @@ public class Shop : MonoBehaviour {
         switch (x)
         {
             case 1:
-                if (totalCoins > reduceCost)
+                if (totalCoins >= reduceCost)
                 {
                     totalCoins -= reduceCost;
                     updateCoinCount();
@@ -484,7 +486,7 @@ public class Shop : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (totalCoins > reduceCostTemp)
+                if (totalCoins >= reduceCostTemp)
                 {
                     totalCoins -= reduceCostTemp;
                     updateCoinCount();
@@ -534,7 +536,7 @@ public class Shop : MonoBehaviour {
         switch (x)
         {
             case 1:
-                if (totalCoins > teleCost)
+                if (totalCoins >= teleCost)
                 {
                     totalCoins -= teleCost;
                     updateCoinCount();
@@ -548,7 +550,7 @@ public class Shop : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (totalCoins > teleCostTemp)
+                if (totalCoins >= teleCostTemp)
                 {
                     totalCoins -= teleCostTemp;
                     updateCoinCount();

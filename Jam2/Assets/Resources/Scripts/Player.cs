@@ -209,35 +209,43 @@ public class Player : MonoBehaviour {
     }
 
     public void drinkHealthPotion()
-    {   
-        if(healthPotions > 0)
-        healthPotions--;
-        setHealth(2);
-        UI.Instance.healthPotionUpdate();
+    {
+        if (healthPotions > 0)
+        {
+            healthPotions--;
+            setHealth(2);
+            UI.Instance.healthPotionUpdate();
+        }
     }
 
     public void drinkIncreaser()
     {
         if (stepIncreasers > 0)
-        stepIncreasers--;
-        incrementSteps(5);
-        UI.Instance.stepIncreaserUpdate();
+        {
+            stepIncreasers--;
+            incrementSteps(5);
+            UI.Instance.stepIncreaserUpdate();
+        }
     }
 
     public void drinkReducer()
     {
         if (stepReducers > 0)
-        stepReducers--;
-        incrementSteps(-5);
-        UI.Instance.stepDecreaserUpdate();
+        {
+            stepReducers--;
+            incrementSteps(-5);
+            UI.Instance.stepDecreaserUpdate();
+        }
     }
 
     public void drinkTeleporter()
     {
         if (teleporters > 0)
+        {
             setSteps(0);
-        teleporters--;
-        UI.Instance.teleporterUpdate();
+            teleporters--;
+            UI.Instance.teleporterUpdate();
+        }
     }
 
     public void incrementEnemiesKilled()
@@ -264,6 +272,7 @@ public class Player : MonoBehaviour {
     {
         RoomGenerator r = FindObjectOfType<RoomGenerator>();
         GameObject p = GameObject.FindGameObjectWithTag("Player");
+        p.GetComponent<characterControls>().teleport();
         p.GetComponent<characterControls>().setMoving(false);
         RoomData rd = r.getNextRoom().GetComponent<RoomData>();
         rd.spawnPlayer(p);
