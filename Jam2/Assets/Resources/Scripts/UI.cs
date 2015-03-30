@@ -52,8 +52,9 @@ public class UI : MonoBehaviour {
     public void healthUpdate()
     {
         int health = Player.Instance.getHealth();
-        float percent = health / maxHealth;
+        float percent = (float)health / maxHealth;
         healthBarSlider.normalizedValue = percent;
+        print(percent);
     }
 
     public void coinUpdate()

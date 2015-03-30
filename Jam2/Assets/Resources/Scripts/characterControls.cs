@@ -30,22 +30,23 @@ public class characterControls : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator>();
 		//synchronise with player data
-		resetSteps ();
+		Player.Instance.incrementSteps (50);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Player.Instance.getSteps () == 0) {
-			return;
-		}
-		if (Player.Instance.getHealth() <= 0) {
-			doKill();
+        //if (Player.Instance.getHealth() <= 0) {
+        //    doKill();
+        //    return;
+        //}
+		if (Player.Instance.getSteps() == 0) {
+			doJump();
 			return;
 		} else {
 			if (!moving && !attacking) {
         		if (Input.GetKey(KeyCode.W))
 	            {
-	                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z), transform.position + new Vector3(0, 1, 0)))
+	                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), transform.position + new Vector3(0, 1, 0)))
 	                    return;
 	                anim.SetTrigger("iddleN");
 					startTime = Time.time;
@@ -58,7 +59,7 @@ public class characterControls : MonoBehaviour {
 				}
 	            if (Input.GetKey(KeyCode.A))
 	            {
-	                if (checkForCollisions(new Vector3(transform.position.x-0.75f, transform.position.y, transform.position.z),transform.position - new Vector3(1, 0, 0)))
+	                if (checkForCollisions(new Vector3(transform.position.x-0.5f, transform.position.y, transform.position.z),transform.position - new Vector3(1, 0, 0)))
 	                    return;
 	                anim.SetTrigger("iddleW");
 					startTime = Time.time;
@@ -71,7 +72,7 @@ public class characterControls : MonoBehaviour {
 				}
 	            if (Input.GetKey(KeyCode.S))
 	            {
-	                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.75f, transform.position.z),transform.position - new Vector3(0, 1, 0)))
+	                if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.5f, transform.position.z),transform.position - new Vector3(0, 1, 0)))
 	                    return;
 	                anim.SetTrigger("iddleS");
 					startTime = Time.time;
@@ -84,7 +85,7 @@ public class characterControls : MonoBehaviour {
 				}
 	            if (Input.GetKey(KeyCode.D))
 	            {
-	                if (checkForCollisions(new Vector3(transform.position.x+0.75f, transform.position.y, transform.position.z),transform.position + new Vector3(1, 0, 0)))
+	                if (checkForCollisions(new Vector3(transform.position.x+0.5f, transform.position.y, transform.position.z),transform.position + new Vector3(1, 0, 0)))
 	                    return;
 					anim.SetTrigger("iddleE");
 					startTime = Time.time;
@@ -135,10 +136,10 @@ public class characterControls : MonoBehaviour {
 					if (!attacking) {
 
 						float length = Mathf.Sqrt (Mathf.Pow (diffX,2) + Mathf.Pow (diffY,2));
-						print (longRange/(6-Player.Instance.getReach()));
-						print (length);
+                        //print (longRange/(6-Player.Instance.getReach()));
+                        //print (length);
 						if(length <= longRange/(6-Player.Instance.getReach()) && length > shortRange) {
-							print ("yo");
+                            //print ("yo");
 							throwDagger(transform.position, mousePoint);
 							doStep ();
 						}
@@ -158,7 +159,7 @@ public class characterControls : MonoBehaviour {
 
 	private bool checkForCollisions(Vector3 startPoint, Vector3 endPoint)
     {
-        //Debug.DrawLine(startPoint, endPoint);
+        Debug.DrawLine(startPoint, endPoint);
         int layer = LayerMask.NameToLayer("RaycastLayer");
         //print("Layer : "+layer);
         RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);
@@ -170,7 +171,7 @@ public class characterControls : MonoBehaviour {
 			if (hit.collider.GetComponent<IncreaserPickup>() != null) { hit.collider.GetComponent<IncreaserPickup>().collect(); }
 			if (hit.collider.GetComponent<DecreaserPickup>() != null) { hit.collider.GetComponent<DecreaserPickup>().collect(); }
             if (hit.collider.GetComponent<OpenTreasure>() != null) { hit.collider.GetComponent<OpenTreasure>().spawnPrize(); }
-            print("Colliding with: "+hit.collider.gameObject.name);
+            //print("Colliding with: "+hit.collider.gameObject.name);
             return true;
         }
 
@@ -201,9 +202,9 @@ public class characterControls : MonoBehaviour {
 			hit = Physics2D.Linecast(transform.position, transform.position + new Vector3(shortRange,0f,0f));
 			break;
 		}
-		if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Enemy")) {
-			hit.collider.gameObject.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage()*2);
-		}
+		//if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Enemy")) {
+			//hit.collider.gameObject.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage()*2);
+		//}
 		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleN") ||
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleS") ||
 			anim.GetCurrentAnimatorStateInfo (0).IsName ("iddleE") ||
@@ -217,18 +218,22 @@ public class characterControls : MonoBehaviour {
 		daggerInstance.GetComponent<Dagger> ().throwDagger (start, end);
 	}
 
+	private void doJump(){
+        //print ("teleport !!");
+	}
+
 	private void doKill(){
 		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("die")){
-			anim.SetTrigger ("kill");
+			anim.SetTrigger("kill");
 		}
 		Player.Instance.death ();
 	}
 
-	public void takeDammages(int dammages) {
+	/*public void takeDammages(int dammages) {
 		int health = Player.Instance.getHealth ();
 		health -= dammages;
 		Player.Instance.setHealth (health);
-	}
+	}*/
 
 	public void resetSteps(){
 		Player.Instance.incrementSteps(10);
@@ -242,4 +247,9 @@ public class characterControls : MonoBehaviour {
     {
         moving = mov;
     }
+    //public void takeDammages(int dammages) {
+    //    int health = Player.Instance.getHealth ();
+    //    health -= dammages;
+    //    Player.Instance.setHealth (health);
+    //}
 }
