@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class UI : MonoBehaviour {
 
+    public Text room;
     public Text nameText;
     public Text goldText;
     public Text stepsText;
@@ -55,6 +56,11 @@ public class UI : MonoBehaviour {
         float percent = (float)health / maxHealth;
         healthBarSlider.normalizedValue = percent;
         print(percent);
+    }
+
+    public void updateRoom()
+    {
+        room.text = "Room " + Player.Instance.getCurrentRoom().ToString() + ": " + Player.Instance.getCurrentRoomEnemies()ToString() + " Enemies Remaining";
     }
 
     public void coinUpdate()

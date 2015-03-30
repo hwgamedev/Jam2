@@ -24,6 +24,8 @@ public class Player : MonoBehaviour {
     private int stepReducersStart;
     private int teleportersStart;
     private int jump;
+    private int currentRoom;
+    private int currentRoomEnemies;
 
     public static Player Instance;
     void Awake()
@@ -57,6 +59,35 @@ public class Player : MonoBehaviour {
         damage = PlayerPrefs.GetInt("attackDamage") + PlayerPrefs.GetInt("damageTemp");
         PlayerPrefs.SetInt("damageTemp", 0);
         UI.Instance.init();
+    }
+
+    public int getCurrentRoom()
+    {
+        return currentRoom;
+    }
+
+    public int getCurrentRoomEnemies()
+    {
+        return currentRoomEnemies;
+    }
+
+    public void setCurrentRoom(int room)
+    {
+        currentRoom = room;
+        UI.Instance.updateRoom();
+
+    }
+
+    public void setRoomEnemies(int enemies)
+    {
+        currentRoomEnemies = enemies;
+        UI.Instance.updateRoom();
+    }
+
+    public void killRoomEnemy()
+    {
+        currentRoomEnemies--;
+        UI.Instance.updateRoom();
     }
 
     public int getReach()
