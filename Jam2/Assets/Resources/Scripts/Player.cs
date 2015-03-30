@@ -269,7 +269,7 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.GetInt("totalDeaths") + 1));
         //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items);
         //PlayerPrefs.SetInt("totalRooms", (PlayerPrefs.GetInt("totalRooms") + rooms);
-        PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins);
+        PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins));
         PlayerPrefs.SetInt("thisCoins", coins);
         PlayerPrefs.SetInt("totalCoins", (PlayerPrefs.GetInt("totalCoins") + coins));
         PlayerPrefs.Save();
