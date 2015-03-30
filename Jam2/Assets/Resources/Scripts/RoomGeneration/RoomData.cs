@@ -29,7 +29,7 @@ public class RoomData : MonoBehaviour {
     //variable obstacle/reward densities
     public float sparseObjects = Random.Range(0.05f, 0.10f);
     public float clumps = Random.Range(0.05f, 0.08f);
-    public float treasure = 0.000001f;
+    public float treasure = 0.01f;
     public float coins = Random.Range(0.02f, 0.10f);
 
     //enemy spawn formation chances
@@ -332,8 +332,11 @@ public class RoomData : MonoBehaviour {
 
     public void spawnPlayer(GameObject player)
     {
+		print (player.transform.position);
         player.transform.parent = transform;
+		print (player.transform.position);
         player.transform.localPosition = new Vector3(spawnPoint[0], spawnPoint[1]*-1, 0);
+		print (player.transform.position);
 
         for (int i = 0; i < roomBoxes.Count; i++)
         {

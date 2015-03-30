@@ -31,7 +31,7 @@ GameObject:
   - 212: {fileID: 21262630}
   - 95: {fileID: 9538128}
   - 61: {fileID: 6101082}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.4039555, y: 339.201843, z: 0}
+  m_LocalPosition: {x: 14, y: -43, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 418052}
