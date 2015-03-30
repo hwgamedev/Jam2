@@ -25,7 +25,8 @@ public class StepManager : MonoBehaviour
 	public void newStep(){
 		Player.Instance.decrementSteps();
 		foreach(EnemyBase enemy in EnemiesArray){
-			enemy.incrementSteps();
+            if(enemy.enabled)
+			    enemy.incrementSteps();
 		}
 	}
 }

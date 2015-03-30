@@ -52,9 +52,9 @@ public class characterControls : MonoBehaviour {
 					startPosition = transform.position;
 					endPosition = startPosition;
 					endPosition += new Vector3 (0, 1, 0);
-					journeyLength = Vector3.Distance (startPosition, endPosition);
+                    journeyLength = Vector3.Distance(startPosition, endPosition);
+                    moving = true;
 					doStep();
-					moving = true;
 				}
 	            if (Input.GetKey(KeyCode.A))
 	            {
@@ -65,9 +65,9 @@ public class characterControls : MonoBehaviour {
 					startPosition = transform.position;
 					endPosition = startPosition;
 					endPosition -= new Vector3 (1, 0, 0);
-					journeyLength = Vector3.Distance (startPosition, endPosition);
+                    journeyLength = Vector3.Distance(startPosition, endPosition);
+                    moving = true;
 					doStep();
-					moving = true;
 				}
 	            if (Input.GetKey(KeyCode.S))
 	            {
@@ -78,9 +78,9 @@ public class characterControls : MonoBehaviour {
 					startPosition = transform.position;
 					endPosition = startPosition;
 					endPosition -= new Vector3 (0, 1, 0);
-					journeyLength = Vector3.Distance (startPosition, endPosition);
+                    journeyLength = Vector3.Distance(startPosition, endPosition);
+                    moving = true;
 					doStep();
-					moving = true;
 				}
 	            if (Input.GetKey(KeyCode.D))
 	            {
@@ -91,9 +91,9 @@ public class characterControls : MonoBehaviour {
 					startPosition = transform.position;
 					endPosition = startPosition;
 					endPosition += new Vector3 (1, 0, 0);
-					journeyLength = Vector3.Distance (startPosition, endPosition);
+                    journeyLength = Vector3.Distance(startPosition, endPosition);
+                    moving = true;
 					doStep();
-					moving = true;
 				}
 				if (Input.GetMouseButtonDown (0)) {
 					Vector3 mousePoint = Camera.main.ScreenPointToRay (Input.mousePosition).origin;
@@ -237,4 +237,9 @@ public class characterControls : MonoBehaviour {
 	public void destroy(){
 		Destroy (gameObject);
 	}
+
+    public void setMoving(bool mov)
+    {
+        moving = mov;
+    }
 }

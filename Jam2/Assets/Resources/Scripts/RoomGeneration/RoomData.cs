@@ -349,4 +349,17 @@ public class RoomData : MonoBehaviour {
             enemyArray[i].active = true;
         }
     }
+
+    public void removePlayer()
+    {
+        for (int i = 0; i < enemyArray.Count; i++)
+        {
+            enemyArray[i].active = false;
+        }
+    }
+
+    public int getRoomSize()
+    {
+        return roomSize;
+    }
 }

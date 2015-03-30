@@ -170,19 +170,19 @@ public class EnemyBase : MonoBehaviour {
 	{	
 		int layer = LayerMask.GetMask("RaycastLayer"); 
 		possDirections = new Dictionary<string, bool>();
-		Debug.DrawRay(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, Color.cyan ); 
+		//Debug.DrawRay(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, Color.cyan ); 
 		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, 1,layer);
-		Debug.Log (hit.collider);
-		Debug.Log (hit);
+		//Debug.Log (hit.collider);
+		//Debug.Log (hit);
 		possDirections.Add("up", (hit.collider == null));
 		hit = Physics2D.Raycast(transform.position + new Vector3(0, -0.75f, 0), -Vector2.up, 1,layer);
-		Debug.Log (hit.collider);
+		//Debug.Log (hit.collider);
 		possDirections.Add("down", (hit.collider == null));
 		hit = Physics2D.Raycast(transform.position + new Vector3(-0.75f, 0, 0), -Vector2.right, 1,layer);
-		Debug.Log (hit.collider);
+		//Debug.Log (hit.collider);
 		possDirections.Add("left", (hit.collider == null));
 		hit = Physics2D.Raycast(transform.position + new Vector3(0.75f, 0, 0), Vector2.right, 1,layer);
-		Debug.Log (hit.collider);
+		//Debug.Log (hit.collider);
 		possDirections.Add("right", (hit.collider == null));
 	}
 

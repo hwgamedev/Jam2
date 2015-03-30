@@ -243,12 +243,15 @@ public class Player : MonoBehaviour {
         UI.Instance.stepUpdate();
 		if (stepsToTeleport == 0) {
 			RoomGenerator r = FindObjectOfType<RoomGenerator>();
-			GameObject p = FindObjectOfType<characterControls>().gameObject;
+			GameObject p = GameObject.FindGameObjectWithTag("Player");
+            p.GetComponent<characterControls>().setMoving(false);
 			print (p);
 			List<GameObject> rooms = r.rooms;
 			print (rooms);
 			int room = Random.Range(0, rooms.Count);
-			rooms[room].GetComponent<RoomData>().spawnPlayer(p);
+            RoomData rd = rooms[room].GetComponent<RoomData>();
+            rd.spawnPlayer(p);
+            this.incrementSteps(rd.getRoomSize());
 		}
     }
 
