@@ -29,7 +29,7 @@ public class RoomData : MonoBehaviour {
     //variable obstacle/reward densities
     public float sparseObjects = Random.Range(0.05f, 0.10f);
     public float clumps = Random.Range(0.05f, 0.08f);
-    public float treasure = 0.000001f;
+    public float treasure = 0.01f;
     public float coins = Random.Range(0.02f, 0.10f);
 
     //enemy spawn formation chances
