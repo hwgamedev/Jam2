@@ -69,6 +69,7 @@ MonoBehaviour:
   stepsTaken: 0
   wait: 0
   waitInit: 0
+  drop: {fileID: 117424, guid: 2cd409bed79ed26469ce9224d80b249c, type: 2}
   range: 0
 --- !u!212 &21288900
 SpriteRenderer:

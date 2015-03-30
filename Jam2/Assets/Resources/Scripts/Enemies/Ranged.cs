@@ -10,6 +10,7 @@ public class Ranged : EnemyBase {
 	override public void Start () {
 		base.Start();
 		range = 5;
+		dmg = dmg/3;
 		render = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
 	}
 
@@ -20,8 +21,6 @@ public class Ranged : EnemyBase {
 		                                    Mathf.Pow(transform.position.y - player.transform.position.y, 2));
 		if(/*awake && */!wait && doSteps > 0 && range > (distanceToPlayer))
 		{
-			waitInit = Time.time;
-			wait = true;
 			shoot();
 			doSteps--;
 		}else
@@ -30,5 +29,6 @@ public class Ranged : EnemyBase {
 
 	void shoot(){
 		render.material.SetColor("_Color", Color.blue);
+		base.attack();
 	}
 }

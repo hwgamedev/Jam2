@@ -16,6 +16,7 @@ public class Collected : MonoBehaviour {
 	void Update () {
 	
         if(activate) {
+			Destroy(GetComponent("BoxCollider2D"));
             timer -= Time.deltaTime;
             if (timer < 0)
                 Destroy(gameObject);

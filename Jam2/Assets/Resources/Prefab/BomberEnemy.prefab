@@ -85,6 +85,7 @@ MonoBehaviour:
   stepsTaken: 0
   wait: 0
   waitInit: 0
+  drop: {fileID: 146846, guid: 40b734684b1bdf545a3a9d0a86405890, type: 2}
   stepsToExplode: 0
   preparingExplosion: 0
   dmgEnemies: []

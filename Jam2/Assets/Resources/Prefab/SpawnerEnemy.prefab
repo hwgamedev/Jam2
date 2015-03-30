@@ -69,6 +69,7 @@ MonoBehaviour:
   stepsTaken: 0
   wait: 0
   waitInit: 0
+  drop: {fileID: 129664, guid: b708f2f7c118d4d4ca3350bf7bf44e6d, type: 2}
   spawnStepCD: 3
   lastSpawnStep: 0
   spawnObject: {fileID: 166490, guid: ca28c3d4987d40741b868f8339518399, type: 2}

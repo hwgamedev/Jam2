@@ -467,6 +467,52 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1955119204
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10.194459
+      objectReference: {fileID: 0}
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.01850724
+      objectReference: {fileID: 0}
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 407536, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 150748, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+      propertyPath: m_Name
+      value: SpawnerEnemy 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 77fcf16a76d13314ea94015fc1d9f340, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &2113273402
 Prefab:
   m_ObjectHideFlags: 0

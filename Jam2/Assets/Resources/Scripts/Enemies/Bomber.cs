@@ -17,7 +17,7 @@ public class Bomber : EnemyBase
 	{
 		base.Start();
 		stepsToExplode = 2;
-		dmg = 20;
+		dmg = dmg;
 		dmgEnemies = new List<EnemyBase>();
 		preparingExplosion = false;
 		exploding = false;
@@ -40,10 +40,11 @@ public class Bomber : EnemyBase
 				startWait ();
 				Explode ();
 			}else{
+				checkWait();
 				if (Time.time - waitInit > 0.6)
 					render.material.SetColor("_Color", Color.red);
 				else{
-					if (Time.time - waitInit > 0.4)
+					if (Time.time - waitInit > 0.2)
 						render.material.SetColor("_Color", Color.white);
 				}
 			}
@@ -54,9 +55,11 @@ public class Bomber : EnemyBase
 	{
 	}
 	override public void attack(){
-		startWait ();
-		render.material.SetColor("_Color", Color.red);
-		preparingExplosion = true;
+		//startWait ();
+		//render.material.SetColor("_Color", Color.red);
+		//preparingExplosion = true;
+		Player.Instance.setHealth(-dmg);
+		die ();
 	}
 
 	void Explode(){

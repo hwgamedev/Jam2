@@ -33,11 +33,6 @@ public class EnemyBase : MonoBehaviour {
 	public bool wait;
 	public float waitInit;
 	Dictionary <string,bool> possDirections;
-	GameObject[] drops;
-	public GameObject goldPickup;
-	public GameObject healthPickup;
-	public GameObject increaserPickup;
-	public GameObject decreaserPickup;
 
     //damage timer
     private float blinkTimer = 0;
@@ -45,6 +40,9 @@ public class EnemyBase : MonoBehaviour {
 
     //need to know which room the enemy's at
     private string room;
+
+	//
+	public GameObject drop;
 
 	// Use this for initialization
 	public virtual void Start () {
@@ -283,37 +281,16 @@ public class EnemyBase : MonoBehaviour {
 
 	public void die()
 	{
+		dropItem();
         FindObjectOfType<StepManager>().unsubscribe(this);
         GameObject.Find(room).GetComponent<RoomData>().setEnemyAsDead(this.gameObject);
-		Debug.Log ("YUDIE");
 		Player.Instance.incrementEnemiesKilled();
-		//dropItem();
 		Destroy(gameObject);
 	}
 
 	public void dropItem(){
-		int index = -1;
-		float tmp = Random.Range(0, 7);
-		GameObject newdrop;
-		if(tmp <= 1){
-			newdrop = Instantiate(goldPickup);
-			newdrop.transform.position = transform.position;
-		}else{ 
-			if (tmp <= 2){
-				newdrop = Instantiate(healthPickup);
-				newdrop.transform.position = transform.position;
-			}else{
-				if (tmp <= 3){
-					newdrop = Instantiate(decreaserPickup);
-					newdrop.transform.position = transform.position;
-				}
-				else {
-					if (tmp <= 4){
-						newdrop = Instantiate(increaserPickup);
-						newdrop.transform.position = transform.position;}
-				}
-			}
-		}
+		GameObject item = Instantiate(drop);
+		item.transform.position = transform.position;
 	}
 
 	public void startWait(){
