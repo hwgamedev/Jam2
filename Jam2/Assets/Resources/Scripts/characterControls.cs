@@ -226,7 +226,7 @@ public class characterControls : MonoBehaviour {
 		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("die")){
 			anim.SetTrigger("kill");
 		}
-		Player.Instance.death ();
+		//Player.Instance.death ();
 	}
 
 	/*public void takeDammages(int dammages) {
