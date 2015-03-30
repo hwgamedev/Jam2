@@ -20,6 +20,7 @@ public class GoldPickup : MonoBehaviour {
         print("Gold collected!");
         if (col.collider.tag == "Player" && !collected)
         {
+            collected = true;
             collect(value);
         }
     }
@@ -29,7 +30,6 @@ public class GoldPickup : MonoBehaviour {
         print("Being collected!");
         if (finalValue == -1)
             finalValue = value;
-        collected = true;
         GetComponent<Collected>().playPickup();
         Player.Instance.setCoins(finalValue);
     }

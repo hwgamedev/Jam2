@@ -59,7 +59,7 @@ public class UI : MonoBehaviour {
 
     public void coinUpdate()
     {
-        int coins = Player.Instance.getCoins();
+        int coins = (Player.Instance.getCoins() + Player.Instance.getThisCoins());
         if (coins > 1000) goldText.text = coins.ToString();
         else goldText.text = "0" + coins.ToString();
     }

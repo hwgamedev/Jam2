@@ -8,7 +8,9 @@ public class Player : MonoBehaviour {
     private string playerName;
     private int maxHealth;
     private int health;
+    private int thisCoins;
     private int coins;
+
     private int damage;
     private int reach;
     private int stepsToTeleport;
@@ -28,6 +30,8 @@ public class Player : MonoBehaviour {
     {
         if (Instance == null) Instance = this;
     }
+
+
 
     void Start()
     {
@@ -100,6 +104,11 @@ public class Player : MonoBehaviour {
         return coins;
     }
 
+    public int getThisCoins()
+    {
+        return thisCoins;
+    }
+
     public int getHealth()
     {
         return health;
@@ -143,7 +152,7 @@ public class Player : MonoBehaviour {
 
     public void setCoins(int _coins)
     {
-        coins += _coins;
+        thisCoins += _coins;
         UI.Instance.coinUpdate();
     }
 
@@ -285,9 +294,9 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.GetInt("totalDeaths") + 1));
         //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items);
         //PlayerPrefs.SetInt("totalRooms", (PlayerPrefs.GetInt("totalRooms") + rooms);
-        PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollecedCoins") + coins));
-        PlayerPrefs.SetInt("thisCoins", coins);
-        PlayerPrefs.SetInt("totalCoins", (PlayerPrefs.GetInt("totalCoins") + coins));
+        PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollectedCoins") + thisCoins));
+        PlayerPrefs.SetInt("thisCoins", thisCoins);
+        PlayerPrefs.SetInt("totalCoins", coins + thisCoins);
         PlayerPrefs.Save();
         Application.LoadLevel("GameOver");
     }
