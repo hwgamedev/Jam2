@@ -70,7 +70,7 @@ public class Shop : MonoBehaviour {
 
     void Start()
     {
-        //PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
+        PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
         if (PlayerPrefs.HasKey("playerName"))
         {
             initStats();
@@ -106,8 +106,6 @@ public class Shop : MonoBehaviour {
     public void initStats()
     {
         totalCoins = PlayerPrefs.GetInt("totalCoins");
-
-        totalCoins += 100000;
         //TempValues
         PlayerPrefs.SetInt("tempExtraHealth", 0);
         PlayerPrefs.SetInt("reachTemp", 0);
