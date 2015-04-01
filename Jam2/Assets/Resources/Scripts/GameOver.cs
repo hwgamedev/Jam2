@@ -8,7 +8,7 @@ public class GameOver : MonoBehaviour {
 
     void Start()
     {
-        gameOver.text = "You earned " + PlayerPrefs.GetInt("thisCoins").ToString() + " coins this attempt, try buying some upgrades  in the shop.";
+        gameOver.text = "You earned " + PlayerPrefs.GetInt("thisCoins").ToString() + " coins this attempt, try buying some upgrades in the shop.";
         PlayerPrefs.SetInt("thisCoins", 0);
     }
     

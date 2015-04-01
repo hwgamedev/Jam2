@@ -17,7 +17,7 @@ public class RoomGenerator : MonoBehaviour {
 
     
     //tiles
-    public GameObject tileTemplate;
+    public List<GameObject> tileTemplate = new List<GameObject>();
     public GameObject cornerTileTop;
     public GameObject cornerTileBottom;
     public GameObject topTile;
@@ -285,7 +285,7 @@ public class RoomGenerator : MonoBehaviour {
         Destroy(grid[xPos, yPos - 2, 0]);
         Destroy(grid[xPos, yPos + 1, 0]);
         //and create a passage instead
-        GameObject temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        GameObject temp = Instantiate(tileTemplate[Random.Range(0,tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos, (yPos) * -1, 0);
@@ -320,7 +320,7 @@ public class RoomGenerator : MonoBehaviour {
         grid[xPos, yPos-1, 1] = temp;
 
         //create the passage for the other subroom as well
-        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp = Instantiate(tileTemplate[Random.Range(0, tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent it to the room object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos+1, (yPos) * -1, 0);
@@ -356,13 +356,13 @@ public class RoomGenerator : MonoBehaviour {
         Destroy(grid[xPos -2, yPos, 0]);
         Destroy(grid[xPos+1, yPos, 0]);
         //and create a passage instead
-        GameObject temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        GameObject temp = Instantiate(tileTemplate[Random.Range(0, tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos, (yPos) * -1, 0);
         //add to grid
         grid[xPos, yPos, 0] = temp;
-        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp = Instantiate(tileTemplate[Random.Range(0, tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos-1, (yPos) * -1, 0);
@@ -383,13 +383,13 @@ public class RoomGenerator : MonoBehaviour {
         //add to grid
         grid[xPos+1, yPos, 0] = temp;
 
-        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp = Instantiate(tileTemplate[Random.Range(0, tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos, (yPos+1) * -1, 0);
         //add to grid
         grid[xPos, yPos+1, 0] = temp;
-        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp = Instantiate(tileTemplate[Random.Range(0, tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos-1, (yPos + 1) * -1, 0);
@@ -410,13 +410,13 @@ public class RoomGenerator : MonoBehaviour {
         //add to grid
         grid[xPos+1, yPos +1, 0] = temp;
 
-        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp = Instantiate(tileTemplate[Random.Range(0, tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos, (yPos + 2) * -1, 0);
         //add to grid
         grid[xPos, yPos+2, 0] = temp;
-        temp = Instantiate(tileTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        temp = Instantiate(tileTemplate[Random.Range(0, tileTemplate.Count)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         //parent passage to parent object
         temp.transform.parent = roomObject;
         temp.transform.localPosition = new Vector3(xPos-1, (yPos + 2) * -1, 0);
@@ -455,7 +455,7 @@ public class RoomGenerator : MonoBehaviour {
             {
                 int xPos = x + offsetX;
                 int yPos = y + offsetY;
-                createTile(tileTemplate, xPos, yPos);
+                createTile(tileTemplate[Random.Range(0, tileTemplate.Count)], xPos, yPos);
             }
         }
     }
