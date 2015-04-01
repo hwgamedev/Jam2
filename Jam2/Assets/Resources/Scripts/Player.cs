@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
     private int items;
     private string currentRoom;
     private int currentRoomEnemies;
+    private int ammo;
 
     public static Player Instance;
     void Awake()
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour {
         maxHealth = PlayerPrefs.GetInt("maxHealth") + PlayerPrefs.GetInt("tempExtraHealth");
         PlayerPrefs.SetInt("tempExtraHealth", 0);
         health = maxHealth;
+        ammo = 5;
         coins = PlayerPrefs.GetInt("totalCoins");
         healthPotionsStart = PlayerPrefs.GetInt("healthPotionsStart") + PlayerPrefs.GetInt("healthPotionsStartTemp");
         PlayerPrefs.SetInt("healthPotionsStartTemp", 0);
@@ -63,6 +65,24 @@ public class Player : MonoBehaviour {
         UI.Instance.init();
     }
 
+
+    public int getAmmo()
+    {
+        return ammo;
+    }
+
+    public void pickUpAmmo()
+    {
+        ammo++;
+        UI.Instance.updateAmmo();
+    }
+
+    public void throwAmmo()
+    {
+        ammo--;
+        UI.Instance.updateAmmo();
+    }
+
     public string getCurrentRoom()
     {
         return currentRoom;
@@ -77,7 +97,6 @@ public class Player : MonoBehaviour {
     {
         currentRoom = room;
         UI.Instance.updateRoom();
-
     }
 
     public void setRoomEnemies(int enemies)

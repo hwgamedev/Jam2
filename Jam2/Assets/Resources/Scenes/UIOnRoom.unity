@@ -128,23 +128,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22492602, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22492602, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22465266, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22465266, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22465266, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}

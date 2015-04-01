@@ -57,7 +57,7 @@ MonoBehaviour:
   drop:
   - {fileID: 103310, guid: 85befd8c5b11a2c4dae77a84df832406, type: 2}
   - {fileID: 129870, guid: ec8ba40c58478604c94741b0c6d3a154, type: 2}
-  dropRate: 10
+  dropRate: 2
 --- !u!212 &21230316
 SpriteRenderer:
   m_ObjectHideFlags: 1

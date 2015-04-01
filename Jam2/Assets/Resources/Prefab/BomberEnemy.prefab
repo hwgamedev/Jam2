@@ -90,6 +90,7 @@ MonoBehaviour:
   - {fileID: 117424, guid: 2cd409bed79ed26469ce9224d80b249c, type: 2}
   - {fileID: 129870, guid: ec8ba40c58478604c94741b0c6d3a154, type: 2}
   - {fileID: 129664, guid: b708f2f7c118d4d4ca3350bf7bf44e6d, type: 2}
+  - {fileID: 177968, guid: e01425a9b9ef19c42878c9a4b5779641, type: 2}
   stepsToExplode: 0
   preparingExplosion: 0
   dmgEnemies: []

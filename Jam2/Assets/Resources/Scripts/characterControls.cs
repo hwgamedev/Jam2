@@ -109,14 +109,18 @@ public class characterControls : MonoBehaviour {
 			}
             else if (Input.GetMouseButtonDown(1))
             {
-                Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-                float diffX = mousePoint.x - transform.position.x;
-                float diffY = mousePoint.y - transform.position.y;
-                float length = Mathf.Sqrt(Mathf.Pow(diffX, 2) + Mathf.Pow(diffY, 2));
-                if (length <= longRange / (6 - Player.Instance.getReach()))
+                if (Player.Instance.getAmmo() > 0)
                 {
-                    throwDagger(transform.position, mousePoint);
-                    doStep();
+                    Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
+                    float diffX = mousePoint.x - transform.position.x;
+                    float diffY = mousePoint.y - transform.position.y;
+                    float length = Mathf.Sqrt(Mathf.Pow(diffX, 2) + Mathf.Pow(diffY, 2));
+                    if (length <= longRange / (6 - Player.Instance.getReach()))
+                    {
+                        throwDagger(transform.position, mousePoint);
+                        Player.Instance.throwAmmo();
+                        doStep();
+                    }
                 }
             }
             else if (Input.GetMouseButtonDown(0))
@@ -203,6 +207,7 @@ public class characterControls : MonoBehaviour {
 			if (hit.collider.GetComponent<IncreaserPickup>() != null) { hit.collider.GetComponent<IncreaserPickup>().collect(); }
 			if (hit.collider.GetComponent<DecreaserPickup>() != null) { hit.collider.GetComponent<DecreaserPickup>().collect(); }
             if (hit.collider.GetComponent<TeleporterPickup>() != null) { hit.collider.GetComponent<TeleporterPickup>().collect(); }
+            if (hit.collider.GetComponent<AmmoPickup>() != null) { hit.collider.GetComponent<AmmoPickup>().collect(); }
             if (hit.collider.GetComponent<OpenTreasure>() != null) { hit.collider.GetComponent<OpenTreasure>().spawnPrize(); }
             //print("Colliding with: "+hit.collider.gameObject.name);
             return true;
