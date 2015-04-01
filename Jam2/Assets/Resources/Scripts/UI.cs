@@ -61,6 +61,7 @@ public class UI : MonoBehaviour {
     public void updateRoom()
     {
         room.text = Player.Instance.getCurrentRoom() + ": " + Player.Instance.getCurrentRoomEnemies().ToString() + " enemies remain";
+        if (Player.Instance.getCurrentRoomEnemies() == 0) Player.Instance.increaseRoomCount();
     }
 
     public void coinUpdate()

@@ -24,6 +24,8 @@ public class Player : MonoBehaviour {
     private int stepReducersStart;
     private int teleportersStart;
     private int jump;
+    private int rooms;
+    private int items;
     private string currentRoom;
     private int currentRoomEnemies;
 
@@ -195,6 +197,11 @@ public class Player : MonoBehaviour {
         UI.Instance.healthUpdate();
     }
 
+    public void increaseRoomCount()
+    {
+        rooms++;
+    }
+
     public void setMaxHealth(int _maxHealth)
     {
         maxHealth = _maxHealth;
@@ -223,6 +230,7 @@ public class Player : MonoBehaviour {
             healthPotions = 10;
         }
         UI.Instance.healthPotionUpdate();
+        items++;
     }
 
     public void pickUpIncreaser()
@@ -233,6 +241,7 @@ public class Player : MonoBehaviour {
             stepIncreasers = 10;
         }
         UI.Instance.stepIncreaserUpdate();
+        items++;
     }
 
     public void pickUpReducer()
@@ -243,6 +252,7 @@ public class Player : MonoBehaviour {
             stepReducers = 10;
         }
         UI.Instance.stepDecreaserUpdate();
+        items++;
     }
 
     public void pickUpTeleporter()
@@ -253,6 +263,7 @@ public class Player : MonoBehaviour {
             teleporters = 10;
         }
         UI.Instance.teleporterUpdate();
+        items++;
     }
 
     public void drinkHealthPotion()
@@ -328,6 +339,7 @@ public class Player : MonoBehaviour {
         RoomData rd = r.getNextRoom().GetComponent<RoomData>();
         rd.spawnPlayer(p);
         this.incrementSteps(rd.getRoomSize());
+        jump++;
     }
 
     public void incrementSteps(int i)
@@ -374,8 +386,8 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("enemyKills", enemiesKilled);
         PlayerPrefs.SetInt("totalJumps", (PlayerPrefs.GetInt("totaljumps") + jump));
         PlayerPrefs.SetInt("totalDeaths", (PlayerPrefs.GetInt("totalDeaths") + 1));
-        //PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items);
-        //PlayerPrefs.SetInt("totalRooms", (PlayerPrefs.GetInt("totalRooms") + rooms);
+        PlayerPrefs.SetInt("totalItems", (PlayerPrefs.GetInt("totalItems") + items));
+        PlayerPrefs.SetInt("totalRooms", (PlayerPrefs.GetInt("totalRooms") + rooms));
         PlayerPrefs.SetInt("totalCollectedCoins", (PlayerPrefs.GetInt("totalCollectedCoins") + thisCoins));
         PlayerPrefs.SetInt("thisCoins", thisCoins);
         PlayerPrefs.SetInt("totalCoins", coins + thisCoins);
