@@ -240,10 +240,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 468214, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -276,46 +272,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[0]
-      value: 
-      objectReference: {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[1]
-      value: 
-      objectReference: {fileID: 163148, guid: 8fbb71f4a1f696b4bab8dbc47cf979e9, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[2]
-      value: 
-      objectReference: {fileID: 152702, guid: 07c0dbbd6e2039948a1904e102005681, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[3]
-      value: 
-      objectReference: {fileID: 155580, guid: 173539c9b3178794a9ac9e30a4a11d8b, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[4]
-      value: 
-      objectReference: {fileID: 150940, guid: d5c315a049c4008419c0b1484ad2d631, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[5]
-      value: 
-      objectReference: {fileID: 172164, guid: 7dc114e90f84bb4479da94552be1190b, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[6]
-      value: 
-      objectReference: {fileID: 152702, guid: 07c0dbbd6e2039948a1904e102005681, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[7]
-      value: 
-      objectReference: {fileID: 155766, guid: 8c8a8546ff5bf124e8169636ce38fc84, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[8]
-      value: 
-      objectReference: {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
-    - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
-      propertyPath: tileTemplate.Array.data[9]
-      value: 
-      objectReference: {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
   m_IsPrefabParent: 0
