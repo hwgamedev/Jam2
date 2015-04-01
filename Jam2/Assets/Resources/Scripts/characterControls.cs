@@ -57,9 +57,9 @@ public class characterControls : MonoBehaviour {
 		if (!moving && !attacking) {
         	if (Input.GetKey(KeyCode.W))
 	        {
+                anim.SetTrigger("iddleN");
 	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.9f, transform.position.z), transform.position + new Vector3(0, 1.1f, 0)))
 	                return;
-	            anim.SetTrigger("iddleN");
 				startTime = Time.time;
 				startPosition = transform.position;
 				endPosition = startPosition;
@@ -70,9 +70,9 @@ public class characterControls : MonoBehaviour {
 			}
 	        else if (Input.GetKey(KeyCode.A))
 	        {
+                anim.SetTrigger("iddleW");
 	            if (checkForCollisions(new Vector3(transform.position.x-0.75f, transform.position.y, transform.position.z),transform.position - new Vector3(1.25f, 0, 0)))
 	                return;
-	            anim.SetTrigger("iddleW");
 				startTime = Time.time;
 				startPosition = transform.position;
 				endPosition = startPosition;
@@ -83,9 +83,9 @@ public class characterControls : MonoBehaviour {
 			}
 	        else if (Input.GetKey(KeyCode.S))
 	        {
+                anim.SetTrigger("iddleS");
 	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.75f, transform.position.z),transform.position - new Vector3(0, 1.25f, 0)))
 	                return;
-	            anim.SetTrigger("iddleS");
 				startTime = Time.time;
 				startPosition = transform.position;
 				endPosition = startPosition;
@@ -96,9 +96,9 @@ public class characterControls : MonoBehaviour {
 			}
 	        else if (Input.GetKey(KeyCode.D))
 	        {
+                anim.SetTrigger("iddleE");
 	            if (checkForCollisions(new Vector3(transform.position.x+0.75f, transform.position.y, transform.position.z),transform.position + new Vector3(1.25f, 0, 0)))
 	                return;
-				anim.SetTrigger("iddleE");
 				startTime = Time.time;
 				startPosition = transform.position;
 				endPosition = startPosition;
@@ -107,55 +107,71 @@ public class characterControls : MonoBehaviour {
                 moving = true;
 				doStep();
 			}
-			else if (Input.GetMouseButtonDown (0)) {
-				Vector3 mousePoint = Camera.main.ScreenPointToRay (Input.mousePosition).origin;
-				float diffX = mousePoint.x - transform.position.x;
-				float diffY = mousePoint.y - transform.position.y;
-				if (diffX > -0.7 && diffX < 0.7) {
-					if (diffY > 1 && diffY < 2) {
-						anim.SetTrigger ("attackN");
-						doStep();
-						//trace.transform.rotation = Quaternion.Euler(0,0,89f);
-						//trace.Play();
-						attacking = true;
-						doAttack ("N");
-					} else if (diffY < 0 && diffY > -1) {
-						anim.SetTrigger ("attackS");
-						doStep();
-						//trace.transform.rotation = Quaternion.Euler(0,0,-91f);
-						//trace.Play();
-						attacking = true;
-						doAttack ("S");
-					}
-				} else if (diffY < 1 && diffY > 0) {
-					if (diffX < -0.7 && diffX > -1.7) {
-						anim.SetTrigger ("attackW");
-						doStep();
-						//trace.transform.rotation = Quaternion.Euler(0,0,-179f);
-						//trace.Play();
-						attacking = true;
-						doAttack ("W");
-					} else if (diffX > 0.7 && diffX < 1.7) {
-						anim.SetTrigger ("attackE");
-						doStep();
-						//trace.transform.rotation = Quaternion.Euler(0,0,-1f);
-						//trace.Play();
-						attacking = true;
-						doAttack ("E");
-					}
-				} 
-				if (!attacking) {
+            else if (Input.GetMouseButtonDown(1))
+            {
+                Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
+                float diffX = mousePoint.x - transform.position.x;
+                float diffY = mousePoint.y - transform.position.y;
+                float length = Mathf.Sqrt(Mathf.Pow(diffX, 2) + Mathf.Pow(diffY, 2));
+                if (length <= longRange / (6 - Player.Instance.getReach()) && length > shortRange)
+                {
+                    throwDagger(transform.position, mousePoint);
+                    doStep();
+                }
+            }
+            else if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
+                float diffX = mousePoint.x - transform.position.x;
+                float diffY = mousePoint.y - transform.position.y;
+                if (diffX > -0.7 && diffX < 0.7)
+                {
+                    if (diffY > 1 && diffY < 2)
+                    {
+                        anim.SetTrigger("attackN");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,89f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("N");
+                    }
+                    else if (diffY < 0 && diffY > -1)
+                    {
+                        anim.SetTrigger("attackS");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,-91f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("S");
+                    }
+                }
+                else if (diffY < 1 && diffY > 0)
+                {
+                    if (diffX < -0.7 && diffX > -1.7)
+                    {
+                        anim.SetTrigger("attackW");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,-179f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("W");
+                    }
+                    else if (diffX > 0.7 && diffX < 1.7)
+                    {
+                        anim.SetTrigger("attackE");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,-1f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("E");
+                    }
+                }
+                if (!attacking)
+                {
 
-					float length = Mathf.Sqrt (Mathf.Pow (diffX,2) + Mathf.Pow (diffY,2));
-                    //print (longRange/(6-Player.Instance.getReach()));
-                    //print (length);
-					if(length <= longRange/(6-Player.Instance.getReach()) && length > shortRange) {
-                        //print ("yo");
-						throwDagger(transform.position, mousePoint);
-						doStep ();
-					}
-				}
-			}
+
+                }
+            }
 		}
 		//}
 		if (moving) {
