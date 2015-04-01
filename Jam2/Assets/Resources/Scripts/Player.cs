@@ -28,6 +28,8 @@ public class Player : MonoBehaviour {
     private int items;
     private string currentRoom;
     private int currentRoomEnemies;
+    Color red = new Color(255, 0, 0);
+    Color green = new Color(51, 255, 0);
 
     public static Player Instance;
     void Awake()
@@ -188,10 +190,26 @@ public class Player : MonoBehaviour {
         thisCoins += _coins;
         UI.Instance.coinUpdate();
     }
-
-    public void setHealth (int _health) 
+    IEnumerator flash(Renderer Char)
     {
+        yield return new WaitForSeconds(0.15F);
+        Char.material.color = Color.white;
+    }
+
+    public void setHealth(int _health) 
+    {
+        Renderer Char = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>();
         health += _health;
+        if (_health < 0)
+        {
+            Char.material.color = Color.red;
+            StartCoroutine(flash(Char));
+        }
+        else
+        {
+            Char.material.color = Color.green;
+            StartCoroutine(flash(Char));
+        }
         if (health > maxHealth) health = maxHealth;
         else if (health <= 0) {death();}
         UI.Instance.healthUpdate();
@@ -271,7 +289,7 @@ public class Player : MonoBehaviour {
         if (healthPotions > 0)
         {
             healthPotions--;
-            setHealth(2);
+            setHealth((maxHealth/5));
             UI.Instance.healthPotionUpdate();
         }
     }
