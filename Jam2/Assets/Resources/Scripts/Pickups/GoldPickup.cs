@@ -17,7 +17,7 @@ public class GoldPickup : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print("Gold collected!");
+        //print("Gold collected!");
         if (!collected && col.collider.tag == "Player")
         {
             collected = true;
@@ -27,7 +27,7 @@ public class GoldPickup : MonoBehaviour {
 
     public void collect(int finalValue)
     {
-        print("Being collected!");
+        //print("Being collected!");
             finalValue = value;
             value = 0;
         GetComponent<Collected>().playPickup();

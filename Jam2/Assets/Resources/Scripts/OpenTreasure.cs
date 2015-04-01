@@ -31,7 +31,7 @@ public class OpenTreasure : MonoBehaviour {
         {
             GetComponent<Animator>().SetTrigger("OpenChest");
             claimed = true;
-            print("Spawning prize!");
+            //print("Spawning prize!");
             GameObject prize = Instantiate(prizes[Random.Range(0, prizes.Length)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             prize.transform.position = new Vector2(transform.position.x, transform.position.y);
             if (prize.name == "GoldStack")

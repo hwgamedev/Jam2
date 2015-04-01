@@ -17,7 +17,7 @@ public class IncreaserPickup : MonoBehaviour
 	
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		print("Increaser collected!");
+		//print("Increaser collected!");
 		if (col.collider.tag == "Player" && !collected)
 		{
 			collect();
@@ -26,7 +26,7 @@ public class IncreaserPickup : MonoBehaviour
 	
 	public void collect()
 	{
-		print("Being collected!");
+		//print("Being collected!");
 		collected = true;
 		GetComponent<Collected>().playPickup();
 		Player.Instance.pickUpIncreaser();

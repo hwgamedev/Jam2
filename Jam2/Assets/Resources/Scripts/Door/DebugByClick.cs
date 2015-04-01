@@ -16,11 +16,11 @@ public class DebugByClick : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("Name = " + hit.collider.name);
-                Debug.Log("Tag = " + hit.collider.tag);
-                Debug.Log("Hit Point = " + hit.point);
-                Debug.Log("Object position = " + hit.collider.gameObject.transform.position);
-                Debug.Log("--------------");
+                //Debug.Log("Name = " + hit.collider.name);
+                //Debug.Log("Tag = " + hit.collider.tag);
+                //Debug.Log("Hit Point = " + hit.point);
+                //Debug.Log("Object position = " + hit.collider.gameObject.transform.position);
+                //Debug.Log("--------------");
             }
         }
 	}

@@ -16,7 +16,6 @@ public class HealthPickup : MonoBehaviour
 	
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		print("Potion collected!");
 		if (col.collider.tag == "Player" && !collected)
 		{
 			collect();
@@ -25,7 +24,6 @@ public class HealthPickup : MonoBehaviour
 	
 	public void collect()
 	{
-		print("Being collected!");
 		collected = true;
 		GetComponent<Collected>().playPickup();
 		Player.Instance.pickUpHealthPotion();

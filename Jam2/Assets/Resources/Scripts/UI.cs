@@ -38,6 +38,7 @@ public class UI : MonoBehaviour {
         if(PlayerPrefs.GetInt("newPlayer") == 1)
         {
             help.SetActive(true);
+            help2.SetActive(false);
         }
         else
         {
@@ -82,6 +83,7 @@ public class UI : MonoBehaviour {
     public void helpOpen()
     {
         help.SetActive(true);
+        help2.SetActive(false);
     }
 
     public void nameUpdate()

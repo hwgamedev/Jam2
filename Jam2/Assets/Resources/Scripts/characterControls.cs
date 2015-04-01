@@ -195,7 +195,7 @@ public class characterControls : MonoBehaviour {
 
 	private bool checkForCollisions(Vector3 startPoint, Vector3 endPoint)
     {
-        Debug.DrawLine(startPoint, endPoint);
+        //Debug.DrawLine(startPoint, endPoint);
         int layer = LayerMask.NameToLayer("RaycastLayer");
         //print("Layer : "+layer);
         RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);

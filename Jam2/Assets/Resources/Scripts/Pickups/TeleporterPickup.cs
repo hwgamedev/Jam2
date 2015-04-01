@@ -18,7 +18,7 @@ public class TeleporterPickup : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print("Potion collected!");
+        //print("Potion collected!");
         if (col.collider.tag == "Player" && !collected)
         {
             collect();
@@ -27,7 +27,7 @@ public class TeleporterPickup : MonoBehaviour {
 
     public void collect()
     {
-        print("Being collected!");
+        //print("Being collected!");
         collected = true;
         GetComponent<Collected>().playPickup();
         Player.Instance.pickUpTeleporter();

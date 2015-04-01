@@ -24,7 +24,7 @@ public class GridManager : MonoBehaviour {
 	//update grid numbers
 	public void updateGrid(RoomData rd)
 	{
-		Debug.Log("PATHMOVE");
+		//Debug.Log("PATHMOVE");
 		rg = rd;
 		grid = rg.getGrid();
 		distanceSteps = new int[grid.GetLength(0), grid.GetLength(1)] ;
@@ -161,7 +161,7 @@ public class GridManager : MonoBehaviour {
 			min = distanceSteps[x,y+1];
 			temp = new KeyValuePair<int,int >(0, -1);
 		}
-		Debug.Log (min);
+		//Debug.Log (min);
 		return temp;
 
 

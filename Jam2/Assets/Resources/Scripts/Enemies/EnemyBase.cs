@@ -261,7 +261,7 @@ public class EnemyBase : MonoBehaviour {
 	{
         //Debug.Log("Gonna fuck you up");
 		startWait();
-		Debug.Log (dmg);
+		//Debug.Log (dmg);
 		Player.Instance.setHealth(-dmg);
 	}
 

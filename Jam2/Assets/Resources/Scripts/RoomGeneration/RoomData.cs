@@ -196,7 +196,7 @@ public class RoomData : MonoBehaviour {
             int maxY = roomBox[1] + roomBox[3] - 1;
             int mandatoryX = (roomBox[0]+((maxX - minX) / 2));
             int mandatoryY = (roomBox[1]+((maxY - minY)) / 2);
-            print("Mandatory enemy x: " + mandatoryX + " y: " + mandatoryY + " minX: " + minX + ",maxX: " + maxX + ", minY: " + minY + ", maxY: " + maxY);
+            //print("Mandatory enemy x: " + mandatoryX + " y: " + mandatoryY + " minX: " + minX + ",maxX: " + maxX + ", minY: " + minY + ", maxY: " + maxY);
 
 
             for (int x = minX; x < maxX; x++)
@@ -298,9 +298,9 @@ public class RoomData : MonoBehaviour {
 
         }
 
-        print(gameObject.name+" EnemyCount: " + enemyCount+ " NoSubrooms: "+roomBoxes.Count);
+        //print(gameObject.name+" EnemyCount: " + enemyCount+ " NoSubrooms: "+roomBoxes.Count);
         decrement = .4f / (enemyCount);
-        print("decrement: " + decrement);
+        //print("decrement: " + decrement);
         
         
     }

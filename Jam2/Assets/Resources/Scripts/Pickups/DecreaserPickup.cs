@@ -17,7 +17,7 @@ public class DecreaserPickup : MonoBehaviour
 	
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		print("Decreaser collected!");
+		//print("Decreaser collected!");
 		if (col.collider.tag == "Player" && !collected)
 		{
 			collect();
@@ -26,7 +26,7 @@ public class DecreaserPickup : MonoBehaviour
 	
 	public void collect()
 	{
-		print("Being collected!");
+		//print("Being collected!");
 		collected = true;
 		GetComponent<Collected>().playPickup();
 		Player.Instance.pickUpReducer();

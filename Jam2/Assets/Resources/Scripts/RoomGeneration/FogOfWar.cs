@@ -30,7 +30,7 @@ public class FogOfWar : MonoBehaviour {
     public void changeAlpha(float nAlpha)
     {
         newAlpha = newAlpha - nAlpha;
-        print("Newalpha: " + newAlpha);
+        //print("Newalpha: " + newAlpha);
         changedAlpha = true;
     }
 
