@@ -47,7 +47,17 @@ MonoBehaviour:
   maxSubRoomSize: 15
   maxSizeVariation: 3
   minSizeVariation: 3
-  tileTemplate: {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
+  tileTemplate:
+  - {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
+  - {fileID: 163148, guid: 8fbb71f4a1f696b4bab8dbc47cf979e9, type: 2}
+  - {fileID: 152702, guid: 07c0dbbd6e2039948a1904e102005681, type: 2}
+  - {fileID: 155580, guid: 173539c9b3178794a9ac9e30a4a11d8b, type: 2}
+  - {fileID: 150940, guid: d5c315a049c4008419c0b1484ad2d631, type: 2}
+  - {fileID: 172164, guid: 7dc114e90f84bb4479da94552be1190b, type: 2}
+  - {fileID: 152702, guid: 07c0dbbd6e2039948a1904e102005681, type: 2}
+  - {fileID: 155766, guid: 8c8a8546ff5bf124e8169636ce38fc84, type: 2}
+  - {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
+  - {fileID: 121368, guid: 9109d6a31ca757a459ad1a08ab773043, type: 2}
   cornerTileTop: {fileID: 174428, guid: f31cad70126b9814e84d9ef070931aaf, type: 2}
   cornerTileBottom: {fileID: 174390, guid: d34dd9a8ab6158d408d88cfe3df3c63d, type: 2}
   topTile: {fileID: 197168, guid: 359fe4dc132441a4d983d307889887cc, type: 2}
@@ -61,6 +71,8 @@ MonoBehaviour:
   roomDataTemplate: {fileID: 172580, guid: ff34cfcfff0466a41a4c835e051461bc, type: 2}
   player: {fileID: 190170, guid: 233f43a0a6e2e904997f9079a30197c0, type: 2}
   rooms: []
+  visitedRooms: []
+  currRoom: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

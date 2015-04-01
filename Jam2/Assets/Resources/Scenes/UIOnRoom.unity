@@ -303,7 +303,7 @@ Prefab:
     - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
       propertyPath: tileTemplate.Array.data[6]
       value: 
-      objectReference: {fileID: 153500, guid: b83899e7b168d824480997483ed2ca3a, type: 2}
+      objectReference: {fileID: 152702, guid: 07c0dbbd6e2039948a1904e102005681, type: 2}
     - target: {fileID: 11470748, guid: 94e2dcdfa88ea26469c38c93a96bdada, type: 2}
       propertyPath: tileTemplate.Array.data[7]
       value: 
