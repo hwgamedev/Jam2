@@ -10,8 +10,6 @@ public class EnemyBase : MonoBehaviour {
 
 	//general
 	//public bool awake;
-
-    private bool attacked = false;
 	//moving
 	public float speed = 1.0f;
 	private float startTime;
@@ -43,7 +41,7 @@ public class EnemyBase : MonoBehaviour {
     private string room;
 
 	//
-	public GameObject drop;
+	public List<GameObject> drop = new List<GameObject>();
 
 	// Use this for initialization
 	public virtual void Start () {
@@ -267,21 +265,10 @@ public class EnemyBase : MonoBehaviour {
 		Player.Instance.setHealth(-dmg);
 	}
 
-    IEnumerator attackTime()
-    {
-        yield return new WaitForSeconds(0.5F);
-        attacked = false;
-    }
-
 	public void takeDamage(int damage)
 	{
         //Debug.Log("Hurting really bad!");
-        if (!attacked)
-        {
             health -= damage;
-            attacked = true;
-            StartCoroutine(attackTime());
-        }
         if (health <= 0)
             die();
 	}
@@ -293,7 +280,10 @@ public class EnemyBase : MonoBehaviour {
 
 	public void die()
 	{
-		dropItem();
+        if(Random.Range(0,10) > 3)
+        { 
+            dropItem(); 
+        }
         FindObjectOfType<StepManager>().unsubscribe(this);
         GameObject.Find(room).GetComponent<RoomData>().setEnemyAsDead(this.gameObject);
 		Player.Instance.incrementEnemiesKilled();
@@ -301,7 +291,7 @@ public class EnemyBase : MonoBehaviour {
 	}
 
 	public void dropItem(){
-		GameObject item = Instantiate(drop);
+		GameObject item = Instantiate(drop[Random.Range(0, drop.Count)]);
 		item.transform.position = transform.position;
 	}
 

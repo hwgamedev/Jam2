@@ -33,7 +33,6 @@ public class Collected : MonoBehaviour {
         {
             activate = true;
             timer = 1f;
-
         }
     }
 }

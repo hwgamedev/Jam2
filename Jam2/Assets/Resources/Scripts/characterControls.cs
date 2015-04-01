@@ -202,6 +202,7 @@ public class characterControls : MonoBehaviour {
 			if (hit.collider.GetComponent<HealthPickup>() != null) { hit.collider.GetComponent<HealthPickup>().collect(); }
 			if (hit.collider.GetComponent<IncreaserPickup>() != null) { hit.collider.GetComponent<IncreaserPickup>().collect(); }
 			if (hit.collider.GetComponent<DecreaserPickup>() != null) { hit.collider.GetComponent<DecreaserPickup>().collect(); }
+            if (hit.collider.GetComponent<TeleporterPickup>() != null) { hit.collider.GetComponent<TeleporterPickup>().collect(); }
             if (hit.collider.GetComponent<OpenTreasure>() != null) { hit.collider.GetComponent<OpenTreasure>().spawnPrize(); }
             //print("Colliding with: "+hit.collider.gameObject.name);
             return true;
@@ -238,6 +239,10 @@ public class characterControls : MonoBehaviour {
 		if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Enemy")) {
 			hit.collider.gameObject.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage()*2);
 		}
+        else if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Breakable"))
+        {
+            hit.collider.gameObject.GetComponent<Breakable>().attacked();
+        }
 	}
 
 	private void throwDagger(Vector3 start, Vector3 end){
