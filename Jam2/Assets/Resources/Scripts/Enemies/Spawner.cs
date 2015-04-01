@@ -10,6 +10,8 @@ public class Spawner : EnemyBase{
 
 	override public void Start () {
 		base.Start();
+        maxHealth = 4;
+        health = 4;
 		spawnStepCD = 3;
 		lastSpawnStep = 0;
 	}

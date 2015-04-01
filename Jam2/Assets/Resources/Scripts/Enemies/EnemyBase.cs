@@ -11,6 +11,7 @@ public class EnemyBase : MonoBehaviour {
 	//general
 	//public bool awake;
 
+    private bool attacked = false;
 	//moving
 	public float speed = 1.0f;
 	private float startTime;
@@ -74,7 +75,7 @@ public class EnemyBase : MonoBehaviour {
 		wait = false;
 
 		//stats
-		maxHealth = 1;
+		maxHealth = 6;
 		health = maxHealth;
 		dmg = 5;
 
@@ -266,12 +267,22 @@ public class EnemyBase : MonoBehaviour {
 		Player.Instance.setHealth(-dmg);
 	}
 
+    IEnumerator attackTime()
+    {
+        yield return new WaitForSeconds(0.5F);
+        attacked = false;
+    }
 
 	public void takeDamage(int damage)
 	{
         //Debug.Log("Hurting really bad!");
-        //health -= damage;
-        //if (health <= 0)
+        if (!attacked)
+        {
+            health -= damage;
+            attacked = true;
+            StartCoroutine(attackTime());
+        }
+        if (health <= 0)
             die();
 	}
 

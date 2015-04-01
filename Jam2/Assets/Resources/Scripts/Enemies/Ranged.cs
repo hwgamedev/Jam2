@@ -9,6 +9,8 @@ public class Ranged : EnemyBase {
 
 	override public void Start () {
 		base.Start();
+        maxHealth = 3;
+        health = 3;
 		range = 5;
 		dmg = dmg/3;
 		render = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
