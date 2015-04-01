@@ -98,6 +98,7 @@ public class Shop : MonoBehaviour {
         PlayerPrefs.SetInt("totalDeaths", 0);
         PlayerPrefs.SetInt("totalItems", 0);
         PlayerPrefs.SetInt("totalRoomsCleared", 0);
+        PlayerPrefs.SetInt("newPlayer", 1);
         PlayerPrefs.Save();
         initStats();
         creator.SetActive(false);

@@ -25,11 +25,25 @@ public class UI : MonoBehaviour {
     public Slider healthBarSlider;
     private int maxHealth;
     public static UI Instance;
+    public GameObject help;
+    public GameObject help2;
+    public Text ammoText;
+    public GameObject ammoDisplay;
+
 
 
     void Awake()
     {
         if (Instance == null) Instance = this;
+        if(PlayerPrefs.GetInt("newPlayer") == 1)
+        {
+            help.SetActive(true);
+        }
+        else
+        {
+            help.SetActive(false);
+            help2.SetActive(false);
+        }
     }
 
     public void init()
@@ -44,18 +58,56 @@ public class UI : MonoBehaviour {
         stepDecreaserUpdate();
         teleporterUpdate();
         stepUpdate();
+        updateAmmo();
+    }
+
+    public void helpNext()
+    {
+        help2.SetActive(true);
+        help.SetActive(false);
+    }
+
+    public void helpBack()
+    {
+        help2.SetActive(false);
+        help.SetActive(true);
+    }
+
+    public void helpClose()
+    {
+        help.SetActive(false);
+        help2.SetActive(false);
+    }
+
+    public void helpOpen()
+    {
+        help.SetActive(true);
     }
 
     public void nameUpdate()
     {
         nameText.text = Player.Instance.getName();
     }
+
+    public void updateAmmo()
+    {
+        int ammo = Player.Instance.getAmmo();
+        ammoText.text = ammo.ToString();
+        if (ammo == 0)
+        {
+            ammoDisplay.SetActive(false);
+        }
+        else
+        {
+            ammoDisplay.SetActive(true);
+        }
+    }
+
     public void healthUpdate()
     {
         int health = Player.Instance.getHealth();
         float percent = (float)health / maxHealth;
         healthBarSlider.normalizedValue = percent;
-        print(percent);
     }
 
     public void updateRoom()
