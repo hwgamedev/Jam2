@@ -260,17 +260,18 @@ public class EnemyBase : MonoBehaviour {
 	
 	public virtual void attack()
 	{
-        Debug.Log("Gonna fuck you up");
+        //Debug.Log("Gonna fuck you up");
 		startWait();
 		Debug.Log (dmg);
 		Player.Instance.setHealth(-dmg);
 	}
 
+
 	public void takeDamage(int damage)
 	{
         //Debug.Log("Hurting really bad!");
-		health -= damage;
-        if (health <= 0)
+        //health -= damage;
+        //if (health <= 0)
             die();
 	}
 

@@ -22,15 +22,19 @@ public class Dagger : MonoBehaviour {
 		if (initiated) {
 			float distCovered = (Time.time - startTime) * speed;
 			float fracJourney = distCovered / journeyLength;
-			if(!checkCollision(transform.position, Vector3.Lerp (startPosition, endPosition, fracJourney))){
-				transform.position = Vector3.Lerp (startPosition, endPosition, fracJourney);
-				transform.Rotate(0f, 0f, 20f);
-				if (transform.position == endPosition) {
-					Destroy (gameObject);
-				}
-			} else {
-				Destroy (gameObject);
-			}
+            if (!checkCollision(transform.position, Vector3.Lerp(startPosition, endPosition, fracJourney)))
+            {
+                transform.position = Vector3.Lerp(startPosition, endPosition, fracJourney);
+                transform.Rotate(0f, 0f, 20f);
+                if (transform.position == endPosition)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 		}
 	}
 
@@ -43,21 +47,25 @@ public class Dagger : MonoBehaviour {
 		initiated = true;
 	}
 
-	private bool checkCollision(Vector3 start, Vector3 end) {
+    private bool checkCollision(Vector3 start, Vector3 end)
+    {
         int layer = LayerMask.GetMask("RaycastLayer");
-		RaycastHit2D hit = Physics2D.Linecast(start, end, layer);
-		if (hit && !hit.collider.isTrigger)
-		{
-			//print("Colliding with: "+hit.collider.gameObject.name);
-			if(hit.collider.gameObject.CompareTag("Player")){
-				return false;
-			}
-			if(hit.collider.gameObject.CompareTag("Enemy")){
-				hit.collider.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage());
-				return true;
-			}
-		}
-		
-		return false;
-	}
+        RaycastHit2D hit = Physics2D.Linecast(start, end, layer);
+        if (hit && !hit.collider.isTrigger)
+        {
+            print("Colliding with: " + hit.collider.gameObject.name);
+            if (hit.collider.gameObject.CompareTag("Player"))
+            {
+                return false;
+            }
+            if (hit.collider.gameObject.CompareTag("Enemy"))
+            {
+                hit.collider.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage() * 2);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

@@ -11,6 +11,8 @@ TagManager:
   - Corner
   - Floor
   - Treasure
+  - GameVariables
+  - Dagger
   layers:
   - Default
   - TransparentFX

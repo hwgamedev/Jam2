@@ -28,8 +28,6 @@ public class Player : MonoBehaviour {
     private int items;
     private string currentRoom;
     private int currentRoomEnemies;
-    Color red = new Color(255, 0, 0);
-    Color green = new Color(51, 255, 0);
 
     public static Player Instance;
     void Awake()

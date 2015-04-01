@@ -113,7 +113,7 @@ public class characterControls : MonoBehaviour {
                 float diffX = mousePoint.x - transform.position.x;
                 float diffY = mousePoint.y - transform.position.y;
                 float length = Mathf.Sqrt(Mathf.Pow(diffX, 2) + Mathf.Pow(diffY, 2));
-                if (length <= longRange / (6 - Player.Instance.getReach()) && length > shortRange)
+                if (length <= longRange / (6 - Player.Instance.getReach()))
                 {
                     throwDagger(transform.position, mousePoint);
                     doStep();
@@ -242,6 +242,7 @@ public class characterControls : MonoBehaviour {
 
 	private void throwDagger(Vector3 start, Vector3 end){
 		GameObject daggerInstance = Instantiate(dagger, start, Quaternion.identity) as GameObject;
+        
 		daggerInstance.GetComponent<Dagger> ().throwDagger (start, end);
 	}
 
