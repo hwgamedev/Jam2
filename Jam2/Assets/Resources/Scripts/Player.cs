@@ -250,7 +250,7 @@ public class Player : MonoBehaviour {
     public void setSteps(int _stepsToTeleport)
     {
         stepsToTeleport = _stepsToTeleport;
-        if (stepsToTeleport == 0)
+        if (stepsToTeleport == -1)
         {
             teleport();
         }
@@ -356,11 +356,8 @@ public class Player : MonoBehaviour {
         stepsToTeleport --;
         //if steps >= 0
         //call teleport
-        if (stepsToTeleport <= 0) {
-			stepsToTeleport = 0;
-		}
         UI.Instance.stepUpdate();
-		if (stepsToTeleport == 0) {
+		if (stepsToTeleport < 0) {
             teleport();
 		}
     }
