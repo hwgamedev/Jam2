@@ -2,12 +2,14 @@
 using System.Collections;
 
 public class GoldPickup : MonoBehaviour {
-
-    int value = Random.Range(5, 20);
+    public int maxCoins;
+    public int minCoins;
+    int value;
     bool collected = false;
 
 	// Use this for initialization
 	void Start () {
+        value = Random.Range(minCoins, maxCoins);
 	}
 	
 	// Update is called once per frame
