@@ -146,6 +146,22 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11427590, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
+      propertyPath: m_Color.a
+      value: .352941185
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427590, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427590, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427590, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
+      propertyPath: m_Text
+      value: 02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e2376ffb91a1284f8e29b84d4742179, type: 2}
   m_IsPrefabParent: 0
@@ -186,7 +202,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 417160, guid: 6f62698e204e6c7498307054dd909c22, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f62698e204e6c7498307054dd909c22, type: 2}
@@ -228,7 +244,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 436476, guid: 6b6899ecccc4fa04d9327b5b1679d7f6, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b6899ecccc4fa04d9327b5b1679d7f6, type: 2}

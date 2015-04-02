@@ -48,6 +48,8 @@ public class Shop : MonoBehaviour {
     public int potionCap;
     public int teleporterCap;
 
+    public GameObject delete;
+
     int healthCost;
     int healthCostTemp;
     int damageCost;
@@ -68,6 +70,14 @@ public class Shop : MonoBehaviour {
     public Button[] perm = new Button[7];
     public Button[] temp = new Button[7];
 
+
+    void Update()
+    {
+      if (Input.GetKey(KeyCode.End))
+      {
+          delete.SetActive(true);
+      }
+    }
     void Start()
     {
         //PlayerPrefs.DeleteAll();  //Uncomment to delete your save for testing
@@ -81,8 +91,20 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    public void deleteCharacter()
+    {
+        PlayerPrefs.DeleteAll();
+        Application.LoadLevel("shop");
+    }
+
+    public void cancelDelete()
+    {
+        delete.SetActive(false);
+    }
     public void createCharacter()
     {
+        if(createChar.text != "")
+        {
         PlayerPrefs.SetString("playerName", createChar.text);
         PlayerPrefs.SetInt("maxHealth", startHealth);
         PlayerPrefs.SetInt("totalCoins", 0);
@@ -102,6 +124,7 @@ public class Shop : MonoBehaviour {
         PlayerPrefs.Save();
         initStats();
         creator.SetActive(false);
+        }
     }
 
     public void initStats()
