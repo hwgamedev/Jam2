@@ -135,43 +135,46 @@ public class characterControls : MonoBehaviour {
                 Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
                 float diffX = mousePoint.x - transform.position.x;
                 float diffY = mousePoint.y - transform.position.y;
-                float angle = Mathf.Atan2(diffX, diffY);
-                Debug.Log("Angle: "+(Mathf.Rad2Deg*angle));
-                if (angle > Mathf.Deg2Rad*-45 && angle <= Mathf.Deg2Rad*45)
+                if (diffX > -5 && diffX < 5)
                 {
-                    anim.SetTrigger("attackN");
-                    doStep();
-                    //trace.transform.rotation = Quaternion.Euler(0,0,89f);
-                    //trace.Play();
-                    attacking = true;
-                    doAttack("N");
-                }
-                else if(angle > Mathf.Deg2Rad*45 && angle <= Mathf.Deg2Rad*135)
-                {
-                    anim.SetTrigger("attackE");
-                    doStep();
-                    //trace.transform.rotation = Quaternion.Euler(0,0,-1f);
-                    //trace.Play();
-                    attacking = true;
-                    doAttack("E");
-                }
-                else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135)
-                {
-                    anim.SetTrigger("attackS");
-                    doStep();
-                    //trace.transform.rotation = Quaternion.Euler(0,0,-91f);
-                    //trace.Play();
-                    attacking = true;
-                    doAttack("S");
-                }
-                else if(angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45)
-                {
-                    anim.SetTrigger("attackW");
-                    doStep();
-                    //trace.transform.rotation = Quaternion.Euler(0,0,-179f);
-                    //trace.Play();
-                    attacking = true;
-                    doAttack("W");
+                    float angle = Mathf.Atan2(diffX, diffY);
+                    Debug.Log("Angle: " + (Mathf.Rad2Deg * angle));
+                    if (angle > Mathf.Deg2Rad * -45 && angle <= Mathf.Deg2Rad * 45)
+                    {
+                        anim.SetTrigger("attackN");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,89f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("N");
+                    }
+                    else if (angle > Mathf.Deg2Rad * 45 && angle <= Mathf.Deg2Rad * 135)
+                    {
+                        anim.SetTrigger("attackE");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,-1f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("E");
+                    }
+                    else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135)
+                    {
+                        anim.SetTrigger("attackS");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,-91f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("S");
+                    }
+                    else if (angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45)
+                    {
+                        anim.SetTrigger("attackW");
+                        doStep();
+                        //trace.transform.rotation = Quaternion.Euler(0,0,-179f);
+                        //trace.Play();
+                        attacking = true;
+                        doAttack("W");
+                    }
                 }
                 /*if (diffX > -0.5 && diffX < 0.5)
                 {
@@ -246,7 +249,7 @@ public class characterControls : MonoBehaviour {
     
 
 	private void doAttack(string direction){
-        Debug.Log("Attacking!");
+        //Debug.Log("Attacking!");
         //print("Remaining steps: " + Player.Instance.getSteps());
 		RaycastHit2D hit = Physics2D.Linecast(transform.position+new Vector3(0,0.5f,0), transform.position + new Vector3(0f,shortRange,0f));
 		switch (direction) {

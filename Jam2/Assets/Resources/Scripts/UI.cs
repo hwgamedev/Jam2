@@ -75,10 +75,12 @@ public class UI : MonoBehaviour {
     {
         help.SetActive(false);
         help2.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void helpOpen()
     {
+        Time.timeScale = 0;
         help.SetActive(true);
         help2.SetActive(false);
     }
