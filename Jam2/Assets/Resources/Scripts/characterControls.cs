@@ -7,7 +7,7 @@ public class characterControls : MonoBehaviour {
 
 	// stats of character
 	public float speed = 1.0f;
-	public float shortRange = 1.5f;
+	public float shortRange = 0f;
 	public float longRange = 11f;
 
     private FigureMovement mover;
@@ -19,7 +19,6 @@ public class characterControls : MonoBehaviour {
 	private float journeyLength;
 	private Vector3 startPosition;
 	private Vector3 endPosition;
-
 
 	//states
 	public bool attacking = false;
@@ -36,7 +35,7 @@ public class characterControls : MonoBehaviour {
 
         mover = GetComponent<FigureMovement>();
 	}
-	
+
 	// Update is called once per frame
 	void FixedUpdate () {
 

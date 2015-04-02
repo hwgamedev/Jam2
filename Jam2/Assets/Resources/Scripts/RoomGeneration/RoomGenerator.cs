@@ -46,6 +46,7 @@ public class RoomGenerator : MonoBehaviour {
 
     //template for player
     public GameObject player;
+    public GameObject camera;
 
     public List<GameObject> rooms;
     public List<GameObject> visitedRooms;
@@ -85,7 +86,8 @@ public class RoomGenerator : MonoBehaviour {
 
         int startRoom = Random.Range(0, rooms.Count);
         GameObject playerInstance = Instantiate(player, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-        rooms[startRoom].GetComponent<RoomData>().spawnPlayer(playerInstance);
+        GameObject cameraInstance = Instantiate(camera, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        rooms[startRoom].GetComponent<RoomData>().spawnPlayer(playerInstance, cameraInstance);
         currRoom = rooms[startRoom];
         visitedRooms.Add(rooms[startRoom]);
         rooms.RemoveAt(startRoom);

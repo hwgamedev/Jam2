@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: eb487c45ef1c96c4aaf1136bb71218a8
-timeCreated: 1427597974
+timeCreated: 1428009479
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,28 +64,28 @@ TextureImporter:
         y: 0
         width: 96
         height: 64
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attackN_1
       rect:
         serializedVersion: 2
-        x: 240
+        x: 244
         y: 0
         width: 96
         height: 64
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attackN_2
       rect:
         serializedVersion: 2
-        x: 432
+        x: 428
         y: 0
         width: 96
         height: 64
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attackN_3
       rect:
@@ -94,8 +94,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 64
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attackN_4
       rect:
@@ -104,8 +104,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 64
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attackN_5
       rect:
@@ -114,8 +114,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 64
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .100000001}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

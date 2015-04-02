@@ -357,12 +357,14 @@ public class RoomData : MonoBehaviour {
         playerVisibleRooms[spawnRoom] = true;
     }
 
-    public void spawnPlayer(GameObject player)
+    public void spawnPlayer(GameObject player, GameObject camera)
     {
 		//print (player.transform.position);
         player.transform.parent = transform;
+        camera.transform.parent = transform;
 		//print (player.transform.position);
         player.transform.localPosition = new Vector3(spawnPoint[0], spawnPoint[1]*-1, 0);
+        camera.transform.localPosition = new Vector3(spawnPoint[0], spawnPoint[1] * -1, -10);
 		//print (player.transform.position);
         Player.Instance.setCurrentRoom(gameObject.name);
         Player.Instance.setRoomEnemies(enemyArray.Count);

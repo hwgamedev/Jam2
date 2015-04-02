@@ -70,6 +70,7 @@ MonoBehaviour:
   doorVertical: {fileID: 107120, guid: 3659d6a2c0e5b104dbb767b72ab76746, type: 2}
   roomDataTemplate: {fileID: 172580, guid: ff34cfcfff0466a41a4c835e051461bc, type: 2}
   player: {fileID: 190170, guid: 233f43a0a6e2e904997f9079a30197c0, type: 2}
+  camera: {fileID: 186458, guid: 8123d36395e74ff43a27be6547c3ffe5, type: 2}
   rooms: []
   visitedRooms: []
   currRoom: {fileID: 0}

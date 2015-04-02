@@ -369,9 +369,10 @@ public class Player : MonoBehaviour {
     {
         RoomGenerator r = FindObjectOfType<RoomGenerator>();
         GameObject p = GameObject.FindGameObjectWithTag("Player");
+        GameObject c = GameObject.FindGameObjectWithTag("MainCamera");
         p.GetComponent<characterControls>().teleport();
         RoomData rd = r.getNextRoom().GetComponent<RoomData>();
-        rd.spawnPlayer(p);
+        rd.spawnPlayer(p,c);
         this.incrementSteps(rd.getRoomSize());
         jump++;
     }
