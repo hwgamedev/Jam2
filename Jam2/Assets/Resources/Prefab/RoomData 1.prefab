@@ -64,18 +64,8 @@ MonoBehaviour:
   - {fileID: 146364, guid: 343258a71dad0954bbc0c1afbbacbcab, type: 2}
   sparseObjects: .080215469
   clumps: .0722759515
-  treasure: 9.99999997e-07
+  treasure: 7.00000019e-05
   coins: .060769219
   singleEnemy: .00727870688
   enemyLine: .000975806499
   cornerFormation: .00220897654
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 172580}
-  m_IsPrefabParent: 1
