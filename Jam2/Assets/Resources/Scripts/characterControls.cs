@@ -135,7 +135,7 @@ public class characterControls : MonoBehaviour {
                 Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
                 float diffX = mousePoint.x - transform.position.x;
                 float diffY = mousePoint.y - transform.position.y;
-                if (diffX > -5 && diffX < 5)
+                if (diffX > -2 && diffX < 2)
                 {
                     float angle = Mathf.Atan2(diffX, diffY);
                     Debug.Log("Angle: " + (Mathf.Rad2Deg * angle));

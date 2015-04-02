@@ -34,6 +34,7 @@ public class UI : MonoBehaviour {
         if (Instance == null) Instance = this;
         if(PlayerPrefs.GetInt("newPlayer") == 1)
         {
+            Time.timeScale = 0;
             help.SetActive(true);
             help2.SetActive(false);
         }

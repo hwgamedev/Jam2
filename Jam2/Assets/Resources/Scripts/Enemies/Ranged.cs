@@ -18,7 +18,6 @@ public class Ranged : EnemyBase {
 
 	override public void Update () {
 		/*if(wait && Time.time - waitInit > 0.5)*/
-			render.material.SetColor("_Color", Color.white);
 		float distanceToPlayer = Mathf.Sqrt(Mathf.Pow(transform.position.x - player.transform.position.x, 2) +
 		                                    Mathf.Pow(transform.position.y - player.transform.position.y, 2));
         if (/*awake && !wait && */doSteps > 0 && range > (distanceToPlayer))
@@ -29,8 +28,15 @@ public class Ranged : EnemyBase {
 			base.Update();
 	}
 
+    IEnumerator flash()
+    {
+        yield return new WaitForSeconds(0.2F);
+        render.material.color = Color.white;
+    }
+
 	void shoot(){
 		render.material.SetColor("_Color", Color.blue);
+        StartCoroutine(flash());
 		base.attack();
 	}
 }
