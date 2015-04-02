@@ -9,15 +9,12 @@ public class UI : MonoBehaviour {
     public Text nameText;
     public Text goldText;
     public Text stepsText;
+    public Text stepsTextBig;
     public Text killText;
-    public Text healthText;
     public Text healthPotionQuantity;
     public Text increaserQuantity;
     public Text decreaserQuantity;
     public Text teleporterQuantity;
-    public Image buff;
-    public Image debuff1;
-    public Image debuff2;
     public Button healthPotion;
     public Button increaser;
     public Button decreaser;
@@ -166,6 +163,19 @@ public class UI : MonoBehaviour {
 
     public void stepUpdate()
     {
-        stepsText.text = Player.Instance.getSteps().ToString();
+        int steps = Player.Instance.getSteps();
+        if (steps <=5)
+        {
+            stepsText.enabled = false;
+            stepsTextBig.enabled = true;
+            stepsTextBig.text = "0" + steps.ToString();
+        }
+        else
+        {
+            stepsText.enabled = true;
+            stepsTextBig.enabled = false;
+            stepsText.text = steps.ToString();
+        }
+
     }
 }
