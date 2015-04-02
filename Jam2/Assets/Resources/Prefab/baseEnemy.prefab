@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21294516}
   - 114: {fileID: 11488150}
   - 61: {fileID: 6141698}
+  - 114: {fileID: 11464800}
   m_Layer: 9
   m_Name: baseEnemy
   m_TagString: Enemy
@@ -43,6 +44,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &11464800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2754b85e8c89f4fab0e4ea9332f0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moving: 0
+  tokenTemplate: {fileID: 150880, guid: ad80453437d3687408580ac8f84930f9, type: 2}
 --- !u!114 &11488150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +73,6 @@ MonoBehaviour:
   speed: 1
   journeyLength: 0
   endPosition: {x: 0, y: 0, z: 0}
-  moving: 0
   moveDirection: {x: 0, y: 0}
   initialPos: {x: 0, y: 0, z: 0}
   maxHealth: 1000
@@ -67,8 +80,6 @@ MonoBehaviour:
   dmg: 0
   doSteps: 0
   stepsTaken: 0
-  wait: 0
-  waitInit: 0
   drop:
   - {fileID: 117424, guid: 2cd409bed79ed26469ce9224d80b249c, type: 2}
   - {fileID: 146846, guid: 40b734684b1bdf545a3a9d0a86405890, type: 2}

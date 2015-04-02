@@ -370,7 +370,6 @@ public class Player : MonoBehaviour {
         RoomGenerator r = FindObjectOfType<RoomGenerator>();
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         p.GetComponent<characterControls>().teleport();
-        p.GetComponent<characterControls>().setMoving(false);
         RoomData rd = r.getNextRoom().GetComponent<RoomData>();
         rd.spawnPlayer(p);
         this.incrementSteps(rd.getRoomSize());

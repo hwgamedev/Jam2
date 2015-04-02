@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21288900}
   - 114: {fileID: 11496188}
   - 61: {fileID: 6182170}
+  - 114: {fileID: 11495384}
   m_Layer: 9
   m_Name: archer
   m_TagString: Enemy
@@ -43,6 +44,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &11495384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2754b85e8c89f4fab0e4ea9332f0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moving: 0
+  tokenTemplate: {fileID: 150880, guid: ad80453437d3687408580ac8f84930f9, type: 2}
 --- !u!114 &11496188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +73,6 @@ MonoBehaviour:
   speed: 1
   journeyLength: 0
   endPosition: {x: 0, y: 0, z: 0}
-  moving: 0
   moveDirection: {x: 0, y: 0}
   initialPos: {x: 0, y: 0, z: 0}
   maxHealth: 1000
@@ -67,8 +80,6 @@ MonoBehaviour:
   dmg: 0
   doSteps: 0
   stepsTaken: 0
-  wait: 0
-  waitInit: 0
   drop:
   - {fileID: 129664, guid: b708f2f7c118d4d4ca3350bf7bf44e6d, type: 2}
   - {fileID: 129870, guid: ec8ba40c58478604c94741b0c6d3a154, type: 2}

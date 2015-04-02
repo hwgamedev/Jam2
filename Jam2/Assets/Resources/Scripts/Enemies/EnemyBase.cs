@@ -15,7 +15,7 @@ public class EnemyBase : MonoBehaviour {
 	private float startTime;
 	public float journeyLength;
 	public Vector3 endPosition;
-	public bool moving;
+	//public bool moving;
 	float xDistance;
 	float yDistance;
 	public Vector2 moveDirection;
@@ -29,8 +29,8 @@ public class EnemyBase : MonoBehaviour {
 	//step counters
 	public int doSteps;
 	public int stepsTaken;
-	public bool wait;
-	public float waitInit;
+	//public bool wait;
+	//public float waitInit;
 	Dictionary <string,bool> possDirections;
 
     //damage timer
@@ -40,37 +40,20 @@ public class EnemyBase : MonoBehaviour {
     //need to know which room the enemy's at
     private string room;
 
+    private FigureMovement mover;
+
 	//
 	public List<GameObject> drop = new List<GameObject>();
 
 	// Use this for initialization
 	public virtual void Start () {
-        if (blinkTimer > 0)
-        {
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
-            blinkTimer -= Time.deltaTime;
-            //if end of animation, make sure we're not blinking
-            if (blinkTimer <= 0 && blink == true)
-            {
-                blinkTimer = 0;
-                blink = false;
-                sr.color = Color.white;
-            }
-            else {
-                if (blink)
-                    sr.color = Color.white;
-                else
-                    sr.color = Color.red;
-                blink = !blink;
-            }    
-        }
+        mover = GetComponent<FigureMovement>();
 		//Player.Instance.incrementTotalEnemies();
 		player = GameObject.FindWithTag("Player");
 		//initDrops ();
 		//awake = false;
-		moving = false;
 		stepsTaken = 0;
-		wait = false;
+		//wait = false;
 
 		//stats
 		maxHealth = 6;
@@ -85,36 +68,57 @@ public class EnemyBase : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	public virtual void Update () {
-		if(wait){
+    public virtual void Update()
+    {
+        if (blinkTimer > 0)
+        {
+            SpriteRenderer sr = GetComponent<SpriteRenderer>();
+            blinkTimer -= Time.deltaTime;
+            //if end of animation, make sure we're not blinking
+            if (blinkTimer <= 0 && blink == true)
+            {
+                blinkTimer = 0;
+                blink = false;
+                sr.color = Color.white;
+            }
+            else
+            {
+                if (blink)
+                    sr.color = Color.white;
+                else
+                    sr.color = Color.red;
+                blink = !blink;
+            }
+        }
+
+		/*if(wait){
 			checkWait();
 			return;
-		}
+		}*/
 		//if(!awake)
 		//	return;
 		if(doSteps > 0 )
 		{
 			bool canHit = checkCanHit();
-			if (/*awake && */!moving && !canHit)
+			if (/*awake && */!mover.moving && !canHit)
 			{	
 				startTime = Time.time;
 				initialPos = transform.position;
 				endPosition = initialPos;
 
 				calculateMovement();
-				if(!wait){
+				//if(!wait){
 					journeyLength = Vector3.Distance (initialPos, endPosition);
 					stepsTaken++;
-					moving = true;
 					faceMoveDirection();
-				}
+				//}
 				stepsTaken++;
 				doSteps--;
 				
 
 			}else{
-				if(canHit && !moving){
-					startWait();
+				if(canHit && !mover.moving){
+					//startWait();
 					faceMoveDirection();
 					attack();
 					doSteps--;
@@ -122,18 +126,21 @@ public class EnemyBase : MonoBehaviour {
 				}
 			}
 		}
-		if(moving)
+		if(mover.moving)
 			move();
 	}
 
 	void move()
 	{
-		float distCovered = (Time.time - startTime) * speed;
+        mover.moveSine();
+		/*float distCovered = (Time.time - startTime) * speed;
 		float fracJourney = distCovered / journeyLength;
 		transform.position = Vector3.Lerp (initialPos, endPosition, fracJourney);
 		if (transform.position == endPosition) {
 			moving = false;
-		}
+		}*/
+
+
 	}
 
 	void faceLeft(){
@@ -151,11 +158,13 @@ public class EnemyBase : MonoBehaviour {
 
 	virtual public void faceMoveDirection()
 	{
-		switch((int)moveDirection.x){
+		//switch((int)moveDirection.x){
+        switch((int)mover.getMovementX()) {
 		case 1: faceRight(); break;
 		case -1: faceLeft(); break;
 		}
-		switch((int)moveDirection.y){
+		//switch((int)moveDirection.y){
+        switch((int)mover.getMovementY()) {
 		case 1: faceUp(); break;
 		case -1: faceDown(); break;
 		}
@@ -211,56 +220,62 @@ public class EnemyBase : MonoBehaviour {
 		getPossDirections();
 		Vector2 targetPos = player.transform.position;
 		xDistance = targetPos.x - transform.position.x;
-		yDistance = targetPos.y - transform.position.y;
+        yDistance = targetPos.y - transform.position.y;
 		bool right, left, up, down;
 		possDirections.TryGetValue("right", out right);
 		if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance) && xDistance > 0  && right)
 		{
-			moveDirection = new Vector2( 1, 0);
-			endPosition += new Vector3(1, 0, 0);
+            mover.startMove(1,0);
+			//moveDirection = new Vector2( 1, 0);
+			//endPosition += new Vector3(1, 0, 0);
 			return;
 		}
 		possDirections.TryGetValue("left", out left);
 		if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance) && xDistance < 0  && left)
-		{
-			moveDirection = new Vector2( -1, 0);
-			endPosition += new Vector3(-1, 0, 0);
+        {
+            mover.startMove(-1, 0);
+			//moveDirection = new Vector2( -1, 0);
+			//endPosition += new Vector3(-1, 0, 0);
 			return;
 		}
 		possDirections.TryGetValue("up", out up);
 		possDirections.TryGetValue("down", out down);
 		if((up && !down)|| (up && yDistance > 0 && down))
 		{
-			moveDirection = new Vector2( 0, 1);
-			endPosition += new Vector3(0, 1, 0);
+            mover.startMove(0, -1);
+			//moveDirection = new Vector2( 0, 1);
+			//endPosition += new Vector3(0, 1, 0);
 			return;
 		}
 		if(down)
-		{
-			moveDirection = new Vector2( 0, -1);
-			endPosition += new Vector3(0, -1, 0);
+        {
+            mover.startMove(0, 1);
+			//moveDirection = new Vector2( 0, -1);
+			//endPosition += new Vector3(0, -1, 0);
 			return;
 		}
 		if((right && !left)|| (right && xDistance > 0 && left))
-		{
-			moveDirection = new Vector2( 1, 0);
-			endPosition += new Vector3(1, 0, 0);
+        {
+            mover.startMove(1, 0);
+			//moveDirection = new Vector2( 1, 0);
+			//endPosition += new Vector3(1, 0, 0);
 			return;
 		}
 		if(left)
-		{
-			moveDirection = new Vector2( -1, 0);
-			endPosition += new Vector3(-1, 0, 0);
+        {
+            mover.startMove(-1, 0);
+			//moveDirection = new Vector2( -1, 0);
+			//endPosition += new Vector3(-1, 0, 0);
 			return;
 		}
-		startWait();
+		//startWait();
 	}
 	
 	
 	public virtual void attack()
 	{
         //Debug.Log("Gonna fuck you up");
-		startWait();
+		//startWait();
 		//Debug.Log (dmg);
 		Player.Instance.setHealth(-dmg);
 	}
@@ -295,16 +310,16 @@ public class EnemyBase : MonoBehaviour {
 		item.transform.position = transform.position;
 	}
 
-	public void startWait(){
+	/*public void startWait(){
 		waitInit = Time.time;
 		wait = true;
-	}
-	public bool checkWait()
+	}*/
+	/*public bool checkWait()
 	{
 		if(Time.time - waitInit >= 1)
 			wait = false;
 		return wait;
-	}
+	}*/
 
     public void setRoom(string roomName)
     {

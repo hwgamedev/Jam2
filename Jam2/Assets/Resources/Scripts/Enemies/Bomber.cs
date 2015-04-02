@@ -31,15 +31,15 @@ public class Bomber : EnemyBase
 			if(!exploding)
 				base.Update();
 			else
-				if(!wait)
+				//if(!wait)
 					Explode ();
 		else{
-			if(!wait){
+			//if(!wait){
 				render.material.SetColor("_Color", Color.yellow);
 				exploding = true;
-				startWait ();
+				//startWait ();
 				Explode ();
-			}else{
+			/*}else{
 				checkWait();
 				if (Time.time - waitInit > 0.6)
 					render.material.SetColor("_Color", Color.red);
@@ -47,7 +47,7 @@ public class Bomber : EnemyBase
 					if (Time.time - waitInit > 0.2)
 						render.material.SetColor("_Color", Color.white);
 				}
-			}
+			}*/
 		}
 	}
 

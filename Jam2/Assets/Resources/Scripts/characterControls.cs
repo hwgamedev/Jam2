@@ -10,6 +10,8 @@ public class characterControls : MonoBehaviour {
 	public float shortRange = 1.5f;
 	public float longRange = 11f;
 
+    private FigureMovement mover;
+
 	private Animator anim;
 
 	// movement helpers
@@ -18,9 +20,9 @@ public class characterControls : MonoBehaviour {
 	private Vector3 startPosition;
 	private Vector3 endPosition;
 
+
 	//states
-	private bool moving = false;
-	private bool attacking = false;
+	public bool attacking = false;
 
 	//if need be to add a particle system when attacking
 	//public ParticleSystem trace;
@@ -31,10 +33,12 @@ public class characterControls : MonoBehaviour {
 		anim = GetComponent<Animator>();
 		//synchronise with player data
 		Player.Instance.incrementSteps (50);
+
+        mover = GetComponent<FigureMovement>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         //Debug.Log("Updated in " + Time.deltaTime);
         //if (Player.Instance.getHealth() <= 0) {
@@ -46,27 +50,28 @@ public class characterControls : MonoBehaviour {
 		//	return;
 		//} else {
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("iddleN") ||
+        /*if (anim.GetCurrentAnimatorStateInfo(0).IsName("iddleN") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("iddleS") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("iddleE") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("iddleW"))
         {
             attacking = false;
-        }
+        }*/
 
-		if (!moving && !attacking) {
+		if (!mover.moving && !attacking) {
         	if (Input.GetKey(KeyCode.W))
 	        {
                 anim.SetTrigger("iddleN");
 	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.9f, transform.position.z), transform.position + new Vector3(0, 1.1f, 0)))
 	                return;
 				startTime = Time.time;
-				startPosition = transform.position;
+				
 				endPosition = startPosition;
 				endPosition += new Vector3 (0, 1, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                moving = true;
-				doStep();
+                doStep();
+
+                mover.startMove(0, -1);
 			}
 	        else if (Input.GetKey(KeyCode.A))
 	        {
@@ -78,8 +83,9 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition -= new Vector3 (1, 0, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                moving = true;
 				doStep();
+
+                mover.startMove(-1, 0);
 			}
 	        else if (Input.GetKey(KeyCode.S))
 	        {
@@ -87,12 +93,13 @@ public class characterControls : MonoBehaviour {
 	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.75f, transform.position.z),transform.position - new Vector3(0, 1.25f, 0)))
 	                return;
 				startTime = Time.time;
-				startPosition = transform.position;
+                startPosition = transform.position;
 				endPosition = startPosition;
 				endPosition -= new Vector3 (0, 1, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                moving = true;
-				doStep();
+                doStep();
+
+                mover.startMove(0,1);
 			}
 	        else if (Input.GetKey(KeyCode.D))
 	        {
@@ -104,8 +111,9 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition += new Vector3 (1, 0, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                moving = true;
 				doStep();
+
+                mover.startMove(1, 0);
 			}
             else if (Input.GetMouseButtonDown(1))
             {
@@ -128,63 +136,75 @@ public class characterControls : MonoBehaviour {
                 Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
                 float diffX = mousePoint.x - transform.position.x;
                 float diffY = mousePoint.y - transform.position.y;
-                if (diffX > -0.7 && diffX < 0.7)
+                float angle = Mathf.Atan2(diffX, diffY);
+                Debug.Log("Angle: "+(Mathf.Rad2Deg*angle));
+                if (angle > Mathf.Deg2Rad*-45 && angle <= Mathf.Deg2Rad*45)
                 {
-                    if (diffY > 1 && diffY < 2)
+                    anim.SetTrigger("attackN");
+                    doStep();
+                    //trace.transform.rotation = Quaternion.Euler(0,0,89f);
+                    //trace.Play();
+                    attacking = true;
+                    doAttack("N");
+                }
+                else if(angle > Mathf.Deg2Rad*45 && angle <= Mathf.Deg2Rad*135)
+                {
+                    anim.SetTrigger("attackE");
+                    doStep();
+                    //trace.transform.rotation = Quaternion.Euler(0,0,-1f);
+                    //trace.Play();
+                    attacking = true;
+                    doAttack("E");
+                }
+                else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135)
+                {
+                    anim.SetTrigger("attackS");
+                    doStep();
+                    //trace.transform.rotation = Quaternion.Euler(0,0,-91f);
+                    //trace.Play();
+                    attacking = true;
+                    doAttack("S");
+                }
+                else if(angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45)
+                {
+                    anim.SetTrigger("attackW");
+                    doStep();
+                    //trace.transform.rotation = Quaternion.Euler(0,0,-179f);
+                    //trace.Play();
+                    attacking = true;
+                    doAttack("W");
+                }
+                /*if (diffX > -0.5 && diffX < 0.5)
+                {
+                    if (diffY > 0.5 && diffY < 1.5)
                     {
-                        anim.SetTrigger("attackN");
-                        doStep();
-                        //trace.transform.rotation = Quaternion.Euler(0,0,89f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("N");
                     }
-                    else if (diffY < 0 && diffY > -1)
+                    else if (diffY < -.5 && diffY > -1.5)
                     {
-                        anim.SetTrigger("attackS");
-                        doStep();
-                        //trace.transform.rotation = Quaternion.Euler(0,0,-91f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("S");
                     }
                 }
-                else if (diffY < 1 && diffY > 0)
+                else if (diffY < .5 && diffY > -.5)
                 {
-                    if (diffX < -0.7 && diffX > -1.7)
+                    if (diffX < -0.5 && diffX > -1.5)
                     {
-                        anim.SetTrigger("attackW");
-                        doStep();
-                        //trace.transform.rotation = Quaternion.Euler(0,0,-179f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("W");
                     }
-                    else if (diffX > 0.7 && diffX < 1.7)
+                    else if (diffX > 0.5 && diffX < 1.5)
                     {
-                        anim.SetTrigger("attackE");
-                        doStep();
-                        //trace.transform.rotation = Quaternion.Euler(0,0,-1f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("E");
                     }
-                }
-                if (!attacking)
-                {
-
-
-                }
+                }*/
             }
 		}
 		//}
-		if (moving) {
-			doLerp ();
+        if (mover.moving)
+        {
+            mover.moveSine();
+			//doLerp ();
 		}
 	}
 
     public void teleport()
     {
+        attacking = false;
         anim.SetTrigger("tele");
     }
 
@@ -221,24 +241,26 @@ public class characterControls : MonoBehaviour {
 		float fracJourney = distCovered / journeyLength;
 		transform.position = Vector3.Lerp (startPosition, endPosition, fracJourney);
 		if (transform.position == endPosition) {
-			moving = false;
+			//moving = false;
 		}
 	}
+    
 
 	private void doAttack(string direction){
+        Debug.Log("Attacking!");
         //print("Remaining steps: " + Player.Instance.getSteps());
-		RaycastHit2D hit = Physics2D.Linecast(transform.position+new Vector3(0,0.75f,0), transform.position + new Vector3(0f,shortRange,0f));
+		RaycastHit2D hit = Physics2D.Linecast(transform.position+new Vector3(0,0.5f,0), transform.position + new Vector3(0f,shortRange,0f));
 		switch (direction) {
 		case "N":
 			break;
 		case "S":
-            hit = Physics2D.Linecast(transform.position + new Vector3(0, -0.75f, 0), transform.position - new Vector3(0f, shortRange, 0f));
+            hit = Physics2D.Linecast(transform.position + new Vector3(0, -0.5f, 0), transform.position - new Vector3(0f, shortRange, 0f));
 			break;
 		case "W":
-            hit = Physics2D.Linecast(transform.position + new Vector3(-0.75f,0, 0), transform.position - new Vector3(shortRange, 0f, 0f));
+            hit = Physics2D.Linecast(transform.position + new Vector3(-0.5f,0, 0), transform.position - new Vector3(shortRange, 0f, 0f));
 			break;
 		case "E":
-            hit = Physics2D.Linecast(transform.position + new Vector3(0.75f, 0, 0), transform.position + new Vector3(shortRange, 0f, 0f));
+            hit = Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position + new Vector3(shortRange, 0f, 0f));
 			break;
 		}
 		if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Enemy")) {
@@ -283,11 +305,16 @@ public class characterControls : MonoBehaviour {
 
     public void setMoving(bool mov)
     {
-        moving = mov;
+        //mover.moving = mov;
     }
     //public void takeDammages(int dammages) {
     //    int health = Player.Instance.getHealth ();
     //    health -= dammages;
     //    Player.Instance.setHealth (health);
     //}
+
+    public void disableAttacking()
+    {
+        attacking = false;
+    }
 }
