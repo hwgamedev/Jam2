@@ -68,9 +68,8 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition += new Vector3 (0, 1, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                doStep();
-
                 mover.startMove(0, -1);
+                doStep();
 			}
 	        else if (Input.GetKey(KeyCode.A))
 	        {
@@ -82,9 +81,8 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition -= new Vector3 (1, 0, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-				doStep();
-
                 mover.startMove(-1, 0);
+                doStep();
 			}
 	        else if (Input.GetKey(KeyCode.S))
 	        {
@@ -96,9 +94,8 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition -= new Vector3 (0, 1, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                doStep();
-
                 mover.startMove(0,1);
+                doStep();
 			}
 	        else if (Input.GetKey(KeyCode.D))
 	        {
@@ -110,9 +107,8 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition += new Vector3 (1, 0, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-				doStep();
-
                 mover.startMove(1, 0);
+                doStep();
 			}
             else if (Input.GetMouseButtonDown(1))
             {
@@ -142,38 +138,38 @@ public class characterControls : MonoBehaviour {
                     if (angle > Mathf.Deg2Rad * -45 && angle <= Mathf.Deg2Rad * 45)
                     {
                         anim.SetTrigger("attackN");
-                        doStep();
                         //trace.transform.rotation = Quaternion.Euler(0,0,89f);
                         //trace.Play();
                         attacking = true;
                         doAttack("N");
+                        doStep();
                     }
                     else if (angle > Mathf.Deg2Rad * 45 && angle <= Mathf.Deg2Rad * 135)
                     {
                         anim.SetTrigger("attackE");
-                        doStep();
                         //trace.transform.rotation = Quaternion.Euler(0,0,-1f);
                         //trace.Play();
                         attacking = true;
                         doAttack("E");
+                        doStep();
                     }
                     else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135)
                     {
                         anim.SetTrigger("attackS");
-                        doStep();
                         //trace.transform.rotation = Quaternion.Euler(0,0,-91f);
                         //trace.Play();
                         attacking = true;
                         doAttack("S");
+                        doStep();
                     }
                     else if (angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45)
                     {
                         anim.SetTrigger("attackW");
-                        doStep();
                         //trace.transform.rotation = Quaternion.Euler(0,0,-179f);
                         //trace.Play();
                         attacking = true;
                         doAttack("W");
+                        doStep();
                     }
                 }
                 /*if (diffX > -0.5 && diffX < 0.5)

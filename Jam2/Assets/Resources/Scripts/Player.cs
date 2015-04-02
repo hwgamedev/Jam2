@@ -335,7 +335,7 @@ public class Player : MonoBehaviour {
     {
         if (teleporters > 0)
         {
-            setSteps(0);
+            setSteps(-1);
             teleporters--;
             UI.Instance.teleporterUpdate();
         }

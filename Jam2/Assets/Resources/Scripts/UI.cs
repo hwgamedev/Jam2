@@ -37,6 +37,7 @@ public class UI : MonoBehaviour {
             Time.timeScale = 0;
             help.SetActive(true);
             help2.SetActive(false);
+            PlayerPrefs.SetInt("newPlayer", 0);
         }
         else
         {
