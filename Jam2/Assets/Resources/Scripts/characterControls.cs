@@ -37,25 +37,7 @@ public class characterControls : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
-
-        //Debug.Log("Updated in " + Time.deltaTime);
-        //if (Player.Instance.getHealth() <= 0) {
-        //    doKill();
-        //    return;
-        //}
-		//if (Player.Instance.getSteps() == 0) {
-		//	doJump();
-		//	return;
-		//} else {
-
-        /*if (anim.GetCurrentAnimatorStateInfo(0).IsName("iddleN") ||
-            anim.GetCurrentAnimatorStateInfo(0).IsName("iddleS") ||
-            anim.GetCurrentAnimatorStateInfo(0).IsName("iddleE") ||
-            anim.GetCurrentAnimatorStateInfo(0).IsName("iddleW"))
-        {
-            attacking = false;
-        }*/
+	void Update () {
 
 		if (!mover.moving && !attacking) {
         	if (Input.GetKey(KeyCode.W))
@@ -63,13 +45,9 @@ public class characterControls : MonoBehaviour {
                 anim.SetTrigger("iddleN");
 	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.9f, transform.position.z), transform.position + new Vector3(0, 1.1f, 0)))
 	                return;
-				startTime = Time.time;
-				
-				endPosition = startPosition;
-				endPosition += new Vector3 (0, 1, 0);
-                journeyLength = Vector3.Distance(startPosition, endPosition);
-                doStep();
+
                 mover.startMove(0, -1);
+                doStep();
 
 			}
 	        else if (Input.GetKey(KeyCode.A))
@@ -77,13 +55,9 @@ public class characterControls : MonoBehaviour {
                 anim.SetTrigger("iddleW");
 	            if (checkForCollisions(new Vector3(transform.position.x-0.75f, transform.position.y, transform.position.z),transform.position - new Vector3(1.25f, 0, 0)))
 	                return;
-				startTime = Time.time;
-				startPosition = transform.position;
-				endPosition = startPosition;
-				endPosition -= new Vector3 (1, 0, 0);
-                journeyLength = Vector3.Distance(startPosition, endPosition);
-                doStep();
+
                 mover.startMove(-1, 0);
+                doStep();
 
 			}
 	        else if (Input.GetKey(KeyCode.S))
@@ -91,13 +65,9 @@ public class characterControls : MonoBehaviour {
                 anim.SetTrigger("iddleS");
 	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.75f, transform.position.z),transform.position - new Vector3(0, 1.25f, 0)))
 	                return;
-				startTime = Time.time;
-                startPosition = transform.position;
-				endPosition = startPosition;
-				endPosition -= new Vector3 (0, 1, 0);
-                journeyLength = Vector3.Distance(startPosition, endPosition);
+
+                mover.startMove(0, 1);
                 doStep();
-                mover.startMove(0,1);
 
 			}
 	        else if (Input.GetKey(KeyCode.D))
@@ -105,13 +75,9 @@ public class characterControls : MonoBehaviour {
                 anim.SetTrigger("iddleE");
 	            if (checkForCollisions(new Vector3(transform.position.x+0.75f, transform.position.y, transform.position.z),transform.position + new Vector3(1.25f, 0, 0)))
 	                return;
-				startTime = Time.time;
-				startPosition = transform.position;
-				endPosition = startPosition;
-				endPosition += new Vector3 (1, 0, 0);
-                journeyLength = Vector3.Distance(startPosition, endPosition);
-                doStep();
+
                 mover.startMove(1, 0);
+                doStep();
 
 			}
             else if (Input.GetMouseButtonDown(1))
@@ -197,15 +163,19 @@ public class characterControls : MonoBehaviour {
             }
 		}
 		//}
+	}
+
+    void FixedUpdate()
+    {
         if (mover.moving)
         {
             mover.moveSine();
-			//doLerp ();
-		}
-	}
+        }
+    }
 
     public void teleport()
     {
+        mover.stopMove();
         attacking = false;
         anim.SetTrigger("tele");
     }

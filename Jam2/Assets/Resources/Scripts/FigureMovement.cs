@@ -78,8 +78,12 @@ public class FigureMovement : MonoBehaviour {
     private void endMove()
     {
         transform.position = new Vector3(startPosition.x + movementX, startPosition.y - movementY, 0);
-        index = 0;
+        stopMove();
+    }
+
+    public void stopMove() {
         moving = false;
+        index = 0;
         movementY = 0;
         movementX = 0;
         moveToken.SetActive(false);
