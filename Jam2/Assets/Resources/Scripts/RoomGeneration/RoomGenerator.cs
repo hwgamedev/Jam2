@@ -91,6 +91,8 @@ public class RoomGenerator : MonoBehaviour {
         currRoom = rooms[startRoom];
         visitedRooms.Add(rooms[startRoom]);
         rooms.RemoveAt(startRoom);
+        //playerInstance.transform.position = new Vector3(-47, -4, 0);
+        //cameraInstance.transform.position = new Vector3(-47, -4, 0);
 
 	}
 	
