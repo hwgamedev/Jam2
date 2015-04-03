@@ -247,16 +247,6 @@ public class Player : MonoBehaviour {
         totalEnemies = _totalEnemies;
     }
 
-    public void setSteps(int _stepsToTeleport)
-    {
-        stepsToTeleport = _stepsToTeleport;
-        if (stepsToTeleport == -1)
-        {
-            teleport();
-        }
-        UI.Instance.stepUpdate();
-    }
-
     public void pickUpHealthPotion()
     {
         healthPotions++;
@@ -341,6 +331,16 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void setSteps(int _stepsToTeleport)
+    {
+        stepsToTeleport = _stepsToTeleport;
+        UI.Instance.stepUpdate();
+        if (stepsToTeleport < 0)
+        {
+            teleport();
+        }
+    }
+
     public void incrementEnemiesKilled()
     {
         enemiesKilled++;
@@ -353,12 +353,10 @@ public class Player : MonoBehaviour {
 
     public void decrementSteps()
     {
-        stepsToTeleport --;
-        //if steps >= 0
-        //call teleport
+        stepsToTeleport--;
         UI.Instance.stepUpdate();
 		if (stepsToTeleport < 0) {
-            teleport();
+            setSteps(-1);
 		}
     }
 
@@ -377,13 +375,11 @@ public class Player : MonoBehaviour {
     public void incrementSteps(int i)
     {
         stepsToTeleport += i;
-        //if steps >= 0
-        //call teleport
-        if (stepsToTeleport <= 0) { 
-			stepsToTeleport = 0;
-            teleport();
-		}
         UI.Instance.stepUpdate();
+        if (stepsToTeleport < 0)
+        {
+            setSteps(-1);
+        }
     }
 
     public void incrementJump()

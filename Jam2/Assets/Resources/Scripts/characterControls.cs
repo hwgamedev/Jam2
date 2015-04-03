@@ -68,8 +68,9 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition += new Vector3 (0, 1, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                mover.startMove(0, -1);
                 doStep();
+                mover.startMove(0, -1);
+
 			}
 	        else if (Input.GetKey(KeyCode.A))
 	        {
@@ -81,8 +82,9 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition -= new Vector3 (1, 0, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                mover.startMove(-1, 0);
                 doStep();
+                mover.startMove(-1, 0);
+
 			}
 	        else if (Input.GetKey(KeyCode.S))
 	        {
@@ -94,8 +96,9 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition -= new Vector3 (0, 1, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                mover.startMove(0,1);
                 doStep();
+                mover.startMove(0,1);
+
 			}
 	        else if (Input.GetKey(KeyCode.D))
 	        {
@@ -107,8 +110,9 @@ public class characterControls : MonoBehaviour {
 				endPosition = startPosition;
 				endPosition += new Vector3 (1, 0, 0);
                 journeyLength = Vector3.Distance(startPosition, endPosition);
-                mover.startMove(1, 0);
                 doStep();
+                mover.startMove(1, 0);
+
 			}
             else if (Input.GetMouseButtonDown(1))
             {
