@@ -89,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2754b85e8c89f4fab0e4ea9332f0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moving: 0
   tokenTemplate: {fileID: 150880, guid: ad80453437d3687408580ac8f84930f9, type: 2}
 --- !u!212 &21262630
 SpriteRenderer:

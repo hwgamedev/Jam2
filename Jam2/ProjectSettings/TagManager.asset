@@ -14,6 +14,7 @@ TagManager:
   - GameVariables
   - Dagger
   - Breakable
+  - PlayerMover
   layers:
   - Default
   - TransparentFX

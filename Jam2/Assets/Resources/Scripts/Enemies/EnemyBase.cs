@@ -105,14 +105,14 @@ public class EnemyBase : MonoBehaviour {
         if (hit.collider != null && hit.collider.tag.Equals("PlayerMover"))
         {
             Debug.Log("Should wait up!");
-            faceDown();
+            faceUp();
             return true;
         }
         hit = Physics2D.Raycast(transform.position + new Vector3(0, -0.75f, 0), -Vector2.up, .5f);
         if (hit.collider != null && hit.collider.tag.Equals("PlayerMover"))
         {
             Debug.Log("Should wait down!");
-            faceUp();
+            faceDown();
             return true;
         }
         hit = Physics2D.Raycast(transform.position + new Vector3(-0.75f, 0, 0), -Vector2.right, .5f);

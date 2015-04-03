@@ -7,8 +7,9 @@ public class characterControls : MonoBehaviour {
 
 	// stats of character
 	public float speed = 1.0f;
-	public float shortRange = 0f;
+	public int shortRange = 1;
 	public float longRange = 11f;
+    private int movementRange = 1;
 
     private FigureMovement mover;
 
@@ -41,70 +42,45 @@ public class characterControls : MonoBehaviour {
 
         //check if the player is not in the middle of something right now
 		if (!mover.isMoving() && !attacking) {
-            //gather the directions of movement
-            int[] movementDir = getMovementDir();
             //check for movement
-            if (movementDir[0] != 0 || movementDir[1] != 0)
-            {
-                if(checkForCollisions(movementDir[0],movementDir[1])) return;
-                mover.startMove(movementDir[0], -1*movementDir[1]);
-                doStep();
-            }
-
+            if (tryMove() == true) return;
             //check for ranged attack
-            else if (Input.GetMouseButtonDown(1))
-            {
-                if (Player.Instance.getAmmo() > 0)
-                {
-                    tryThrowDagger();
-                }
-            }
+            else if (tryThrowDagger() == true) return;
             //check for melee attack
-            else if (Input.GetMouseButtonDown(0))
-            {
-                tryAttack();
-            }
+            else if (tryAttack() == true) return;
 		}
 	}
 
-    private int[] getMovementDir()
+    private bool tryMove()
     {
         int xMov = 0, yMov = 0;
 
         //check for movement up
-        if (Input.GetKey(KeyCode.W))
-        {
-            yMov = 1;
-            anim.SetTrigger("iddleN");
-        }
-
+        if (Input.GetKey(KeyCode.W)) { yMov = 1; anim.SetTrigger("iddleN"); }
         //check for movement left
-        else if (Input.GetKey(KeyCode.A))
-        {
-            xMov = -1;
-            anim.SetTrigger("iddleW");
-        }
-
+        else if (Input.GetKey(KeyCode.A)) { xMov = -1; anim.SetTrigger("iddleW"); }
         //check for movement down
-        else if (Input.GetKey(KeyCode.S))
-        {
-            yMov = -1;
-            anim.SetTrigger("iddleS");
-        }
-
+        else if (Input.GetKey(KeyCode.S)) { yMov = -1; anim.SetTrigger("iddleS"); }
         //check for movement right
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D)) { xMov = 1; anim.SetTrigger("iddleE"); }
+
+        if (xMov != 0 || yMov != 0)
         {
-            xMov = 1;
-            anim.SetTrigger("iddleE");
+            GameObject go = checkForCollisions(xMov,yMov, movementRange);
+            if (go != null) { handlePickup(go); return false; }
+            mover.startMove(xMov, -1 * yMov);
+            doStep();
+            return true;
         }
 
-        int[] result = { xMov, yMov };
-        return result;
+        return false;
     }
 
-    private void tryThrowDagger()
+    private bool tryThrowDagger()
     {
+        if (!Input.GetMouseButtonDown(1) || 
+            Player.Instance.getAmmo() > 0) return false;
+
         Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
         float diffX = mousePoint.x - transform.position.x;
         float diffY = mousePoint.y - transform.position.y;
@@ -114,37 +90,57 @@ public class characterControls : MonoBehaviour {
             throwDagger(transform.position, mousePoint);
             Player.Instance.throwAmmo();
             doStep();
+            return true;
         }
+
+        return false;
     }
 
-    private void tryAttack()
+    private bool tryAttack()
     {
+        if (!Input.GetMouseButtonDown(0)) return false;
+
+        int x = 0, y = 0;
         //work out direction of click from player
         Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-        float diffX = mousePoint.x - transform.position.x;
-        float diffY = mousePoint.y - transform.position.y;
-        float angle = Mathf.Atan2(diffX, diffY);
-        //Debug.Log("Angle: " + (Mathf.Rad2Deg * angle));
+        float angle = Mathf.Atan2(mousePoint.x - transform.position.x, mousePoint.y - transform.position.y);
 
         //determine which of the 4 directions it falls in to
         string attackDir = null;
-        if (angle > Mathf.Deg2Rad * -45 && angle <= Mathf.Deg2Rad * 45)
-            attackDir = "N";
-        else if (angle > Mathf.Deg2Rad * 45 && angle <= Mathf.Deg2Rad * 135)
-            attackDir = "E";
-        else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135)
-            attackDir = "S";
-        else if (angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45)
-            attackDir = "W";
+        if (angle > Mathf.Deg2Rad * -45 && angle <= Mathf.Deg2Rad * 45) { attackDir = "N"; y = 1; }
+        else if (angle > Mathf.Deg2Rad * 45 && angle <= Mathf.Deg2Rad * 135) { attackDir = "E"; x = 1; }
+        else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135) { attackDir = "S"; y = -1; }
+        else if (angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45) { attackDir = "W"; x = -1; }
 
         //execute attack
         if (attackDir != null)
         {
+            //get the collission object
+            GameObject obj = checkForCollisions(x, y, shortRange);
+            if (obj != null) 
+            {
+                if (obj.CompareTag("Enemy")) obj.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage() * 2);
+                else if(obj.CompareTag("Breakable")) obj.GetComponent<Breakable>().attacked();
+            }
+
             anim.SetTrigger("attack" + attackDir);
             attacking = true;
-            doAttack(attackDir);
             doStep();
+            return true;
         }
+        return false;
+    }
+
+    private void handlePickup(GameObject go)
+    {
+        //this is where all of the collectibles are handled
+        if (go.GetComponent<GoldPickup>() != null) { go.GetComponent<GoldPickup>().collect(-1); }
+        if (go.GetComponent<HealthPickup>() != null) { go.GetComponent<HealthPickup>().collect(); }
+        if (go.GetComponent<IncreaserPickup>() != null) { go.GetComponent<IncreaserPickup>().collect(); }
+        if (go.GetComponent<DecreaserPickup>() != null) { go.GetComponent<DecreaserPickup>().collect(); }
+        if (go.GetComponent<TeleporterPickup>() != null) { go.GetComponent<TeleporterPickup>().collect(); }
+        if (go.GetComponent<AmmoPickup>() != null) { go.GetComponent<AmmoPickup>().collect(); }
+        if (go.GetComponent<OpenTreasure>() != null) { go.GetComponent<OpenTreasure>().spawnPrize(); }
     }
 
     public void teleport()
@@ -159,61 +155,34 @@ public class characterControls : MonoBehaviour {
 		// notify game mechanic of step performed by player
 	}
 
-	private bool checkForCollisions(int xDir, int yDir)
+	private GameObject checkForCollisions(int xDir, int yDir, int range)
     {
-        float offset = 0.6f;
-        float lineEnd = 1.4f;
-        Vector3 startPoint = new Vector3(transform.position.x + offset*xDir,
-                                        transform.position.y + offset*yDir,
+        //offset from centre of tile where the player is
+        float playerOffset = 0.5f;
+        //margin from side of tile, as we don't want to scan from beginning of tile to end, just to be safe
+        float tileMargin = 0.1f;
+        //line length (subtract 1 from range because it's 1 by default)
+        float lineLength = 0.8f+(range-1);
+        //start and end position of line
+        float lineStart = playerOffset + tileMargin;
+        float lineEnd = lineStart + lineLength;
+
+        //start and end vectors of collission check
+        Vector3 startPoint = new Vector3(transform.position.x + lineStart*xDir,
+                                        transform.position.y + lineStart * yDir,
                                         transform.position.z);
         Vector3 endPoint = transform.position+new Vector3(lineEnd*xDir, lineEnd*yDir, 0);
 
-        //Debug.DrawLine(startPoint, endPoint);
-
+        Debug.DrawLine(startPoint, endPoint);
 
         RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);
         if (hit && !hit.collider.isTrigger)
         {
-			if (hit.collider.GetComponent<Dagger>() != null) { return false; }
-            if (hit.collider.GetComponent<GoldPickup>() != null) { hit.collider.GetComponent<GoldPickup>().collect(-1); }
-			if (hit.collider.GetComponent<HealthPickup>() != null) { hit.collider.GetComponent<HealthPickup>().collect(); }
-			if (hit.collider.GetComponent<IncreaserPickup>() != null) { hit.collider.GetComponent<IncreaserPickup>().collect(); }
-			if (hit.collider.GetComponent<DecreaserPickup>() != null) { hit.collider.GetComponent<DecreaserPickup>().collect(); }
-            if (hit.collider.GetComponent<TeleporterPickup>() != null) { hit.collider.GetComponent<TeleporterPickup>().collect(); }
-            if (hit.collider.GetComponent<AmmoPickup>() != null) { hit.collider.GetComponent<AmmoPickup>().collect(); }
-            if (hit.collider.GetComponent<OpenTreasure>() != null) { hit.collider.GetComponent<OpenTreasure>().spawnPrize(); }
-            //print("Colliding with: "+hit.collider.gameObject.name);
-            return true;
+            return hit.collider.gameObject;
         }
 
-        return false;
+        return null;
     }
-
-	private void doAttack(string direction){
-        //Debug.Log("Attacking!");
-        //print("Remaining steps: " + Player.Instance.getSteps());
-		RaycastHit2D hit = Physics2D.Linecast(transform.position+new Vector3(0,0.5f,0), transform.position + new Vector3(0f,shortRange,0f));
-		switch (direction) {
-		case "N":
-			break;
-		case "S":
-            hit = Physics2D.Linecast(transform.position + new Vector3(0, -0.5f, 0), transform.position - new Vector3(0f, shortRange, 0f));
-			break;
-		case "W":
-            hit = Physics2D.Linecast(transform.position + new Vector3(-0.5f,0, 0), transform.position - new Vector3(shortRange, 0f, 0f));
-			break;
-		case "E":
-            hit = Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position + new Vector3(shortRange, 0f, 0f));
-			break;
-		}
-		if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Enemy")) {
-			hit.collider.gameObject.GetComponent<EnemyBase>().takeDamage(Player.Instance.getDamage()*2);
-		}
-        else if (hit && !hit.collider.isTrigger && hit.collider.gameObject.CompareTag("Breakable"))
-        {
-            hit.collider.gameObject.GetComponent<Breakable>().attacked();
-        }
-	}
 
 	private void throwDagger(Vector3 start, Vector3 end){
 		GameObject daggerInstance = Instantiate(dagger, start, Quaternion.identity) as GameObject;
