@@ -8,19 +8,6 @@ public class EnemyBase : MonoBehaviour {
 	public GameObject player;
 	public GameVariables vars;
 
-	//general
-	//public bool awake;
-	//moving
-	public float speed = 1.0f;
-	private float startTime;
-	public float journeyLength;
-	public Vector3 endPosition;
-	//public bool moving;
-	float xDistance;
-	float yDistance;
-	public Vector2 moveDirection;
-	public Vector3 initialPos;
-
 	//stats
 	public int maxHealth;
 	public int health;
@@ -28,19 +15,15 @@ public class EnemyBase : MonoBehaviour {
 
 	//step counters
 	public int doSteps;
-	public int stepsTaken;
-	//public bool wait;
-	//public float waitInit;
+    public int stepsTaken;
 	Dictionary <string,bool> possDirections;
-
-    //damage timer
-    private float blinkTimer = 0;
-    private bool blink = false;
 
     //need to know which room the enemy's at
     private string room;
 
+    //movement
     private FigureMovement mover;
+    float xDistance, yDistance;
 
 	//
 	public List<GameObject> drop = new List<GameObject>();
@@ -51,9 +34,6 @@ public class EnemyBase : MonoBehaviour {
 		//Player.Instance.incrementTotalEnemies();
 		player = GameObject.FindWithTag("Player");
 		//initDrops ();
-		//awake = false;
-		stepsTaken = 0;
-		//wait = false;
 
 		//stats
 		maxHealth = 6;
@@ -70,77 +50,28 @@ public class EnemyBase : MonoBehaviour {
 	// Update is called once per frame
     public virtual void Update()
     {
-        if (blinkTimer > 0)
-        {
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
-            blinkTimer -= Time.deltaTime;
-            //if end of animation, make sure we're not blinking
-            if (blinkTimer <= 0 && blink == true)
-            {
-                blinkTimer = 0;
-                blink = false;
-                sr.color = Color.white;
-            }
-            else
-            {
-                if (blink)
-                    sr.color = Color.white;
-                else
-                    sr.color = Color.red;
-                blink = !blink;
-            }
-        }
-
-		/*if(wait){
-			checkWait();
-			return;
-		}*/
-		//if(!awake)
-		//	return;
 		if(doSteps > 0 )
 		{
+            if (checkShouldWait())
+            {
+                doSteps--;
+                return;
+            }
 			bool canHit = checkCanHit();
-			if (/*awake && */!mover.moving && !canHit)
-			{	
-				startTime = Time.time;
-				initialPos = transform.position;
-				endPosition = initialPos;
-
+			if (!mover.isMoving() && !canHit)
+			{
+                stepsTaken++;
 				calculateMovement();
-				//if(!wait){
-					journeyLength = Vector3.Distance (initialPos, endPosition);
-					stepsTaken++;
-					faceMoveDirection();
-				//}
-				stepsTaken++;
+				faceMoveDirection();
 				doSteps--;
 				
 
-			}else{
-				if(canHit && !mover.moving){
-					//startWait();
-					faceMoveDirection();
-					attack();
-					doSteps--;
-					stepsTaken++;
-				}
+			}else if (canHit && !mover.isMoving())
+            {
+				attack();
+				doSteps--;
 			}
 		}
-		if(mover.moving)
-			move();
-	}
-
-	void move()
-	{
-        mover.moveSine();
-		/*float distCovered = (Time.time - startTime) * speed;
-		float fracJourney = distCovered / journeyLength;
-		transform.position = Vector3.Lerp (initialPos, endPosition, fracJourney);
-		if (transform.position == endPosition) {
-			moving = false;
-		}*/
-
-
 	}
 
 	void faceLeft(){
@@ -158,38 +89,70 @@ public class EnemyBase : MonoBehaviour {
 
 	virtual public void faceMoveDirection()
 	{
-		//switch((int)moveDirection.x){
         switch((int)mover.getMovementX()) {
 		case 1: faceRight(); break;
 		case -1: faceLeft(); break;
 		}
-		//switch((int)moveDirection.y){
         switch((int)mover.getMovementY()) {
-		case 1: faceUp(); break;
-		case -1: faceDown(); break;
+		case 1: faceDown(); break;
+		case -1: faceUp(); break;
 		}
 	}
+
+    bool checkShouldWait()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, .5f);
+        if (hit.collider != null && hit.collider.tag.Equals("PlayerMover"))
+        {
+            Debug.Log("Should wait up!");
+            faceDown();
+            return true;
+        }
+        hit = Physics2D.Raycast(transform.position + new Vector3(0, -0.75f, 0), -Vector2.up, .5f);
+        if (hit.collider != null && hit.collider.tag.Equals("PlayerMover"))
+        {
+            Debug.Log("Should wait down!");
+            faceUp();
+            return true;
+        }
+        hit = Physics2D.Raycast(transform.position + new Vector3(-0.75f, 0, 0), -Vector2.right, .5f);
+        if (hit.collider != null && hit.collider.tag.Equals("PlayerMover"))
+        {
+            Debug.Log("Should wait left!");
+            faceLeft();
+            return true;
+        }
+        hit = Physics2D.Raycast(transform.position + new Vector3(0.75f, 0, 0), Vector2.right, .5f);
+        if (hit.collider != null && hit.collider.tag.Equals("PlayerMover"))
+        {
+            Debug.Log("Should wait right!");
+            faceRight();
+            return true;
+        }
+
+        return false;
+    }
 
 	bool checkCanHit()
 	{
 		RaycastHit2D hit = Physics2D.Raycast(transform.position , -Vector2.up, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
-			moveDirection= new Vector2(0,-1);
+            faceDown();
 			return true;
 		}
 		hit = Physics2D.Raycast(transform.position , Vector2.up, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
-			moveDirection= new Vector2(0,1);
+            faceUp();
 			return true;
 		}
 		hit = Physics2D.Raycast(transform.position, Vector2.right, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
-			moveDirection= new Vector2(1,0);
+            faceRight();
 			return true;
 		}
 		hit = Physics2D.Raycast(transform.position, -Vector2.right, 1, LayerMask.GetMask("Player"));
 		if (hit.collider != null) {
-			moveDirection= new Vector2(-1,0);
+            faceLeft();
 			return true;
 		}
 		return false;
@@ -200,18 +163,13 @@ public class EnemyBase : MonoBehaviour {
 		int layer = LayerMask.GetMask("RaycastLayer"); 
 		possDirections = new Dictionary<string, bool>();
 		//Debug.DrawRay(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, Color.cyan ); 
-		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, 1,layer);
-		//Debug.Log (hit.collider);
-		//Debug.Log (hit);
+		RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.75f, 0), Vector2.up, .5f,layer);
 		possDirections.Add("up", (hit.collider == null));
-		hit = Physics2D.Raycast(transform.position + new Vector3(0, -0.75f, 0), -Vector2.up, 1,layer);
-		//Debug.Log (hit.collider);
+        hit = Physics2D.Raycast(transform.position + new Vector3(0, -0.75f, 0), -Vector2.up, .5f, layer);
 		possDirections.Add("down", (hit.collider == null));
-		hit = Physics2D.Raycast(transform.position + new Vector3(-0.75f, 0, 0), -Vector2.right, 1,layer);
-		//Debug.Log (hit.collider);
+        hit = Physics2D.Raycast(transform.position + new Vector3(-0.75f, 0, 0), -Vector2.right, .5f, layer);
 		possDirections.Add("left", (hit.collider == null));
-		hit = Physics2D.Raycast(transform.position + new Vector3(0.75f, 0, 0), Vector2.right, 1,layer);
-		//Debug.Log (hit.collider);
+        hit = Physics2D.Raycast(transform.position + new Vector3(0.75f, 0, 0), Vector2.right, .5f, layer);
 		possDirections.Add("right", (hit.collider == null));
 	}
 
@@ -226,16 +184,12 @@ public class EnemyBase : MonoBehaviour {
 		if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance) && xDistance > 0  && right)
 		{
             mover.startMove(1,0);
-			//moveDirection = new Vector2( 1, 0);
-			//endPosition += new Vector3(1, 0, 0);
 			return;
 		}
 		possDirections.TryGetValue("left", out left);
 		if(Mathf.Abs(xDistance) > Mathf.Abs(yDistance) && xDistance < 0  && left)
         {
             mover.startMove(-1, 0);
-			//moveDirection = new Vector2( -1, 0);
-			//endPosition += new Vector3(-1, 0, 0);
 			return;
 		}
 		possDirections.TryGetValue("up", out up);
@@ -243,47 +197,34 @@ public class EnemyBase : MonoBehaviour {
 		if((up && !down)|| (up && yDistance > 0 && down))
 		{
             mover.startMove(0, -1);
-			//moveDirection = new Vector2( 0, 1);
-			//endPosition += new Vector3(0, 1, 0);
 			return;
 		}
 		if(down)
         {
             mover.startMove(0, 1);
-			//moveDirection = new Vector2( 0, -1);
-			//endPosition += new Vector3(0, -1, 0);
 			return;
 		}
 		if((right && !left)|| (right && xDistance > 0 && left))
         {
             mover.startMove(1, 0);
-			//moveDirection = new Vector2( 1, 0);
-			//endPosition += new Vector3(1, 0, 0);
 			return;
 		}
 		if(left)
         {
             mover.startMove(-1, 0);
-			//moveDirection = new Vector2( -1, 0);
-			//endPosition += new Vector3(-1, 0, 0);
 			return;
 		}
-		//startWait();
 	}
 	
 	
 	public virtual void attack()
 	{
-        //Debug.Log("Gonna fuck you up");
-		//startWait();
-		//Debug.Log (dmg);
 		Player.Instance.setHealth(-dmg);
 	}
 
 	public void takeDamage(int damage)
 	{
-        //Debug.Log("Hurting really bad!");
-            health -= damage;
+        health -= damage;
         if (health <= 0)
             die();
 	}
@@ -310,32 +251,9 @@ public class EnemyBase : MonoBehaviour {
 		item.transform.position = transform.position;
 	}
 
-	/*public void startWait(){
-		waitInit = Time.time;
-		wait = true;
-	}*/
-	/*public bool checkWait()
-	{
-		if(Time.time - waitInit >= 1)
-			wait = false;
-		return wait;
-	}*/
-
     public void setRoom(string roomName)
     {
         room = roomName;
     }
-
-	/*public void setAwake(bool a)
-	{
-		awake = a;
-	}
-
-	public bool isAwake()
-	{
-		return awake;
-	}*/
-	
-	
 }
 	

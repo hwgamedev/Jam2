@@ -39,137 +39,111 @@ public class characterControls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!mover.moving && !attacking) {
-        	if (Input.GetKey(KeyCode.W))
-	        {
-                anim.SetTrigger("iddleN");
-	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y + 0.9f, transform.position.z), transform.position + new Vector3(0, 1.1f, 0)))
-	                return;
-
-                mover.startMove(0, -1);
+        //check if the player is not in the middle of something right now
+		if (!mover.isMoving() && !attacking) {
+            //gather the directions of movement
+            int[] movementDir = getMovementDir();
+            //check for movement
+            if (movementDir[0] != 0 || movementDir[1] != 0)
+            {
+                if(checkForCollisions(movementDir[0],movementDir[1])) return;
+                mover.startMove(movementDir[0], -1*movementDir[1]);
                 doStep();
+            }
 
-			}
-	        else if (Input.GetKey(KeyCode.A))
-	        {
-                anim.SetTrigger("iddleW");
-	            if (checkForCollisions(new Vector3(transform.position.x-0.75f, transform.position.y, transform.position.z),transform.position - new Vector3(1.25f, 0, 0)))
-	                return;
-
-                mover.startMove(-1, 0);
-                doStep();
-
-			}
-	        else if (Input.GetKey(KeyCode.S))
-	        {
-                anim.SetTrigger("iddleS");
-	            if (checkForCollisions(new Vector3(transform.position.x, transform.position.y-.75f, transform.position.z),transform.position - new Vector3(0, 1.25f, 0)))
-	                return;
-
-                mover.startMove(0, 1);
-                doStep();
-
-			}
-	        else if (Input.GetKey(KeyCode.D))
-	        {
-                anim.SetTrigger("iddleE");
-	            if (checkForCollisions(new Vector3(transform.position.x+0.75f, transform.position.y, transform.position.z),transform.position + new Vector3(1.25f, 0, 0)))
-	                return;
-
-                mover.startMove(1, 0);
-                doStep();
-
-			}
+            //check for ranged attack
             else if (Input.GetMouseButtonDown(1))
             {
                 if (Player.Instance.getAmmo() > 0)
                 {
-                    Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-                    float diffX = mousePoint.x - transform.position.x;
-                    float diffY = mousePoint.y - transform.position.y;
-                    float length = Mathf.Sqrt(Mathf.Pow(diffX, 2) + Mathf.Pow(diffY, 2));
-                    if (length <= longRange / (6 - Player.Instance.getReach()))
-                    {
-                        throwDagger(transform.position, mousePoint);
-                        Player.Instance.throwAmmo();
-                        doStep();
-                    }
+                    tryThrowDagger();
                 }
             }
+            //check for melee attack
             else if (Input.GetMouseButtonDown(0))
             {
-                Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-                float diffX = mousePoint.x - transform.position.x;
-                float diffY = mousePoint.y - transform.position.y;
-                if (diffX > -2 && diffX < 2)
-                {
-                    float angle = Mathf.Atan2(diffX, diffY);
-                    Debug.Log("Angle: " + (Mathf.Rad2Deg * angle));
-                    if (angle > Mathf.Deg2Rad * -45 && angle <= Mathf.Deg2Rad * 45)
-                    {
-                        anim.SetTrigger("attackN");
-                        //trace.transform.rotation = Quaternion.Euler(0,0,89f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("N");
-                        doStep();
-                    }
-                    else if (angle > Mathf.Deg2Rad * 45 && angle <= Mathf.Deg2Rad * 135)
-                    {
-                        anim.SetTrigger("attackE");
-                        //trace.transform.rotation = Quaternion.Euler(0,0,-1f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("E");
-                        doStep();
-                    }
-                    else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135)
-                    {
-                        anim.SetTrigger("attackS");
-                        //trace.transform.rotation = Quaternion.Euler(0,0,-91f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("S");
-                        doStep();
-                    }
-                    else if (angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45)
-                    {
-                        anim.SetTrigger("attackW");
-                        //trace.transform.rotation = Quaternion.Euler(0,0,-179f);
-                        //trace.Play();
-                        attacking = true;
-                        doAttack("W");
-                        doStep();
-                    }
-                }
-                /*if (diffX > -0.5 && diffX < 0.5)
-                {
-                    if (diffY > 0.5 && diffY < 1.5)
-                    {
-                    }
-                    else if (diffY < -.5 && diffY > -1.5)
-                    {
-                    }
-                }
-                else if (diffY < .5 && diffY > -.5)
-                {
-                    if (diffX < -0.5 && diffX > -1.5)
-                    {
-                    }
-                    else if (diffX > 0.5 && diffX < 1.5)
-                    {
-                    }
-                }*/
+                tryAttack();
             }
 		}
-		//}
 	}
 
-    void FixedUpdate()
+    private int[] getMovementDir()
     {
-        if (mover.moving)
+        int xMov = 0, yMov = 0;
+
+        //check for movement up
+        if (Input.GetKey(KeyCode.W))
         {
-            mover.moveSine();
+            yMov = 1;
+            anim.SetTrigger("iddleN");
+        }
+
+        //check for movement left
+        else if (Input.GetKey(KeyCode.A))
+        {
+            xMov = -1;
+            anim.SetTrigger("iddleW");
+        }
+
+        //check for movement down
+        else if (Input.GetKey(KeyCode.S))
+        {
+            yMov = -1;
+            anim.SetTrigger("iddleS");
+        }
+
+        //check for movement right
+        else if (Input.GetKey(KeyCode.D))
+        {
+            xMov = 1;
+            anim.SetTrigger("iddleE");
+        }
+
+        int[] result = { xMov, yMov };
+        return result;
+    }
+
+    private void tryThrowDagger()
+    {
+        Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
+        float diffX = mousePoint.x - transform.position.x;
+        float diffY = mousePoint.y - transform.position.y;
+        float length = Mathf.Sqrt(Mathf.Pow(diffX, 2) + Mathf.Pow(diffY, 2));
+        if (length <= longRange / (6 - Player.Instance.getReach()))
+        {
+            throwDagger(transform.position, mousePoint);
+            Player.Instance.throwAmmo();
+            doStep();
+        }
+    }
+
+    private void tryAttack()
+    {
+        //work out direction of click from player
+        Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
+        float diffX = mousePoint.x - transform.position.x;
+        float diffY = mousePoint.y - transform.position.y;
+        float angle = Mathf.Atan2(diffX, diffY);
+        //Debug.Log("Angle: " + (Mathf.Rad2Deg * angle));
+
+        //determine which of the 4 directions it falls in to
+        string attackDir = null;
+        if (angle > Mathf.Deg2Rad * -45 && angle <= Mathf.Deg2Rad * 45)
+            attackDir = "N";
+        else if (angle > Mathf.Deg2Rad * 45 && angle <= Mathf.Deg2Rad * 135)
+            attackDir = "E";
+        else if (Mathf.Abs(angle) > Mathf.Deg2Rad * 135)
+            attackDir = "S";
+        else if (angle > Mathf.Deg2Rad * -135 && angle <= Mathf.Deg2Rad * -45)
+            attackDir = "W";
+
+        //execute attack
+        if (attackDir != null)
+        {
+            anim.SetTrigger("attack" + attackDir);
+            attacking = true;
+            doAttack(attackDir);
+            doStep();
         }
     }
 
@@ -185,11 +159,18 @@ public class characterControls : MonoBehaviour {
 		// notify game mechanic of step performed by player
 	}
 
-	private bool checkForCollisions(Vector3 startPoint, Vector3 endPoint)
+	private bool checkForCollisions(int xDir, int yDir)
     {
+        float offset = 0.6f;
+        float lineEnd = 1.4f;
+        Vector3 startPoint = new Vector3(transform.position.x + offset*xDir,
+                                        transform.position.y + offset*yDir,
+                                        transform.position.z);
+        Vector3 endPoint = transform.position+new Vector3(lineEnd*xDir, lineEnd*yDir, 0);
+
         //Debug.DrawLine(startPoint, endPoint);
-        int layer = LayerMask.NameToLayer("RaycastLayer");
-        //print("Layer : "+layer);
+
+
         RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint);
         if (hit && !hit.collider.isTrigger)
         {
@@ -207,16 +188,6 @@ public class characterControls : MonoBehaviour {
 
         return false;
     }
-
-	private void doLerp() {
-		float distCovered = (Time.time - startTime) * speed;
-		float fracJourney = distCovered / journeyLength;
-		transform.position = Vector3.Lerp (startPosition, endPosition, fracJourney);
-		if (transform.position == endPosition) {
-			//moving = false;
-		}
-	}
-    
 
 	private void doAttack(string direction){
         //Debug.Log("Attacking!");
@@ -250,22 +221,12 @@ public class characterControls : MonoBehaviour {
 		daggerInstance.GetComponent<Dagger> ().throwDagger (start, end);
 	}
 
-	private void doJump(){
-        //print ("teleport !!");
-	}
-
 	private void doKill(){
 		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("die")){
 			anim.SetTrigger("kill");
 		}
 		//Player.Instance.death ();
 	}
-
-	/*public void takeDammages(int dammages) {
-		int health = Player.Instance.getHealth ();
-		health -= dammages;
-		Player.Instance.setHealth (health);
-	}*/
 
 	public void resetSteps(){
 		Player.Instance.incrementSteps(10);
@@ -274,16 +235,6 @@ public class characterControls : MonoBehaviour {
 	public void destroy(){
 		Destroy (gameObject);
 	}
-
-    public void setMoving(bool mov)
-    {
-        //mover.moving = mov;
-    }
-    //public void takeDammages(int dammages) {
-    //    int health = Player.Instance.getHealth ();
-    //    health -= dammages;
-    //    Player.Instance.setHealth (health);
-    //}
 
     public void disableAttacking()
     {

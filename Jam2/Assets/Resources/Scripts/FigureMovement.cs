@@ -3,64 +3,76 @@ using System.Collections;
 
 public class FigureMovement : MonoBehaviour {
 
-    float amplitudeX = Mathf.PI / 2;
-    float amplitudeY = Mathf.PI / 8;
-    float omegaX = 2.0f;
-    float omegaY = 8.0f;
+    //sine wave properties - wave length and frequency
+    float moveAmplitude = Mathf.PI / 2;
+    float vfxAmplitude = Mathf.PI / 16;
+    float moveSpeed = 2.0f;
+    float vfxSpeed = 8.0f;
     float index;
 
+    //directions
     private int movementX = 0;
     private int movementY = 0;
+
+    //starting points
     private Vector3 startScale;
     private Vector3 startPosition;
 
-    public bool moving = false;
+    //big old movement bool
+    private bool moving = false;
+
+    //template and instance variables for placing movement tokens
     public GameObject tokenTemplate;
     private GameObject moveToken;
 
+    //for the rotatey-two-sidey effect
     private int rotationDir = 1;
 
 	// Use this for initialization
 	void Start () {
         startScale = transform.localScale;
         moveToken = Instantiate(tokenTemplate, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+
+        //identify the player movement token in a special way
+        if (gameObject.tag.Equals("Player"))
+            moveToken.tag = "PlayerMover";
 	}
 
-    public void moveSine()
+    void FixedUpdate()
+    {
+        if (moving)
+            moveSine();
+    }
+
+    private void moveSine()
     {
         index += Time.fixedDeltaTime;
+        float move = moveAmplitude * Mathf.Sin(moveSpeed * index);
+        float vfx = vfxAmplitude * Mathf.Sin(vfxSpeed * index);
         if (movementX != 0)
         {
-            float x = amplitudeX * Mathf.Sin(omegaX * index);
-            float y = amplitudeY * Mathf.Sin(omegaY * index);
-            if (Mathf.Abs(x * movementX) >= 1.0f)
+            if (Mathf.Abs(move * movementX) >= 1.0f)
             {
-                transform.rotation = Quaternion.identity;
-                rotationDir *= -1;
                 endMove();
             }
             else
             {
-                transform.position = new Vector3(startPosition.x + x * movementX, startPosition.y + y, 0);
-                transform.Rotate(new Vector3(0, 0, y*rotationDir));
+                transform.position = new Vector3(startPosition.x + move * movementX, startPosition.y + vfx, 0);
+                transform.Rotate(new Vector3(0, 0, vfx*rotationDir));
             }
         }
         else if (movementY != 0)
         {
-            float y = amplitudeX * Mathf.Sin(omegaX * index);
-            float x = amplitudeY * Mathf.Sin(omegaY * index);
-            if (Mathf.Abs(y * movementY) >= 1.0f)
+            if (Mathf.Abs(move * movementY) >= 1.0f)
             {
                 transform.localScale = startScale;
-                transform.rotation = Quaternion.identity;
-                rotationDir *= -1;
                 endMove();
             }
             else
             {
-                transform.position = new Vector3(startPosition.x, startPosition.y - y * movementY, 0);
-                transform.Rotate(new Vector3(0, 0, x * rotationDir));
-                transform.localScale = new Vector3(startScale.x + x, startScale.y + x, 1);
+                transform.position = new Vector3(startPosition.x, startPosition.y - move * movementY, 0);
+                transform.Rotate(new Vector3(0, 0, vfx * rotationDir));
+                transform.localScale = new Vector3(startScale.x + vfx, startScale.y + vfx, 1);
             }
         }
     }
@@ -77,6 +89,8 @@ public class FigureMovement : MonoBehaviour {
 
     private void endMove()
     {
+        transform.rotation = Quaternion.identity;
+        rotationDir *= -1;
         transform.position = new Vector3(startPosition.x + movementX, startPosition.y - movementY, 0);
         stopMove();
     }
@@ -88,6 +102,8 @@ public class FigureMovement : MonoBehaviour {
         movementX = 0;
         moveToken.SetActive(false);
     }
+
+    public bool isMoving() { return moving; }
 
     public int getMovementX() { return movementX; }
     public int getMovementY() { return movementY; }
