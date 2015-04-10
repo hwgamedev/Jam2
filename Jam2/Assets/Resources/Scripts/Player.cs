@@ -369,7 +369,7 @@ public class Player : MonoBehaviour {
         RoomData rd = r.getNextRoom().GetComponent<RoomData>();
         rd.spawnPlayer(p,c);
         this.incrementSteps(rd.getRoomSize());
-        jump++;
+		incrementJump();
     }
 
     public void incrementSteps(int i)
@@ -386,6 +386,11 @@ public class Player : MonoBehaviour {
     {
         jump++;
     }
+
+	public int getJump()
+	{
+		return jump;
+	}
 
     public void incrementTotalEnemies()
     {

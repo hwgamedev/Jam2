@@ -3,9 +3,11 @@ using System.Collections;
 
 public class Collected : MonoBehaviour {
 
-    bool activate = false;
+	bool activate = false;
     float timer = 1f;
     float scaleFactor = .02f;
+	//if item should shrink or increase scale
+	public int scaleModifier = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +24,7 @@ public class Collected : MonoBehaviour {
                 Destroy(gameObject);
             else
             {
-                transform.localScale = new Vector2(transform.localScale.x + scaleFactor, transform.localScale.y + scaleFactor);
+				transform.localScale = new Vector2(transform.localScale.x + (scaleModifier * scaleFactor), transform.localScale.y + (scaleModifier *scaleFactor));
             }
         }
         

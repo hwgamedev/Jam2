@@ -17,7 +17,6 @@ public class Bomber : EnemyBase
 	{
 		base.Start();
 		stepsToExplode = 2;
-		dmg = dmg;
 		dmgEnemies = new List<EnemyBase>();
 		preparingExplosion = false;
 		exploding = false;

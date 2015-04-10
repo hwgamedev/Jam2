@@ -141,6 +141,7 @@ public class characterControls : MonoBehaviour {
         if (go.GetComponent<TeleporterPickup>() != null) { go.GetComponent<TeleporterPickup>().collect(); }
         if (go.GetComponent<AmmoPickup>() != null) { go.GetComponent<AmmoPickup>().collect(); }
         if (go.GetComponent<OpenTreasure>() != null) { go.GetComponent<OpenTreasure>().spawnPrize(); }
+		if (go.GetComponent<Web>() != null) { go.GetComponent<Web>().webAction(); }
     }
 
     public void teleport()
