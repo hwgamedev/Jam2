@@ -79,7 +79,7 @@ public class characterControls : MonoBehaviour {
     private bool tryThrowDagger()
     {
         if (!Input.GetMouseButtonDown(1) || 
-            Player.Instance.getAmmo() > 0) return false;
+            Player.Instance.getAmmo() <= 0) return false;
 
         Vector3 mousePoint = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
         float diffX = mousePoint.x - transform.position.x;
