@@ -27,7 +27,10 @@ public class UI : MonoBehaviour {
     public Text ammoText;
     public GameObject ammoDisplay;
 
-
+	//sprites for potions
+	public Sprite[] HP;
+	public Sprite[] Increase;
+	public Sprite[] Decrease;
 
     void Awake()
     {
@@ -137,24 +140,61 @@ public class UI : MonoBehaviour {
     {
         int item = Player.Instance.getHealthPotions();
         healthPotionQuantity.text = item.ToString();
-        if (item == 0) healthPotion.interactable = false;
-        else healthPotion.interactable = true;
+        if (item == 0) {
+			healthPotion.interactable = false;
+			healthPotion.gameObject.GetComponent<Image>().sprite = HP[HP.Length-1];
+		}else {
+			healthPotion.interactable = true;
+			if(item < 2)
+				healthPotion.gameObject.GetComponent<Image>().sprite = HP[HP.Length-1];
+			if(item < 4 && item > 1)
+				healthPotion.gameObject.GetComponent<Image>().sprite = HP[HP.Length-2];
+			if(item < 7 && item > 3)
+				healthPotion.gameObject.GetComponent<Image>().sprite = HP[HP.Length-3];
+			if(item > 7)
+				healthPotion.gameObject.GetComponent<Image>().sprite = HP[HP.Length-4];
+		}
     }
 
     public void stepIncreaserUpdate()
     {
         int item = Player.Instance.getStepIncreasers();
         increaserQuantity.text = item.ToString();
-        if (item == 0) increaser.interactable = false;
-        else increaser.interactable = true;
+		if (item == 0) {
+			increaser.interactable = false;
+			increaser.gameObject.GetComponent<Image>().sprite = Increase[Increase.Length-1];
+		}else {
+			increaser.interactable = true;
+			if(item < 2)
+				increaser.gameObject.GetComponent<Image>().sprite = Increase[Increase.Length-1];
+			if(item < 4 && item > 1)
+				increaser.gameObject.GetComponent<Image>().sprite = Increase[Increase.Length-2];
+			if(item < 7 && item > 3)
+				increaser.gameObject.GetComponent<Image>().sprite = Increase[Increase.Length-3];
+			if(item > 7)
+				increaser.gameObject.GetComponent<Image>().sprite = Increase[Increase.Length-4];
+		}
+
     }
 
     public void stepDecreaserUpdate()
     {
         int item = Player.Instance.getStepDecreasers();
         decreaserQuantity.text = item.ToString();
-        if (item == 0) decreaser.interactable = false;
-        else decreaser.interactable = true;
+        if (item == 0) {
+			decreaser.interactable = false;
+			decreaser.gameObject.GetComponent<Image>().sprite = Decrease[Decrease.Length-1];
+		}else {
+			decreaser.interactable = true;
+			if(item < 2)
+				decreaser.gameObject.GetComponent<Image>().sprite = Decrease[Decrease.Length-1];
+			if(item < 4 && item > 1)
+				decreaser.gameObject.GetComponent<Image>().sprite = Decrease[Decrease.Length-2];
+			if(item < 7 && item > 3)
+				decreaser.gameObject.GetComponent<Image>().sprite = Decrease[Decrease.Length-3];
+			if(item > 7)
+				decreaser.gameObject.GetComponent<Image>().sprite = Decrease[Decrease.Length-4];
+		}
     }
 
     public void teleporterUpdate()

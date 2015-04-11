@@ -1,9 +1,67 @@
 fileFormatVersion: 2
 guid: 5b38f183b6433ea49a774c1ae8a66d76
-timeCreated: 1427627646
+timeCreated: 1428743469
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_0
+    21300002: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_1
+    21300004: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_2
+    21300006: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_3
+    21300008: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_4
+    21300010: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_5
+    21300012: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_6
+    21300014: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_7
+    21300016: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_8
+    21300018: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_9
+    21300020: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_10
+    21300022: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_11
+    21300024: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_12
+    21300026: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_13
+    21300028: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_14
+    21300030: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_15
+    21300032: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_16
+    21300034: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_17
+    21300036: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_18
+    21300038: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_19
+    21300040: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_20
+    21300042: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_21
+    21300044: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_22
+    21300046: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_23
+    21300048: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_24
+    21300050: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_25
+    21300052: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_26
+    21300054: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_27
+    21300056: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_28
+    21300058: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_29
+    21300060: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_30
+    21300062: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_31
+    21300064: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_32
+    21300066: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_33
+    21300068: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_34
+    21300070: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_35
+    21300072: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_36
+    21300074: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_37
+    21300076: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_38
+    21300078: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_39
+    21300080: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_40
+    21300082: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_41
+    21300084: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_42
+    21300086: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_43
+    21300088: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_44
+    21300090: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_45
+    21300092: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_46
+    21300094: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_47
+    21300096: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_48
+    21300098: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_49
+    21300100: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_50
+    21300102: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_51
+    21300104: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_52
+    21300106: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_53
+    21300108: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_54
+    21300110: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_55
+    21300112: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_56
+    21300114: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_57
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -37,7 +95,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +106,587 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_0
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 359
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 361
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_2
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 362
+        width: 41
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 360
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_4
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 356
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_5
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 357
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_6
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 358
+        width: 49
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_7
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 358
+        width: 50
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_8
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 358
+        width: 48
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_9
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 305
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_10
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 307
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_11
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 308
+        width: 41
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_12
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 307
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_13
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 302
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_14
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 303
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_15
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 304
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_16
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 304
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_17
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 304
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_18
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 250
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_19
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 252
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_20
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 253
+        width: 41
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_21
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 252
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_22
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 247
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_23
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 248
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_24
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 249
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_25
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 249
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_26
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 249
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_27
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 200
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_28
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 200
+        width: 39
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_29
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 200
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_30
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 198
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_31
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 193
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_32
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 194
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_33
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 195
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_34
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 195
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_35
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 195
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_36
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 146
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_37
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 146
+        width: 39
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_38
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 146
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_39
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 147
+        width: 41
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_40
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 142
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_41
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 140
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_42
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 141
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_43
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 141
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_44
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 141
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_45
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 90
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_46
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 90
+        width: 39
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_47
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 90
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_48
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 91
+        width: 41
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_49
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 86
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_50
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 35
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_51
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 35
+        width: 46
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_52
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 35
+        width: 46
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_53
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 36
+        width: 41
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_54
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 31
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_55
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 35
+        width: 40
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_56
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 43
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: items__ring__amulets_and_potions_by_mangust_art-d4evb0d_57
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 43
+        width: 39
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

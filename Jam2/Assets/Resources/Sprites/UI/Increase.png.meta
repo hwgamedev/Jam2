@@ -1,13 +1,27 @@
 fileFormatVersion: 2
-guid: 2ea2aa92c63289c429830389cec4feeb
-timeCreated: 1427627992
+guid: 729249aee0c25814da15166d14a2702e
+timeCreated: 1428745776
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Decr_0
+    21300002: Decr_1
+    21300004: Decr_2
+    21300006: Decr_3
+    21300008: Decr_4
+    21300010: Increse_0
+    21300012: Increse_1
+    21300014: Increse_2
+    21300016: Increse_3
+    21300018: Increse_4
+    21300020: Increase_0
+    21300022: Increase_1
+    21300024: Increase_2
+    21300026: Increase_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -26,10 +40,10 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 1
+    filterMode: -1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -37,7 +51,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +62,47 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Increase_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 165
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Increase_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 110
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Increase_2
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 56
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Increase_3
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 2
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

@@ -1751,6 +1751,21 @@ MonoBehaviour:
   help2: {fileID: 138360}
   ammoText: {fileID: 11420712}
   ammoDisplay: {fileID: 159606}
+  HP:
+  - {fileID: 21300000, guid: 83ac0e9634bebf640ab910de93ac2812, type: 3}
+  - {fileID: 21300002, guid: 83ac0e9634bebf640ab910de93ac2812, type: 3}
+  - {fileID: 21300004, guid: 83ac0e9634bebf640ab910de93ac2812, type: 3}
+  - {fileID: 21300006, guid: 83ac0e9634bebf640ab910de93ac2812, type: 3}
+  Increase:
+  - {fileID: 21300020, guid: 729249aee0c25814da15166d14a2702e, type: 3}
+  - {fileID: 21300022, guid: 729249aee0c25814da15166d14a2702e, type: 3}
+  - {fileID: 21300024, guid: 729249aee0c25814da15166d14a2702e, type: 3}
+  - {fileID: 21300026, guid: 729249aee0c25814da15166d14a2702e, type: 3}
+  Decrease:
+  - {fileID: 21300020, guid: 21e92cd249af4174998821d9b3570cb1, type: 3}
+  - {fileID: 21300022, guid: 21e92cd249af4174998821d9b3570cb1, type: 3}
+  - {fileID: 21300024, guid: 21e92cd249af4174998821d9b3570cb1, type: 3}
+  - {fileID: 21300026, guid: 21e92cd249af4174998821d9b3570cb1, type: 3}
 --- !u!114 &11447490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2117,7 +2132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 2ea2aa92c63289c429830389cec4feeb, type: 3}
+  m_Sprite: {fileID: 21300020, guid: 729249aee0c25814da15166d14a2702e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2249,7 +2264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: bfee628d5a77c9942af19c60f8193d1b, type: 3}
+  m_Sprite: {fileID: 21300020, guid: 21e92cd249af4174998821d9b3570cb1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
